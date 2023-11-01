@@ -8,7 +8,7 @@ var config =
     type: Phaser.AUTO,
     width: 512,
     height: 384,
-    scene:[gameState], //array con las escenas
+    scene:[PedroTestScene],
     render:
     {
         pixelArt:true
