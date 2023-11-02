@@ -14,19 +14,20 @@ class AttackSystem{
         positionX = 0//TODO: Get character position_character.position
         positiony = 0//TODO: Get character position_character.position
 
+        positionOffset = 100
 
         switch(direcion){
             case 0:
-                positionX += 100; 
-
+                positionX += positionOffset; 
+                break
             case 1:
-                positionY += 100; 
+                positionY += positionOffset; 
 
             case 2:
-                positionX -= 100; 
+                positionX -= positionOffset; 
 
             case 3:
-                positionY -= 100; 
+                positionY -= positionOffset; 
 
         }
 
