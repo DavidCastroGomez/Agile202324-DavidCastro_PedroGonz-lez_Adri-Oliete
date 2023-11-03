@@ -1,11 +1,15 @@
 class Character
 {
-    constructor(){
-        var sprite = new SpriteManager();
-        var healthSystem = new HealthSystem();
-        var attackSystem = new AttackSystem();
-        var movementSystem = new MovementSystem();
-        var inputSystem = new InputSystem();
-        var collisionManager = new CollisionManager();
+    constructor(_scene){
+        this.sprite = new SpriteManager(_scene,0,0,null);
+        this.healthSystem = new HealthSystem();
+        this.attackSystem = new AttackSystem();
+        this.movementSystem = new MovementSystem(1, this.sprite, 2);
+        this.inputSystem = new InputSystem(attackSystem, movementSystem);
+        this.collisionManager = new CollisionManager();
+    }
+
+    update(){
+        this.inputSystem.GetInputs();
     }
 }

@@ -7,19 +7,22 @@ class PedroTestScene extends Phaser.Scene
 
     preload()
     { 
+        //-------------------------------------------------------------General preload:
         this.cameras.main.setBackgroundColor("0");
 
+        //-------------------------------------------------------------Map preload:
         this.load.setPath('res/img/tilesets');
         //this.load.image('tiles', 'Alttp_Tileset.png');
         this.load.image('tileset','Alttp_Lost_Woods.png');
 
         this.load.setPath('res/maps');
         //this.load.tilemapTiledJSON('Map', 'TestMap.json');
-        this.load.tilemapTiledJSON('level','Alttp_Lost_Woods.json');
+        this.load.tilemapTiledJSON('level','Alttp_Lost_Woods.json');        
     }
 
     create()
     {
+        //-------------------------------------------------------------Map creation:
         //this.map = this.add.tilemap('Map');
         //this.map.addTilesetImage('tiles');
         //this.map.createLayer('ground_layer', 'tiles');
@@ -27,6 +30,13 @@ class PedroTestScene extends Phaser.Scene
         //this.map = this.add.tilemap('level');
         //this.map.addTilesetImage('tileset');
         //this.map.createLayer('lost_woods','tileset');
+
+        //-------------------------------------------------------------Hero creation:
+        this.heroTest = new Hero(this);
+    }
+
+    update(){
+        this.heroTest.update();
     }
 }
 

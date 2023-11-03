@@ -2,24 +2,28 @@ class InputSystem
 {
     
     constructor(_attackSystem, _movementSystem){
-        this.attackSystem = _attackSystem
-        this.movementSystem = _movementSystem
+        this.attackSystem = _attackSystem;
+        this.movementSystem = _movementSystem;
     }
+
+    GetInputs(){/*Will be overrided*/}
 
     PassInputs(input){
         
         switch(input){
 
             case up:
-                //this.movementSystem.move()
+                this.movementSystem.Move(up)
             case right:
-                //this.movementSystem.move()
+                this.movementSystem.Move(right)
             case left:
-                //this.movementSystem.move()
+                this.movementSystem.Move(left)
             case down:
-                //this.movementSystem.move()
+                this.movementSystem.Move(down)
             case run:
-                //this.movementSystem.run()
+                this.movementSystem.Run()
+            case walk:
+                this.movementSystem.Walk()
             case attack:
                 this.attackSystem.Attack()
         }
