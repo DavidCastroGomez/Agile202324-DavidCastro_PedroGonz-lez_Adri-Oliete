@@ -2,10 +2,9 @@ class Hero extends Character
 {
     constructor(){
         //super.sprite = 
-        //super.healthSystem = 
         //super.attackSystem = 
-        //super.movementSystem = 
-        //super.inputSystem = 
-        //super.collisionManager = 
+        super.inputSystem = new PlayerInput();
+        
+        //Movement, collision and health systems are generic
     }
 }
