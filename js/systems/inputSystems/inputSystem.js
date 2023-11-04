@@ -1,9 +1,10 @@
 class InputSystem
 {
     
-    constructor(_attackSystem, _movementSystem){
+    constructor(_scene, _attackSystem, _movementSystem){
         this.attackSystem = _attackSystem;
         this.movementSystem = _movementSystem;
+        this.scene = _scene;
     }
 
     GetInputs(){/*Will be overrided*/}
@@ -12,19 +13,19 @@ class InputSystem
         
         switch(input){
 
-            case up:
-                this.movementSystem.Move(up)
-            case right:
-                this.movementSystem.Move(right)
-            case left:
-                this.movementSystem.Move(left)
-            case down:
-                this.movementSystem.Move(down)
-            case run:
+            case 'up':
+                this.movementSystem.Move('up')
+            case 'right':
+                this.movementSystem.Move('right')
+            case 'left':
+                this.movementSystem.Move('left')
+            case 'down':
+                this.movementSystem.Move('down')
+            case 'run':
                 this.movementSystem.Run()
-            case walk:
+            case 'walk':
                 this.movementSystem.Walk()
-            case attack:
+            case 'attack':
                 this.attackSystem.Attack()
         }
 

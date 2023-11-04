@@ -2,7 +2,7 @@ class Hero extends Character
 {
     preload(){
         //Sprites:
-        this.load.setPath('assets/img');
+        this.load.setPath('assets/img/sprites');
         this.load.spritesheet('Hero','TestLink.png');
     }
 
@@ -17,10 +17,10 @@ class Hero extends Character
         //super.attackSystem = new HeroAttackSystem();
 
         //Movement:
-        super.movementSystem = new HeroMovementSystem();
+        super.movementSystem = new MovementSystem(1, super.sprite, 2);
 
         //Inputs:
-        super.inputSystem = new HeroInputSystem(this.movementSystem, super.attackSystem);
+        super.inputSystem = new HeroInputSystem(_scene, super.movementSystem, super.attackSystem);
     }
 
     update(){

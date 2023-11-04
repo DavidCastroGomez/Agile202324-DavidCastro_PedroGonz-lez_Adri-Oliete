@@ -10,13 +10,13 @@ class MovementSystem{
         
         switch(direction){
 
-            case up:
+            case 'up':
                 self.body.velocity.y -= speed;
-            case right:
+            case 'right':
                 self.body.velocity.x += speed;
-            case left:
+            case 'left':
                 self.body.velocity.x -= speed;
-            case down:
+            case 'down':
                 self.body.velocity.y += speed;
         }
     }
