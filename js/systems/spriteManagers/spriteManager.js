@@ -6,7 +6,6 @@ class SpriteManager extends Phaser.GameObjects.Sprite
             _scene.add.existing(this);
             _scene.physics.world.enable(this);
             this.body.collideWorldBounds = true;
-            this.health=gamePrefs.MAX_HEALTH;
-            this.nivel=_scene;            
+            this.map=_scene;            
     }
 }

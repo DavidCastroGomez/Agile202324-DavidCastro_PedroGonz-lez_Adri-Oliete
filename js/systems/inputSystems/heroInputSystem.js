@@ -3,10 +3,10 @@ class HeroInputSystem extends InputSystem{
     constructor(_attackSystem, _movementSystem){
         super(_attackSystem, _movementSystem)     
         
-        cursors = this.input.keyboard.createCursorKeys();
-        attackKey = this.input.keyboard.addKey('O');
-        runKey = this.input.keyboard.addKey('P');
-        interactKey = this.input.keyboard.addKey('I');
+        this.cursors = this.input.keyboard.createCursorKeys();
+        this.attackKey = this.input.keyboard.addKey('O');
+        this.runKey = this.input.keyboard.addKey('P');
+        this.interactKey = this.input.keyboard.addKey('I');
 
     }
 
