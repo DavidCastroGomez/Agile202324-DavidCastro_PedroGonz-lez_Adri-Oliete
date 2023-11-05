@@ -1,23 +1,86 @@
-class SpriteManager extends Phaser.GameObjects.Sprite
-{
-    constructor(_scene,_posX,_posY,_spriteTag)
-    {
-        //this.nave = Scene.physics.add.sprite(posX,posY,spriteTag);
-        super(_scene,_posX,_posY,_spriteTag);
-        _scene.add.existing(this);
-        this.setOrigin(.5,0);
-        this.anims.play('enemy_idle');
-        //this.health = 2;
+class SpriteManager {
 
+    constructor() { }
+
+    preloadSprites() {
+        //bg
+
+        juego.load.spritesheet('link', 'assets/anims/link_anim_sprite.png', { frameWidth: 18, frameHeight: 26 });
+        //Other
     }
 
-    preUpdate(time,delta)
-    {
-        if(this.y>=config.height)
-        {
-            this.active = false;
-        }
+    loadAnimations() {
+        loadLinkAnimations();
+    }
 
-        super.preUpdate(time,delta);
+    loadLinkAnimations() {
+        //Idle
+        juego.anims.create({
+            key: 'link_idle_down',
+            frames: this.anims.generateFrameNumbers('link', { start: 0, end: 0 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        juego.anims.create({
+            key: 'link_idle_left',
+            frames: this.anims.generateFrameNumbers('link', { start: 74, end: 74 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        juego.anims.create({
+            key: 'link_idle_right',
+            frames: this.anims.generateFrameNumbers('link', { start: 74, end: 74 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        juego.anims.create({
+            key: 'link_idle_up',
+            frames: this.anims.generateFrameNumbers('link', { start: 148, end: 148 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        // Walk 
+        juego.anims.create({
+            key: 'link_walk_down',
+            frames: this.anims.generateFrameNumbers('link', { start: 1, end: 9 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        juego.anims.create({
+            key: 'link_walk_left',
+            frames: this.anims.generateFrameNumbers('link', { start: 75, end: 83 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        juego.anims.create({
+            key: 'link_walk_right',
+            frames: this.anims.generateFrameNumbers('link', { start: 75, end: 83 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        juego.anims.create({
+            key: 'link_walk_up',
+            frames: this.anims.generateFrameNumbers('link', { start: 149, end: 156 }),
+            frameRate: 10,
+            repeat: -1
+        });
+    }
+
+
+    playAnimations() {
+        /*
+        if (this.cursores.right.isDown) {
+            anims.play('link_right', true);
+        }
+        if (this.cursores.left.isDown) {
+            anims.play('link_left', true);
+        }
+        if (this.cursores.up.isDown) {
+            anims.play('link_up', true);
+        }
+        if (this.cursores.down.isDown) {
+            anims.play('link_down', true);
+        }*/
     }
 }
