@@ -11,21 +11,25 @@ class MovementSystem{
         switch(direction){
 
             case 'up':
-                self.body.velocity.y -= speed;
+                this.self.body.velocity.y -= this.speed;
+                break;
             case 'right':
-                self.body.velocity.x += speed;
+                this.self.body.velocity.x += this.speed;
+                break;
             case 'left':
-                self.body.velocity.x -= speed;
+                this.self.body.velocity.x -= this.speed;
+                break;
             case 'down':
-                self.body.velocity.y += speed;
+                this.self.body.velocity.y += this.speed;
+                break;
         }
     }
 
     Run(){
-        speed = originalSpeed * runningMultipler;
+        this.speed = this.originalSpeed * this.runningMultipler;
     }
 
     Walk(){
-        speed = originalSpeed;
+        this.speed = this.originalSpeed;
     }
 }

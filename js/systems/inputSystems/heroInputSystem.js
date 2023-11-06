@@ -31,7 +31,7 @@ class HeroInputSystem extends InputSystem{
             super.PassInputs('walk')
         }
     
-        if (attackKey.isDown) {
+        if (this.attackKey.isDown) {
             super.PassInputs('attack')
         }
     }
