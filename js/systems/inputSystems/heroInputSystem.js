@@ -1,41 +1,38 @@
 class HeroInputSystem extends InputSystem{
 
-    constructor(_attackSystem, _movementSystem){
-        super(_attackSystem, _movementSystem)     
+    constructor(_scene, _attackSystem, _movementSystem){
+        super(_scene, _attackSystem, _movementSystem)     
         
-        cursors = this.input.keyboard.createCursorKeys();
-        attackKey = this.input.keyboard.addKey('O');
-        runKey = this.input.keyboard.addKey('P');
-        interactKey = this.input.keyboard.addKey('P');
-
+        this.cursors = _scene.input.keyboard.createCursorKeys();
+        this.attackKey = _scene.input.keyboard.addKey('O');
+        this.runKey = _scene.input.keyboard.addKey('P');
+        this.interactKey = _scene.input.keyboard.addKey('I');
     }
 
     GetInputs(){
 
-        if (cursors.left.isDown) {
-            super.PassInputs(up)
-        } else if (cursors.right.isDown) {
-            super.PassInputs(up)
+        if (this.cursors.up.isDown) {
+            super.PassInputs('up')
+        } 
+        if (this.cursors.right.isDown) {
+            super.PassInputs('right')
+        }
+        if (this.cursors.left.isDown) {
+            super.PassInputs('left')
+        } 
+        if (this.cursors.down.isDown) {
+            super.PassInputs('down')
+        }
+
+        if (this.runKey.isDown) {
+            super.PassInputs('run')
+        }
+        else{
+            super.PassInputs('walk')
         }
     
-        if (cursors.up.isDown) {
-            super.PassInputs(up)
-        } else if (cursors.down.isDown) {
-            super.PassInputs(up)
-        }
-    
-        // Handle player actions
         if (attackKey.isDown) {
-            // Handle the 'O' key for attacking
-            super.PassInputs(attack)
+            super.PassInputs('attack')
         }
-    
-        if (runKey.isDown) {
-            // Handle the 'P' key for running
-            super.PassInputs(run)
-        }
-
-
     }
-
 }

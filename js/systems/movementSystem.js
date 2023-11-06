@@ -1,4 +1,0 @@
-class MovementSystem{
-    constructor(){
-    }
-}
