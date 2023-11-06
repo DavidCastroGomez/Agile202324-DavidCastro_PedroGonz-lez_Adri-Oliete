@@ -8,7 +8,7 @@ class Hero extends Character {
 
 
         //Attacks:
-        super.attackSystem = new AttackSystem(_scene, this);
+        super.attackSystem = new AttackSystem(_scene, this, 2);
 
         //Movement:
         super.SetMovementsystem(new MovementSystem(120, this, 1.5));
