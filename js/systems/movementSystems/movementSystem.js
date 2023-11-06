@@ -1,14 +1,14 @@
-class MovementSystem{
-    constructor(_speed, _self, _runningMultipler){
+class MovementSystem {
+    constructor(_speed, _self, _runningMultipler) {
         this.speed = _speed;
         this.originalSpeed = _speed;
         this.self = _self;
         this.runningMultipler = _runningMultipler;
     }
 
-    Move(direction){
-        
-        switch(direction){
+    Move(direction) {
+
+        switch (direction) {
 
             case 'up':
                 this.self.body.velocity.y -= this.speed;
@@ -25,11 +25,11 @@ class MovementSystem{
         }
     }
 
-    Run(){
+    Run() {
         this.speed = this.originalSpeed * this.runningMultipler;
     }
 
-    Walk(){
+    Walk() {
         this.speed = this.originalSpeed;
     }
 }

@@ -1,10 +1,8 @@
 class Character extends Phaser.GameObjects.Sprite {
-    constructor(_scene) {
-        super(_scene, config.width/2,config.height/2, null)
+    constructor(_scene, _x, _y, _tag) {
+        super(_scene,  _x, _y, _tag)
 
-        this.sprite = new SpriteManager(_scene);
-        this.texture = this.sprite.tag;
-
+        this.sprite;
 
         this.healthSystem
         this.attackSystem
@@ -12,8 +10,9 @@ class Character extends Phaser.GameObjects.Sprite {
         this.inputSystem
         this.collisionManager
 
-        _scene.add.existing(this);
-        _scene.physics.world.enable(this)
+        this.scene = _scene;
+        this.scene.add.existing(this);
+        this.scene.physics.world.enable(this);
     }
 
     create(){
@@ -22,6 +21,7 @@ class Character extends Phaser.GameObjects.Sprite {
 
     update() {
         this.inputSystem.GetInputs();
+        this.sprite.update();
 
         /*
         this.healthSystem.update()

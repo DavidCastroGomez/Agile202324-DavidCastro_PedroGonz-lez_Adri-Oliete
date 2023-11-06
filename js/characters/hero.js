@@ -1,12 +1,11 @@
-class Hero extends Character
-{
+class Hero extends Character {
 
-    constructor(_scene)
-    {
-        super(_scene);
-        
+    constructor(_scene) {
+        super(_scene, config.width / 2, config.height / 2, 'hero');
+
         //Sprite:
-        super.sprite = new SpriteManager(_scene, this, config.width/2,config.height/2);
+        this.sprite = new HeroSpriteController(this.anims);
+
 
         //Attacks:
         //super.attackSystem = new HeroAttackSystem();
@@ -20,7 +19,7 @@ class Hero extends Character
         super.inputSystem = new HeroInputSystem(_scene, super.movementSystem, super.GetMovementSystem());
     }
 
-    update(){
+    update() {
         super.update();
     }
 }
