@@ -21,7 +21,6 @@ class Character extends Phaser.GameObjects.Sprite {
 
     update() {
         this.inputSystem.GetInputs();
-        this.sprite.update();
 
         /*
         this.healthSystem.update()
@@ -41,7 +40,15 @@ class Character extends Phaser.GameObjects.Sprite {
         return this.movementSystem
     }
 
+    GetAttackSystem(){
+        return this.attackSystem
+    }
+
     SetInputSystem(_aaa){
         this.inputSystem = _aaa
+    }
+
+    GetSpriteManager(){
+        return this.sprite
     }
 }

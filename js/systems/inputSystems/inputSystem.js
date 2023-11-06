@@ -14,24 +14,22 @@ class InputSystem
         switch(input){
 
             case 'up':
-                this.movementSystem.Move('up')
-                break;
             case 'right':
-                this.movementSystem.Move('right')
-                break;
             case 'left':
-                this.movementSystem.Move('left')
-                break;
             case 'down':
-                this.movementSystem.Move('down')
+            case 'stop_hor':
+            case 'stop_ver':
+                this.movementSystem.Move(input)
                 break;
             case 'run':
                 this.movementSystem.Run()
                 break;
             case 'walk':
-                //this.movementSystem.Walk()
+                this.movementSystem.Walk()
+                break;
             case 'attack':
-                //this.attackSystem.Attack()
+                this.attackSystem.Attack()
+                break;
         }
 
     }

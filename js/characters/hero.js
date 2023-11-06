@@ -4,19 +4,19 @@ class Hero extends Character {
         super(_scene, config.width / 2, config.height / 2, 'hero');
 
         //Sprite:
-        this.sprite = new HeroSpriteController(this.anims);
+        super.sprite = new HeroSpriteController(this.anims);
 
 
         //Attacks:
-        //super.attackSystem = new HeroAttackSystem();
+        super.attackSystem = new AttackSystem(_scene, this);
 
         //Movement:
-        super.SetMovementsystem(new MovementSystem(1, this, 2));
+        super.SetMovementsystem(new MovementSystem(120, this, 1.5));
 
         //super.movementSystem.Walk()
 
         //Inputs:
-        super.inputSystem = new HeroInputSystem(_scene, super.movementSystem, super.GetMovementSystem());
+        super.inputSystem = new HeroInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem());
     }
 
     update() {

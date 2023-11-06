@@ -10,7 +10,8 @@ class HeroSpriteController {
             key: 'idle_down',
             frames: this.animation.generateFrameNumbers('hero', { start: 0, end: 0 }),
             frameRate: 10,
-            repeat: -1
+            repeat: -1,
+
         });
         this.animation.create({
             key: 'idle_left',
@@ -56,9 +57,43 @@ class HeroSpriteController {
             frameRate: 10,
             repeat: -1
         });
+
+        //Combat
+        this.animation.create({
+            key: 'attack_down',
+            frames: this.animation.generateFrameNumbers('hero', { start: 37, end: 43 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.animation.create({
+            key: 'attack_left',
+            frames: this.animation.generateFrameNumbers('hero', { start: 111, end: 117 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.animation.create({
+            key: 'attack_right',
+            frames: this.animation.generateFrameNumbers('hero', { start: 111, end: 117 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.animation.create({
+            key: 'attack_up',
+            frames: this.animation.generateFrameNumbers('hero', { start: 185, end: 191 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        //Picking Up
+        this.animation.create({
+            key: 'pick_up',
+            frames: this.animation.generateFrameNumbers('hero', { start: 25, end: 26 }),
+            frameRate: 10,
+            repeat: -1
+        });
     }
 
-    update() {
-        this.animation.play('walk_down');
+    playAnimation(key) {
+        this.animation.play(key, true);
     }
 }

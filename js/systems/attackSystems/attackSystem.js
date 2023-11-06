@@ -11,10 +11,10 @@ class AttackSystem{
 
     Attack(direcion){
 
-        positionX = 0//TODO: Get character position_character.position
-        positiony = 0//TODO: Get character position_character.position
+        //positionX = this.character.body.position.x//TODO: Get character position_character.position
+        //positiony = this.character.body.position.x//TODO: Get character position_character.position
 
-        positionOffset = 100
+        this.positionOffset = 100
 
         switch(direcion){
             case 0:
@@ -31,8 +31,8 @@ class AttackSystem{
 
         }
 
-        const colliderObject = new ColliderObject(scene, positionX, positionY, 5000);
-        _scene.physics.add.colldier(colliderObject, _enemies)
+        this.colliderObject = new HitboxPrefab(scene, positionX, positionY, 5000);
+        _scene.physics.add.collider(colliderObject, _enemies)
 
     }
 

@@ -1,4 +1,4 @@
-class hitboxPrefab extends Phaser.GameObjects.Sprite
+class HitboxPrefab extends Phaser.GameObjects.Sprite
 {
     constructor(_scene,_posX,_posY, delay){
         super(_scene,_posX,_posY)
