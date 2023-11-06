@@ -28,7 +28,7 @@ class InputSystem
                 this.movementSystem.Walk()
                 break;
             case 'attack':
-                this.attackSystem.Attack()
+                this.attackSystem.Attack(this.movementSystem.GetLastDir())
                 break;
         }
 

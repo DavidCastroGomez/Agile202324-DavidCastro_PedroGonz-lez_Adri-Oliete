@@ -1,39 +1,54 @@
 class AttackSystem{
     
-    constructor(_scene, _character){
+    constructor(_scene, _character, _attackCooldown){
         this.scene = _scene
         this.character = _character
+
+        this.maxAttackCooldown = _attackCooldown
+        this.currentAttackCooldown = this.maxAttackCooldown
     }
 
     AddEnemies(_enemies){
         this.enemies = _enemies
     }
 
-    Attack(direcion){
+    Attack(direction){
 
-        //positionX = this.character.body.position.x//TODO: Get character position_character.position
-        //positiony = this.character.body.position.x//TODO: Get character position_character.position
+        if(this.currentAttackCooldown >= this.maxAttackCooldown){
+            
+        }else{
 
-        this.positionOffset = 100
+        this.positionX = this.character.body.position.x
+        this.positionY = this.character.body.position.y
 
-        switch(direcion){
-            case 0:
-                positionX += positionOffset; 
+        this.positionOffsetX = 40
+        this.positionOffsetY = 40
+
+        switch(direction){
+            case 'right':
+                this.positionX += this.positionOffsetX; 
                 break
-            case 1:
-                positionY += positionOffset; 
-
-            case 2:
-                positionX -= positionOffset; 
-
-            case 3:
-                positionY -= positionOffset; 
-
+            case 'down':
+                this.positionY += this.positionOffsetY; 
+                break
+            case 'left':
+                this.positionX -= this.positionOffsetX; 
+                break
+            case 'up':
+                this.positionY -= this.positionOffsetY; 
+                break
         }
 
-        this.colliderObject = new HitboxPrefab(scene, positionX, positionY, 5000);
-        _scene.physics.add.collider(colliderObject, _enemies)
+        this.colliderObject = new HitboxPrefab(this.scene, this.positionX, this.positionY, 200);
+        this.scene.physics.add.collider(this.colliderObject, this.enemies)
+
+        this.currentAttackCooldown = 0
+    }
 
     }
 
+
+    update(delta){
+        
+    }
 }
