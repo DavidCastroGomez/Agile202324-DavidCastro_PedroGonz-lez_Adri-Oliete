@@ -1,11 +1,8 @@
-class AttackSystem {
-
-    constructor(_scene, _owner, _attackCooldown) {
 class AttackSystem{
     
-    constructor(_scene, _character, _attackCooldown){
+    constructor(_scene, _owner, _attackCooldown){
         this.scene = _scene
-        this.character = _character
+        this.owner = _owner
 
         this.maxAttackCooldown = _attackCooldown
         this.currentAttackCooldown = this.maxAttackCooldown
@@ -27,8 +24,8 @@ class AttackSystem{
 
         if(!this.chargingAttack){
 
-            this.positionX = this.character.body.position.x
-            this.positionY = this.character.body.position.y
+            this.positionX = this.owner.body.position.x
+            this.positionY = this.owner.body.position.y
 
             this.positionOffsetX = 40
             this.positionOffsetY = 40

@@ -8,14 +8,12 @@ class InputSystem {
 
     GetInputs() {/*Will be overrided*/ }
 
-    PassInputs(input, duration){
-        
-        switch(input){
+    PassInputs(input, duration) {
 
         switch (input) {
             case 'stop_hor':
             case 'stop_ver':
-                
+
             case 'up':
             case 'right':
             case 'left':

@@ -49,7 +49,7 @@ class MovementSystem {
                 this.anim = this.idleDirection
                 break;
         }
-        
+
     }
 
     Run() {
@@ -70,7 +70,7 @@ class MovementSystem {
         //this.owner.GetSpriteManager().playAnimation(this.anim);
     }
 
-    GetLastDir(){
+    GetLastDir() {
         return this.lastDir
     }
 }
