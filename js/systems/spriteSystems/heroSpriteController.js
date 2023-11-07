@@ -61,25 +61,25 @@ class HeroSpriteController {
         //Combat
         this.animation.create({
             key: 'attack_down',
-            frames: this.animation.generateFrameNumbers('hero', { start: 55, end: 60 }),
+            frames: this.animation.generateFrameNumbers('hero', { start: 165, end: 170 }),
             frameRate: 10,
             repeat: -1
         });
         this.animation.create({
             key: 'attack_left',
-            frames: this.animation.generateFrameNumbers('hero', { start: 70, end: 72 }),
+            frames: this.animation.generateFrameNumbers('hero', { start: 192, end: 196 }),
             frameRate: 10,
             repeat: -1
         });
         this.animation.create({
             key: 'attack_right',
-            frames: this.animation.generateFrameNumbers('hero', { start: 83, end: 85 }),
+            frames: this.animation.generateFrameNumbers('hero', { start: 179, end: 183 }),
             frameRate: 10,
             repeat: -1
         });
         this.animation.create({
             key: 'attack_up',
-            frames: this.animation.generateFrameNumbers('hero', { start: 96, end: 98  }),
+            frames: this.animation.generateFrameNumbers('hero', { start: 205, end: 209 }),
             frameRate: 10,
             repeat: -1
         });
@@ -95,5 +95,65 @@ class HeroSpriteController {
 
     playAnimation(key) {
         this.animation.play(key, true);
+    }
+
+    updateAnim(direction, action) {
+        switch (action) {
+            case 'idle':
+                switch (direction) {
+                    case 'up':
+                        this.animation.play('idle_up', true);
+                        break;
+                    case 'right':
+                        this.animation.play('idle_right', true);
+                        break;
+                    case 'left':
+                        this.animation.play('idle_left', true);
+                        break;
+                    case 'down':
+                        this.animation.play('idle_down', true);
+                        break;
+                }
+                break;
+            case 'walk':
+                switch (direction) {
+                    case 'up':
+                        this.animation.play('walk_up', true);
+                        break;
+                    case 'right':
+                        this.animation.play('walk_right', true);
+                        break;
+                    case 'left':
+                        this.animation.play('walk_left', true);
+                        break;
+                    case 'down':
+                        this.animation.play('walk_down', true);
+                        break;
+                }
+                break;
+            case 'attack':
+                switch (direction) {
+                    case 'up':
+                        this.animation.play('attack_up', true);
+                        break;
+                    case 'right':
+                        this.animation.play('attack_right', true);
+                        break;
+                    case 'left':
+                        this.animation.play('attack_left', true);
+                        break;
+                    case 'down':
+                        this.animation.play('attack_down', true);
+                        break;
+                }
+                break;
+            case 'pick_up':
+                this.animation.play('pick_up', true);
+                break;
+            default:
+                break;
+
+        }
+
     }
 }

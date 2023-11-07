@@ -1,8 +1,8 @@
-class HeroInputSystem extends InputSystem{
+class HeroInputSystem extends InputSystem {
 
-    constructor(_scene, _attackSystem, _movementSystem){
-        super(_scene, _attackSystem, _movementSystem)     
-        
+    constructor(_scene, _attackSystem, _movementSystem) {
+        super(_scene, _attackSystem, _movementSystem)
+
         this.up = _scene.input.keyboard.addKey('W');
         this.down = _scene.input.keyboard.addKey('S');
         this.left = _scene.input.keyboard.addKey('A');
@@ -12,38 +12,28 @@ class HeroInputSystem extends InputSystem{
         this.interactKey = _scene.input.keyboard.addKey('I');
     }
 
-    GetInputs(){
+    GetInputs() {
 
-        if(!this.up.isDown && !this.down.isDown){
+        if (!this.up.isDown && !this.down.isDown)
             super.PassInputs('stop_ver')
-        }
-        if(!this.left.isDown && !this.right.isDown){
+        if (!this.left.isDown && !this.right.isDown)
             super.PassInputs('stop_hor')
-        }
 
-        if (this.up.isDown) {
+        if (this.up.isDown)
             super.PassInputs('up')
-        } 
-        if (this.right.isDown) {
+        if (this.right.isDown)
             super.PassInputs('right')
-        }
-        if (this.left.isDown) {
+        if (this.left.isDown)
             super.PassInputs('left')
-        } 
-        if (this.down.isDown) {
+        if (this.down.isDown)
             super.PassInputs('down')
-        }
-        
 
-        if (this.runKey.isDown) {
+        if (this.runKey.isDown)
             super.PassInputs('run')
-        }
-        else{
+        else
             super.PassInputs('walk')
-        }
-    
-        if (this.attackKey.isDown) {
+
+        if (this.attackKey.isDown)
             super.PassInputs('attack')
-        }
     }
 }

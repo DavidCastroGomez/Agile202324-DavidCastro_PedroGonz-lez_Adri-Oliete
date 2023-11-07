@@ -1,26 +1,28 @@
 class Character extends Phaser.GameObjects.Sprite {
     constructor(_scene, _x, _y, _tag) {
-        super(_scene,  _x, _y, _tag)
+        super(_scene, _x, _y, _tag)
 
-        this.sprite;
+        this.sprite = new SpriteController(this.anims);
+        this.state;
 
-        this.healthSystem
-        this.attackSystem
-        this.movementSystem
-        this.inputSystem
-        this.collisionManager
+        this.healthSystem = new HealthSystem();
+        this.attackSystem = new AttackSystem(_scene, this, 1);
+        this.movementSystem = new MovementSystem(1, this, 1);
+        this.inputSystem = new InputSystem(_scene, this.attackSystem, this.movementSystem);
+        this.collisionManager = new CollisionManager();
 
-        this.scene = _scene;
-        this.scene.add.existing(this);
-        this.scene.physics.world.enable(this);
+        _scene.add.existing(this);
+        _scene.physics.world.enable(this);
     }
 
-    create(){
-        
+    create() {
+
     }
 
     update() {
         this.inputSystem.GetInputs();
+        this.sprite.updateAnim(this.movementSystem.GetLastDir(), 'attack');
+
 
         /*
         this.healthSystem.update()
@@ -36,19 +38,19 @@ class Character extends Phaser.GameObjects.Sprite {
         this.movementSystem = _mov
     }
 
-    GetMovementSystem(){
+    GetMovementSystem() {
         return this.movementSystem
     }
 
-    GetAttackSystem(){
+    GetAttackSystem() {
         return this.attackSystem
     }
 
-    SetInputSystem(_aaa){
+    SetInputSystem(_aaa) {
         this.inputSystem = _aaa
     }
 
-    GetSpriteManager(){
+    GetSpriteManager() {
         return this.sprite
     }
 }

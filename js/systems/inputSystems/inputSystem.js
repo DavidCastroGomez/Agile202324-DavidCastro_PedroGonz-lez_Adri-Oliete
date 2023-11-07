@@ -1,24 +1,23 @@
-class InputSystem
-{
-    
-    constructor(_scene, _attackSystem, _movementSystem){
+class InputSystem {
+
+    constructor(_scene, _attackSystem, _movementSystem) {
         this.attackSystem = _attackSystem;
         this.movementSystem = _movementSystem;
         this.scene = _scene;
     }
 
-    GetInputs(){/*Will be overrided*/}
+    GetInputs() {/*Will be overrided*/ }
 
-    PassInputs(input){
-        
-        switch(input){
+    PassInputs(input) {
 
+        switch (input) {
+            case 'stop_hor':
+            case 'stop_ver':
+                
             case 'up':
             case 'right':
             case 'left':
             case 'down':
-            case 'stop_hor':
-            case 'stop_ver':
                 this.movementSystem.Move(input)
                 break;
             case 'run':
