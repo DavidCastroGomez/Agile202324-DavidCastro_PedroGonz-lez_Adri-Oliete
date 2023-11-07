@@ -17,7 +17,11 @@ class PedroTestScene extends Phaser.Scene
 
         //this.load.setPath('res/maps');
         //this.load.tilemapTiledJSON('Map', 'TestMap.json');
-        //this.load.tilemapTiledJSON('level','Alttp_Lost_Woods.json');        
+        //this.load.tilemapTiledJSON('level','Alttp_Lost_Woods.json');      
+        //this.load.spritesheet('hero', 'res/img/sprites/link_anim.png', { frameWidth: 18, frameHeight: 26 });
+        this.spriteManager = new SpriteManager(this);
+
+        this.spriteManager.preloadSprites();
     }
 
     create()
@@ -32,7 +36,12 @@ class PedroTestScene extends Phaser.Scene
         //this.map.createLayer('lost_woods','tileset');
 
         //-------------------------------------------------------------Hero creation:
-        this.heroTest = new Hero(this);
+        this.heroTest = new Hero(this);        
+        this.heroTest.sprite.create();
+
+        //-------------------------------------------------------------Camera following:
+        //this.cameras.main.startFollow(this.heroTest);
+        //this.cameras.main.setBounds(0,0,gamePrefs.level1Width,gamePrefs.level1Height);
     }
 
     update(){

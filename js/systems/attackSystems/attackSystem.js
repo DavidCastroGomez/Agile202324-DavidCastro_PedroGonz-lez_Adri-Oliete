@@ -1,39 +1,71 @@
 class AttackSystem{
     
-    constructor(_scene, _character){
+    constructor(_scene, _owner, _attackCooldown){
         this.scene = _scene
-        this.character = _character
+        this.owner = _owner
+
+        this.maxAttackCooldown = _attackCooldown
+        this.currentAttackCooldown = this.maxAttackCooldown
+
+        this.chargingAttack = false;
+        this.chargeAttackTime = 1000;
+
+        this.colliderObject = new HitboxPrefab(this.scene, 0, 0, 200);
+        this.scene.physics.add.collider(this.colliderObject, this.enemies)
     }
 
-    AddEnemies(_enemies){
+    AddEnemies(_enemies) {
         this.enemies = _enemies
     }
 
-    Attack(direcion){
+    Attack(direction){
 
-        positionX = 0//TODO: Get character position_character.position
-        positiony = 0//TODO: Get character position_character.position
+        //this.currentAttackCooldown >= this.maxAttackCooldown
 
-        positionOffset = 100
+        if(!this.chargingAttack){
 
-        switch(direcion){
-            case 0:
-                positionX += positionOffset; 
-                break
-            case 1:
-                positionY += positionOffset; 
+            this.positionX = this.owner.body.position.x
+            this.positionY = this.owner.body.position.y
 
-            case 2:
-                positionX -= positionOffset; 
+            this.positionOffsetX = 40
+            this.positionOffsetY = 40
 
-            case 3:
-                positionY -= positionOffset; 
+            switch(direction){
+                case 'right':
+                    this.positionX += this.positionOffsetX; 
+                    break
+                case 'down':
+                    this.positionY += this.positionOffsetY; 
+                    break
+                case 'left':
+                    this.positionX -= this.positionOffsetX; 
+                    break
+                case 'up':
+                    this.positionY -= this.positionOffsetY; 
+                    break
+            }
 
+            this.colliderObject.setNewPosition(this.positionX, this.positionY)
+
+            this.currentAttackCooldown = 0
         }
 
-        const colliderObject = new ColliderObject(scene, positionX, positionY, 5000);
-        _scene.physics.add.colldier(colliderObject, _enemies)
-
+        
     }
 
+    ChargeAttack(direction, duration){
+
+        this.chargingAttack = true
+
+        if(duration > this.chargeAttackTime){
+            this.colliderObject.setNewPosition(0,0)
+        }
+    }
+
+
+
+
+    update(delta){
+        
+    }
 }
