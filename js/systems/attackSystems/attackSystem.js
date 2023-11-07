@@ -6,6 +6,12 @@ class AttackSystem{
 
         this.maxAttackCooldown = _attackCooldown
         this.currentAttackCooldown = this.maxAttackCooldown
+
+        this.chargingAttack = false;
+        this.chargeAttackTime = 1000;
+
+        this.colliderObject = new HitboxPrefab(this.scene, 0, 0, 200);
+        this.scene.physics.add.collider(this.colliderObject, this.enemies)
     }
 
     AddEnemies(_enemies){
@@ -14,38 +20,49 @@ class AttackSystem{
 
     Attack(direction){
 
-        if(this.currentAttackCooldown >= this.maxAttackCooldown){
-            
-        }else{
+        //this.currentAttackCooldown >= this.maxAttackCooldown
 
-        this.positionX = this.character.body.position.x
-        this.positionY = this.character.body.position.y
+        if(!this.chargingAttack){
 
-        this.positionOffsetX = 40
-        this.positionOffsetY = 40
+            this.positionX = this.character.body.position.x
+            this.positionY = this.character.body.position.y
 
-        switch(direction){
-            case 'right':
-                this.positionX += this.positionOffsetX; 
-                break
-            case 'down':
-                this.positionY += this.positionOffsetY; 
-                break
-            case 'left':
-                this.positionX -= this.positionOffsetX; 
-                break
-            case 'up':
-                this.positionY -= this.positionOffsetY; 
-                break
+            this.positionOffsetX = 40
+            this.positionOffsetY = 40
+
+            switch(direction){
+                case 'right':
+                    this.positionX += this.positionOffsetX; 
+                    break
+                case 'down':
+                    this.positionY += this.positionOffsetY; 
+                    break
+                case 'left':
+                    this.positionX -= this.positionOffsetX; 
+                    break
+                case 'up':
+                    this.positionY -= this.positionOffsetY; 
+                    break
+            }
+
+            this.colliderObject.setNewPosition(this.positionX, this.positionY)
+
+            this.currentAttackCooldown = 0
         }
 
-        this.colliderObject = new HitboxPrefab(this.scene, this.positionX, this.positionY, 200);
-        this.scene.physics.add.collider(this.colliderObject, this.enemies)
-
-        this.currentAttackCooldown = 0
+        
     }
 
+    ChargeAttack(direction, duration){
+
+        this.chargingAttack = true
+
+        if(duration > this.chargeAttackTime){
+            this.colliderObject.setNewPosition(0,0)
+        }
     }
+
+
 
 
     update(delta){
