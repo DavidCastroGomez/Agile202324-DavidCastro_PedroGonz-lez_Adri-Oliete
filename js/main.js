@@ -1,13 +1,14 @@
 var gamePrefs=
 {
-    
+    gameWidth:512,
+    gameHeight:384
 }
 
 var config = 
 {
     type: Phaser.AUTO,
-    width: 512,
-    height: 384,
+    width: gamePrefs.gameWidth,
+    height: gamePrefs.gameHeight,
     scene:[PedroTestScene],
     render:
     {

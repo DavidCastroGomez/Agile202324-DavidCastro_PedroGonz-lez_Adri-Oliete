@@ -5,12 +5,7 @@ class SpriteManager {
     }
 
     preloadSprites() {
-        //bg
-
-        this.scene.load.spritesheet('hero', 'res/img/sprites/link_anim.png', { frameWidth: 18, frameHeight: 26 });
-        //Other
+        this.scene.load.setPath('res/img/sprites');
+        this.scene.load.spritesheet('hero', 'link_anim.png', { frameWidth: 18, frameHeight: 26 });
     }
-
-
-    
 }

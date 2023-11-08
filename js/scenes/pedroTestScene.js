@@ -40,7 +40,7 @@ class PedroTestScene extends Phaser.Scene
 
         //-------------------------------------------------------------Camera following:
         this.cameras.main.startFollow(this.heroTest);
-        this.cameras.main.setBounds(0,0,gamePrefs.level1Width,gamePrefs.level1Height);
+        this.cameras.main.setBounds(0,0,gamePrefs.gameWidth,gamePrefs.gameHeight);
     }
 
     update(time, delta){

@@ -83,7 +83,7 @@
          "columns":32,
          "firstgid":1,
          "image":"..\/img\/tilesets\/Alttp_Tileset.png",
-         "imageheight":512,
+         "imageheight":384,
          "imagewidth":512,
          "margin":0,
          "name":"Alttp_Tileset",
