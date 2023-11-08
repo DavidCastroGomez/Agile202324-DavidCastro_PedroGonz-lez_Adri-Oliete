@@ -8,7 +8,7 @@ class Hero extends Character {
 
 
         //Attacks:
-        super.attackSystem = new AttackSystem(_scene, this, 2);
+        //super.attackSystem = new AttackSystem(_scene, this, 2);
 
         //Movement:
         super.SetMovementsystem(new MovementSystem(120, this, 1.5));
@@ -19,7 +19,7 @@ class Hero extends Character {
         super.inputSystem = new HeroInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem());
     }
 
-    update() {
-        super.update();
+    update(delta) {
+        super.update(delta);
     }
 }

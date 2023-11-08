@@ -1,8 +1,9 @@
 class HitboxPrefab extends Phaser.GameObjects.Sprite
 {
-    constructor(_scene,_posX,_posY, _delay){
-        super(_scene,_posX,_posY)
+    constructor(_scene,_posX,_posY){
 
+        super(_scene,_posX,_posY)
+ 
         this.scene = _scene
 
         this.scene.physics.world.enable(this);
@@ -14,26 +15,31 @@ class HitboxPrefab extends Phaser.GameObjects.Sprite
         this.setAlpha(0); 
         this.setOrigin(0);
         this.scene.add.existing(this);
-    
-        this.delay = _delay
 
         this.newBody = this.body
 
-        this.setActive(false)
+        this.body.checkCollision.none = false;
 
     }
 
     setNewPosition(posX, posY){
-
-
         this.newBody.position.x = posX
         this.newBody.position.y = posY
+    }
 
-        this.setActive(true)
 
-        
+
+    activeAttack(_delay,owner){
+        this.delay = _delay
+
+        owner.movementSystem.CanMove(false)
+
+        this.body.checkCollision.none = false;
+      
         this.scene.time.delayedCall(this.delay, () => {
-            this.setActive(false)
+            this.body.checkCollision.none = true;
+            owner.movementSystem.CanMove(true)
+            owner.state = 'idle'
         });
     }
     

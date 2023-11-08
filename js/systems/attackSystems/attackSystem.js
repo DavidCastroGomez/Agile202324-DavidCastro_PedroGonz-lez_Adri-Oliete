@@ -9,8 +9,19 @@ class AttackSystem{
 
         this.chargingAttack = false;
         this.chargeAttackTime = 1000;
+        this.currentchargeAttackTime = 0;
 
-        this.colliderObject = new HitboxPrefab(this.scene, 0, 0, 200);
+        this.positionX = 0;
+        this.positionY = 0;
+
+        this.spinAttackTime = 850;
+        this.currentSpinTime = 0;
+
+        this.chargedPosition = new Phaser.Geom.Point([0], [0]);
+
+        this.permormingChargedAttack = false;
+
+        this.colliderObject = new HitboxPrefab(this.scene, 0, 0);
         this.scene.physics.add.collider(this.colliderObject, this.enemies)
     }
 
@@ -20,52 +31,95 @@ class AttackSystem{
 
     Attack(direction){
 
-        //this.currentAttackCooldown >= this.maxAttackCooldown
+        if(!this.chargingAttack && !this.permormingChargedAttack && this.currentAttackCooldown >= this.maxAttackCooldown){
 
-        if(!this.chargingAttack){
+            this.SetAttackPosition(direction, 1)
 
-            this.positionX = this.owner.body.position.x
-            this.positionY = this.owner.body.position.y
-
-            this.positionOffsetX = 40
-            this.positionOffsetY = 40
-
-            switch(direction){
-                case 'right':
-                    this.positionX += this.positionOffsetX; 
-                    break
-                case 'down':
-                    this.positionY += this.positionOffsetY; 
-                    break
-                case 'left':
-                    this.positionX -= this.positionOffsetX; 
-                    break
-                case 'up':
-                    this.positionY -= this.positionOffsetY; 
-                    break
-            }
-
+            //this.colliderObject.setPosition(this.positionX, this.positionY)
             this.colliderObject.setNewPosition(this.positionX, this.positionY)
+            this.colliderObject.activeAttack(this.maxAttackCooldown, this.owner);
 
             this.currentAttackCooldown = 0
+
+            //animate
+            this.owner.state = 'attack';
         }
 
         
     }
 
-    ChargeAttack(direction, duration){
-
+    ChargeAttack(){
         this.chargingAttack = true
+    }
 
-        if(duration > this.chargeAttackTime){
-            this.colliderObject.setNewPosition(0,0)
+    
+    StopChargeAttack(direction){
+        
+        if(this.chargingAttack && this.currentchargeAttackTime > this.chargeAttackTime){
+
+            this.SetAttackPosition(direction, -1)
+            this.colliderObject.setNewPosition(this.positionX, this.positionY)
+            this.colliderObject.activeAttack(this.spinAttackTime, this.owner);
+
+            this.chargedPosition.setTo([this.positionX], [this.positionY])
+
+            this.SetAttackPosition(direction, 0)
+
+            this.permormingChargedAttack = true;
         }
+
+        this.chargingAttack = false;
+    }
+
+    SetAttackPosition(direction, forward){
+
+        this.positionX = this.owner.body.position.x
+        this.positionY = this.owner.body.position.y
+
+        this.positionOffsetX = 40 * forward
+        this.positionOffsetY = 40 * forward
+
+        switch(direction){
+            case 'right':
+                this.positionX += this.positionOffsetX; 
+                break
+            case 'down':
+                this.positionY += this.positionOffsetY; 
+                break
+            case 'left':
+                this.positionX -= this.positionOffsetX; 
+                break
+            case 'up':
+                this.positionY -= this.positionOffsetY; 
+                break
+        }
+
     }
 
 
+    updateAttackSystem(delta){
 
+        if(this.chargingAttack){
+            this.currentchargeAttackTime += delta;
+        }
 
-    update(delta){
-        
+        if(this.permormingChargedAttack){
+
+            if(this.currentSpinTime > 200){
+                this.chargedPosition = Phaser.Math.RotateAround(this.chargedPosition, this.positionX, this.positionY, 0.01 * delta);
+                this.colliderObject.setNewPosition(this.chargedPosition.x, this.chargedPosition.y)
+            }
+
+            this.currentSpinTime += delta;
+
+            if(this.currentSpinTime > this.spinAttackTime){
+                this.permormingChargedAttack = false;
+                this.currentSpinTime = 0;
+                this.currentAttackCooldown = 0;
+                this.currentchargeAttackTime = 0;
+            }
+        }
+
+        this.currentAttackCooldown += delta;
     }
 }
