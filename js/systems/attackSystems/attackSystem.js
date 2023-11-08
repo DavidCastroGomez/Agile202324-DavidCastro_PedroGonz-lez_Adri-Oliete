@@ -66,9 +66,12 @@ class AttackSystem{
             this.SetAttackPosition(direction, 0)
 
             this.permormingChargedAttack = true;
+
+            this.owner.state = 'chargedAttack';
         }
 
         this.chargingAttack = false;
+        this.currentchargeAttackTime = 0;
     }
 
     SetAttackPosition(direction, forward){
@@ -101,6 +104,10 @@ class AttackSystem{
 
         if(this.chargingAttack){
             this.currentchargeAttackTime += delta;
+
+            if(this.currentchargeAttackTime >= this.maxAttackCooldown){
+                this.owner.state = 'chargingAttack';
+            }
         }
 
         if(this.permormingChargedAttack){
