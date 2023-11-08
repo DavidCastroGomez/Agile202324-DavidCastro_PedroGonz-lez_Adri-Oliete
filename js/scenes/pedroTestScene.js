@@ -15,7 +15,7 @@ class PedroTestScene extends Phaser.Scene
         this.load.image('Alttp_Tileset','Alttp_Tileset.png');
 
         this.load.setPath('res/maps');
-        this.load.tilemapTiledJSON('level1','TestMap.json');
+        this.load.tilemapTiledJSON('testScene','TestMap.json');
 
         //-------------------------------------------------------------Sprite Manager preload:
         this.spriteManager = new SpriteManager(this);
@@ -25,13 +25,14 @@ class PedroTestScene extends Phaser.Scene
     create()
     {
         //-------------------------------------------------------------Map creation:
-        //Pintamos el nivel
-        //Cargo el JSON
-        this.map = this.add.tilemap('level1');
-        //Cargo los tilesets
+        this.map = this.add.tilemap('testScene');
+
         this.map.addTilesetImage('Alttp_Tileset');
-        //Pinto las CAPAS/LAYERS
+
         this.map.createLayer('ground_layer','Alttp_Tileset');
+        this.walls = this.map.createLayer('wall_layer','Alttp_Tileset');
+
+        this.map.setCollisionByExclusion(-1,true,true,'wall_layer'); 
 
         //-------------------------------------------------------------Hero creation:
         this.heroTest = new Hero(this);        
