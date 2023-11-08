@@ -8,9 +8,19 @@ class InputSystem {
 
     GetInputs() {/*Will be overrided*/ }
 
-    PassInputs(input, duration) {
+    PassInputs(input) {
 
         switch (input) {
+            case 'attack':
+                this.attackSystem.Attack(this.movementSystem.GetLastDir())
+                break;
+            case 'chargingAttack':
+                this.attackSystem.ChargeAttack()
+                break;
+            case 'chargedAttack':
+                this.attackSystem.StopChargeAttack(this.movementSystem.GetLastDir())
+                break;
+
             case 'stop_hor':
             case 'stop_ver':
 
@@ -26,12 +36,7 @@ class InputSystem {
             case 'walk':
                 this.movementSystem.Walk()
                 break;
-            case 'attack':
-                this.attackSystem.Attack(this.movementSystem.GetLastDir())
-                break;
-            case 'chargedAttack':
-                this.attackSystem.ChargeAttack(this.movementSystem.GetLastDir(), duration)
-                break;
+
         }
 
     }

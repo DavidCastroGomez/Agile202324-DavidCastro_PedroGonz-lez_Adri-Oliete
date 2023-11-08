@@ -10,8 +10,6 @@ class HeroInputSystem extends InputSystem {
         this.attackKey = _scene.input.keyboard.addKey('O');
         this.runKey = _scene.input.keyboard.addKey('P');
         this.interactKey = _scene.input.keyboard.addKey('I');
-
-        this.chargedAttackTime = 1000;
     }
 
     GetInputs() {
@@ -35,12 +33,13 @@ class HeroInputSystem extends InputSystem {
         else
             super.PassInputs('walk')
 
-        if (this.attackKey.isDown)
+        if (this.attackKey.isDown){
             super.PassInputs('attack')
-        //super.PassInputs('chargedAttack')
+            super.PassInputs('chargingAttack')
+        }
 
         if (this.attackKey.isUp) {
-            //super.PassInputs('chargedAttack', this.attackKey.getDuration())
+            super.PassInputs('chargedAttack')
         }
     }
 }
