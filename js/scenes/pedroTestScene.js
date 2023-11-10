@@ -11,9 +11,6 @@ class PedroTestScene extends Phaser.Scene
         this.cameras.main.setBackgroundColor("125");
 
         //-------------------------------------------------------------Map preload:
-        this.load.setPath('res/img/tilesets');
-        this.load.image('Alttp_Tileset','Alttp_Tileset.png');
-
         this.load.setPath('res/maps');
         this.load.tilemapTiledJSON('testScene','TestMap.json');
 
