@@ -14,10 +14,10 @@ class InputSystem {
             case 'attack':
                 this.attackSystem.Attack(this.movementSystem.GetLastDir())
                 break;
-            case 'chargingAttack':
+            case 'charging_attack':
                 this.attackSystem.ChargeAttack()
                 break;
-            case 'chargedAttack':
+            case 'charged_attack':
                 this.attackSystem.StopChargeAttack(this.movementSystem.GetLastDir())
                 break;
 

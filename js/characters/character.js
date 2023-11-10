@@ -3,7 +3,7 @@ class Character extends Phaser.GameObjects.Sprite {
         super(_scene, _x, _y, _tag)
 
         this.sprite = new SpriteController(this.anims);
-        this.state;
+        this.state = 'idle';
 
         this.healthSystem = new HealthSystem();
         this.attackSystem = new AttackSystem(_scene, this, 200);

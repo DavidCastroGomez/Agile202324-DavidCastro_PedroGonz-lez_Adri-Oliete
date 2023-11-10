@@ -67,7 +67,7 @@ class AttackSystem{
 
             this.permormingChargedAttack = true;
 
-            this.owner.state = 'chargedAttack';
+            this.owner.state = 'charged_attack';
         }
 
         this.chargingAttack = false;
@@ -106,7 +106,7 @@ class AttackSystem{
             this.currentchargeAttackTime += delta;
 
             if(this.currentchargeAttackTime >= this.maxAttackCooldown){
-                this.owner.state = 'chargingAttack';
+                this.owner.state = 'charging_attack';
             }
         }
 

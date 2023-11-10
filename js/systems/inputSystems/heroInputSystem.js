@@ -35,11 +35,11 @@ class HeroInputSystem extends InputSystem {
 
         if (this.attackKey.isDown){
             super.PassInputs('attack')
-            super.PassInputs('chargingAttack')
+            super.PassInputs('charging_attack')
         }
 
         if (this.attackKey.isUp) {
-            super.PassInputs('chargedAttack')
+            super.PassInputs('charged_attack')
         }
     }
 }

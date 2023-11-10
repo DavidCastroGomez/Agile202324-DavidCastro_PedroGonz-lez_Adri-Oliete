@@ -5,49 +5,42 @@ class MovementSystem {
         this.originalSpeed = _speed;
         this.owner = _owner;
         this.runningMultipler = _runningMultipler;
-        this.idleDirection = 'idle_down';
-        this.anim = 'idle_down';
-        this.lastDir;
+        this.lastDir = 'down';
         this.canMove = true;
     }
 
     Move(direction) {
-        if(this.canMove){
+        if (this.canMove) {
+            this.owner.state = 'walk'
             switch (direction) {
                 case 'up':
                     this.owner.body.velocity.y = -this.speed;
-                    //this.anim = 'walk_up';
-                    //this.idleDirection = 'idle_up';
                     this.lastDir = direction;
                     break;
                 case 'right':
                     this.owner.body.velocity.x = this.speed;
-                    //this.anim = 'walk_right';
-                    //this.idleDirection = 'idle_right';
                     this.lastDir = direction;
                     break;
                 case 'left':
                     this.owner.body.velocity.x = -this.speed;
-                    //this.anim = 'walk_left';
-                    //this.idleDirection = 'idle_left';
                     this.lastDir = direction;
                     break;
                 case 'down':
                     this.owner.body.velocity.y = this.speed;
-                    //this.anim = 'walk_down';
-                    //this.idleDirection = 'idle_down';
                     this.lastDir = direction;
                     break;
                 case 'stop_hor':
+                    this.owner.state = 'idle'
                     this.owner.body.velocity.x = 0;
                     this.anim = this.idleDirection
                     break;
                 case 'stop_ver':
+                    this.owner.state = 'idle'
                     this.owner.body.velocity.y = 0;
                     this.anim = this.idleDirection
                     break;
             }
-        }else{
+        } else {
             this.owner.body.velocity.x = 0;
             this.owner.body.velocity.y = 0;
         }
@@ -61,7 +54,6 @@ class MovementSystem {
 
         this.owner.body.velocity.x = dirSpeed.x * this.speed
         this.owner.body.velocity.y = dirSpeed.y * this.speed
-        //this.owner.GetSpriteManager().playAnimation(this.anim);
     }
 
     Walk() {
@@ -69,14 +61,11 @@ class MovementSystem {
         this.speed = this.originalSpeed;
         this.owner.body.velocity.x = dirSpeed.x * this.speed
         this.owner.body.velocity.y = dirSpeed.y * this.speed
-        //this.owner.GetSpriteManager().playAnimation(this.anim);
     }
 
-    CanMove(bool){
+    CanMove(bool) {
         this.canMove = bool;
     }
-
-
 
     GetLastDir() {
         return this.lastDir
