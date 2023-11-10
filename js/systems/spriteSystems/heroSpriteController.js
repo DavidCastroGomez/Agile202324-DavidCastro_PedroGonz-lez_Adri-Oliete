@@ -81,23 +81,23 @@ class HeroSpriteController {
         this.animation.create({
             key: 'charging_attack_down',
             frames: this.animation.generateFrameNumbers('hero', { frames: [55] }),
-            frameRate: 30
-
+            frameRate: 1,
+            repeat: -1
         });
         this.animation.create({
             key: 'charging_attack_left',
             frames: this.animation.generateFrameNumbers('hero', { frames: [237] }),
-            frameRate: 30
+            frameRate: 1
         });
         this.animation.create({
             key: 'charging_attack_right',
             frames: this.animation.generateFrameNumbers('hero', { frames: [247] }),
-            frameRate: 30
+            frameRate: 1
         });
         this.animation.create({
             key: 'charging_attack_up',
             frames: this.animation.generateFrameNumbers('hero', { frames: [262] }),
-            frameRate: 30
+            frameRate: 1
         });
 
         //Charged
@@ -172,16 +172,16 @@ class HeroSpriteController {
             case 'charging_attack':
                 switch (direction) {
                     case 'up':
-                        this.animation.chain('attack_up', 'charging_attack_up');
+                        this.animation.chain('charging_attack_up');
                         break;
                     case 'right':
-                        this.animation.chain('attack_right', 'charging_attack_right');
+                        this.animation.chain('charging_attack_right');
                         break;
                     case 'left':
-                        this.animation.chain('attack_left', 'charging_attack_left');
+                        this.animation.chain('charging_attack_left');
                         break;
                     case 'down':
-                        this.animation.chain('attack_down', 'walk_down');
+                        this.animation.chain('charging_attack_down');
                         break;
                 }
                 break;
