@@ -1,11 +1,11 @@
 class Character extends Phaser.GameObjects.Sprite {
-    constructor(_scene, _x, _y, _tag) {
+    constructor(_scene, _x, _y, _tag,_maxHealth) {
         super(_scene, _x, _y, _tag)
 
         this.sprite = new SpriteController(this.anims);
         this.state = 'idle';
 
-        this.healthSystem = new HealthSystem();
+        this.healthSystem = new HealthSystem(_maxHealth, _scene, this);
         this.attackSystem = new AttackSystem(_scene, this, 200);
         this.movementSystem = new MovementSystem(1, this, 1);
         this.inputSystem = new InputSystem(_scene, this.attackSystem, this.movementSystem);
@@ -61,5 +61,9 @@ class Character extends Phaser.GameObjects.Sprite {
 
     GetSpriteManager() {
         return this.sprite
+    }
+
+    GetHealthSystem(){
+        return this.healthSystem;
     }
 }
