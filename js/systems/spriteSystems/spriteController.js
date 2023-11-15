@@ -1,7 +1,7 @@
 class SpriteController {
 
-    constructor(_anims) {
-        this.animation = _anims;
+    constructor(_owner) {
+        this.animation = _owner.anims;
     }
 
     create() { }

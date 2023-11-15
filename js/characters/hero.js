@@ -4,7 +4,7 @@ class Hero extends Character {
         super(_scene, config.width / 2, config.height / 2, 'hero');
 
         //Sprite:
-        super.sprite = new HeroSpriteController(this.anims);
+        super.sprite = new HeroSpriteController(this);
 
 
         //Attacks:
