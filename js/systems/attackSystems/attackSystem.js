@@ -1,6 +1,6 @@
-class AttackSystem{
-    
-    constructor(_scene, _owner, _attackCooldown){
+class AttackSystem {
+
+    constructor(_scene, _owner, _attackCooldown) {
         this.scene = _scene
         this.owner = _owner
 
@@ -29,9 +29,9 @@ class AttackSystem{
         this.enemies = _enemies
     }
 
-    Attack(direction){
+    Attack(direction) {
 
-        if(!this.chargingAttack && !this.permormingChargedAttack && this.currentAttackCooldown >= this.maxAttackCooldown){
+        if (!this.chargingAttack && !this.permormingChargedAttack && this.currentAttackCooldown >= this.maxAttackCooldown) {
 
             this.SetAttackPosition(direction, 1)
 
@@ -39,23 +39,18 @@ class AttackSystem{
             this.colliderObject.setNewPosition(this.positionX, this.positionY)
             this.colliderObject.activeAttack(this.maxAttackCooldown, this.owner);
 
-            this.currentAttackCooldown = 0
-
-            //animate
-            this.owner.state = 'attack';
+            this.currentAttackCooldown = 0;
         }
-
-        
     }
 
-    ChargeAttack(){
+    ChargeAttack() {
         this.chargingAttack = true
     }
 
-    
-    StopChargeAttack(direction){
-        
-        if(this.chargingAttack && this.currentchargeAttackTime > this.chargeAttackTime){
+
+    StopChargeAttack(direction) {
+
+        if (this.chargingAttack && this.currentchargeAttackTime > this.chargeAttackTime) {
 
             this.SetAttackPosition(direction, -1)
             this.colliderObject.setNewPosition(this.positionX, this.positionY)
@@ -74,7 +69,7 @@ class AttackSystem{
         this.currentchargeAttackTime = 0;
     }
 
-    SetAttackPosition(direction, forward){
+    SetAttackPosition(direction, forward) {
 
         this.positionX = this.owner.body.position.x
         this.positionY = this.owner.body.position.y
@@ -82,48 +77,53 @@ class AttackSystem{
         this.positionOffsetX = 40 * forward
         this.positionOffsetY = 40 * forward
 
-        switch(direction){
+        switch (direction) {
             case 'right':
-                this.positionX += this.positionOffsetX; 
+                this.positionX += this.positionOffsetX;
                 break
             case 'down':
-                this.positionY += this.positionOffsetY; 
+                this.positionY += this.positionOffsetY;
                 break
             case 'left':
-                this.positionX -= this.positionOffsetX; 
+                this.positionX -= this.positionOffsetX;
                 break
             case 'up':
-                this.positionY -= this.positionOffsetY; 
+                this.positionY -= this.positionOffsetY;
                 break
         }
 
     }
 
 
-    updateAttackSystem(delta){
+    updateAttackSystem(delta) {
 
-        if(this.chargingAttack){
+        if (this.chargingAttack) {
             this.currentchargeAttackTime += delta;
 
-            if(this.currentchargeAttackTime >= this.maxAttackCooldown){
+            if (this.currentchargeAttackTime <= this.maxAttackCooldown) {
+                this.owner.state = 'attack';
+            }
+            else /*if (this.currentchargeAttackTime > this.maxAttackCooldown)*/ {
                 this.owner.state = 'charging_attack';
             }
         }
+        else {
+            this.currentchargeAttackTime = 0;
+        }
 
-        if(this.permormingChargedAttack){
+        if (this.permormingChargedAttack) {
 
-            if(this.currentSpinTime > 200){
+            if (this.currentSpinTime > 200) {
                 this.chargedPosition = Phaser.Math.RotateAround(this.chargedPosition, this.positionX, this.positionY, 0.01 * delta);
                 this.colliderObject.setNewPosition(this.chargedPosition.x, this.chargedPosition.y)
             }
 
             this.currentSpinTime += delta;
 
-            if(this.currentSpinTime > this.spinAttackTime){
+            if (this.currentSpinTime > this.spinAttackTime) {
                 this.permormingChargedAttack = false;
                 this.currentSpinTime = 0;
                 this.currentAttackCooldown = 0;
-                this.currentchargeAttackTime = 0;
             }
         }
 
