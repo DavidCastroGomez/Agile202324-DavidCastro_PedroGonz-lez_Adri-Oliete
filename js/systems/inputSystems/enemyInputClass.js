@@ -1,37 +1,69 @@
 class EnemyInputSystem extends InputSystem {
 
-    constructor(_scene, _attackSystem, _movementSystem) {
+    constructor(_scene, _attackSystem, _movementSystem, _owner) {
         super(_scene, _attackSystem, _movementSystem)
 
-        //super
+        this.owner = _owner
 
-        this.delay = 2000;
+        this.delay = 5000;
+
+        this.wanderRadius = 50;
+
+        const Modes = {
+            WANDER, SEEK, ATTACK
+        }
+    
+
+        this.state = Modes.WANDER
+
+        this.canCalculateWander = true;
     }
 
     GetInputs() {
-        GenerateMovement()
+        GeneratePosition()
+        GoToPosition();
     }
 
-    GenerateMovement(){
+    GeneratePosition(){
+        switch(this.state){
+            case Modes.WANDER:
+                this.WanderBehaviour();
+                break;
+        }     
+    }
 
+    GoToPosition(){
+        if(positionX < targetX){
+            super.PassInputs("right")
+        }else{
+            super.PassInputs("left")
+        }
+
+        if(positionY < targetY){
+            super.PassInputs("up")
+        }else{
+            super.PassInputs("down")
+        }
     }
 
     WanderBehaviour(){
-        this.time.delayedCall(this.delay, function () {
+        if(canCalculateWander){
+            this.canCalculateWander = false;
+
+            this.positionX = this.owner.body.position.x
+            this.positionY = this.owner.body.position.y
 
             // Calculate a random angle
-            const angle = Math.random() * 2 * Math.PI;
+            this.angle = Math.random() * 2 * Math.PI;
     
             // Calculate the new destination within the wander radius
-            enemy.targetX = enemy.x + enemy.wanderRadius * Math.cos(angle);
-            enemy.targetY = enemy.y + enemy.wanderRadius * Math.sin(angle);
-    
-            // Move the enemy towards the new destination
-            this.physics.moveToObject(enemy, { x: enemy.targetX, y: enemy.targetY }, 100);
-    
-            // Continue the wandering behavior
-            wanderEnemy.call(this, enemy);
-        });
+            this.targetX = positionX + this.wanderRadius * Math.cos(angle);
+            this.targetY = positionY + this.wanderRadius * Math.sin(angle);
+
+            this.time.delayedCall(this.delay, ()  =>{
+                this.canCalculateWander = true;
+            });
+        }
     }
 
     

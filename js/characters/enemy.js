@@ -16,7 +16,7 @@ class Enemy extends Character {
         //super.movementSystem.Walk()
 
         //Inputs:
-        super.inputSystem = new HeroInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem());
+        super.inputSystem = new EnemyInputSystemInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem(), this);
     }
 
     update(delta) {
