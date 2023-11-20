@@ -1,0 +1,6 @@
+[
+    {"id": 0, "x": "config.width / 2 - 20", "y": "config.height / 2 + 20"},
+    {"id": 1, "x": "config.width / 2 - 20", "y": "config.height / 2 - 20"},
+    {"id": 2, "x": "config.width / 2 + 20", "y": "config.height / 2 + 20"},
+    {"id": 3, "x": "config.width / 2 + 20", "y": "config.height / 2 - 20"}
+]
