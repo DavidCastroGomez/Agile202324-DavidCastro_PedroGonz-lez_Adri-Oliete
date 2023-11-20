@@ -1,7 +1,7 @@
-class Hero extends Character {
+class Enemy extends Character {
 
     constructor(_scene) {
-        super(_scene, config.width / 2, config.height / 2, 'hero');
+        super(_scene, config.width / 2, config.height / 2, 'enemy');
 
         //Sprite:
         //super.sprite = new HeroSpriteController(this.anims);
