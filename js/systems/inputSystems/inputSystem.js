@@ -12,13 +12,13 @@ class InputSystem {
 
         switch (input) {
             case 'attack':
-                this.attackSystem.Attack(this.movementSystem.GetLastDir())
-                break;
-            case 'charging_attack':
-                this.attackSystem.ChargeAttack()
+                this.attackSystem.Attack(this.movementSystem.GetLastDir());
+                //break;
+            //case 'charging_attack':
+                this.attackSystem.ChargeAttack();
                 break;
             case 'charged_attack':
-                this.attackSystem.StopChargeAttack(this.movementSystem.GetLastDir())
+                this.attackSystem.StopChargeAttack(this.movementSystem.GetLastDir());
                 break;
 
             case 'stop_hor':
@@ -28,13 +28,13 @@ class InputSystem {
             case 'right':
             case 'left':
             case 'down':
-                this.movementSystem.Move(input)
+                this.movementSystem.Move(input);
                 break;
             case 'run':
-                this.movementSystem.Run()
+                this.movementSystem.Run();
                 break;
             case 'walk':
-                this.movementSystem.Walk()
+                this.movementSystem.Walk();
                 break;
 
         }
