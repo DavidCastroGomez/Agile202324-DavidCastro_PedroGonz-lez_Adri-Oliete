@@ -9,7 +9,7 @@ var config =
     type: Phaser.AUTO,
     width: gamePrefs.gameWidth,
     height: gamePrefs.gameHeight,
-    scene:[PedroTestScene],
+    scene:[TestScene],
     render:
     {
         pixelArt:true

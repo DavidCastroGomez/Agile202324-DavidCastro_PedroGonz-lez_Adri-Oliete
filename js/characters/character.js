@@ -9,7 +9,6 @@ class Character extends Phaser.GameObjects.Sprite {
         this.attackSystem = new AttackSystem(_scene, this, 200);
         this.movementSystem = new MovementSystem(1, this, 1);
         this.inputSystem = new InputSystem(_scene, this.attackSystem, this.movementSystem);
-        this.collisionManager = new CollisionManager();
 
         _scene.add.existing(this);
         _scene.physics.world.enable(this);
@@ -17,10 +16,6 @@ class Character extends Phaser.GameObjects.Sprite {
         this.setGeneralSceneColliders(_scene);
     }
 
-    create() {
-
-    }
-    
     setGeneralSceneColliders(_scene){
         _scene.physics.add.collider
         (
@@ -39,7 +34,6 @@ class Character extends Phaser.GameObjects.Sprite {
         this.attackSystem.update()
         this.movementSystem.update()
         this.inputSystem.update()
-        this.collisionManager.update()
         */
     }
 

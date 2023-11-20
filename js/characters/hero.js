@@ -1,7 +1,7 @@
 class Hero extends Character {
 
-    constructor(_scene,_maxHealth) {
-        super(_scene, config.width / 2, config.height / 2, 'hero', _maxHealth);
+    constructor(_scene,_x, _y,_maxHealth) {
+        super(_scene, _x, _y, 'hero', _maxHealth);
 
         //Sprite:
         super.sprite = new HeroSpriteController(this.anims);
