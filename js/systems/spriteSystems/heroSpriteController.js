@@ -1,8 +1,8 @@
 class HeroSpriteController extends SpriteController {
 
     constructor(_owner) {
-        super(_owner)
-        _owner.body.setSize(16, 20)
+        super(_owner);
+        _owner.body.setSize(16, 20);
     }
 
     create() {

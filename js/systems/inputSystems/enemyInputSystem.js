@@ -34,15 +34,15 @@ class EnemyInputSystem extends InputSystem {
 
     GoToPosition(){
         if(positionX < targetX){
-            super.PassInputs("right")
+            super.PassInputs('right')
         }else{
-            super.PassInputs("left")
+            super.PassInputs('left')
         }
 
         if(positionY < targetY){
-            super.PassInputs("up")
+            super.PassInputs('up')
         }else{
-            super.PassInputs("down")
+            super.PassInputs('down')
         }
     }
 
