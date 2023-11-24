@@ -12,6 +12,6 @@ class SpriteManager {
         this.scene.load.setPath('res/img/sprites');
 
         this.scene.load.spritesheet('hero', 'link_anim.png', { frameWidth: 36, frameHeight: 52 });
-        this.scene.load.spritesheet('soldier', 'soldier_anim.png', { frameWidth: 36, frameHeight: 40 });
+        this.scene.load.spritesheet('enemy', 'soldier_anim.png', { frameWidth: 36, frameHeight: 40 });
     }
 }

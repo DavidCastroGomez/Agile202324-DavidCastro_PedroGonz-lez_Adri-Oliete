@@ -1,23 +1,23 @@
 class Enemy extends Character {
 
-    constructor(_scene, _x, _y,_maxHealth) {
-        super(_scene, _x, _y, 'enemy');
+    constructor(_scene, _x, _y, _maxHealth) {
+        super(_scene, _x, _y, 'enemy', _maxHealth);
 
         //Sprite:
-        //super.sprite = new HeroSpriteController(this.anims);
+        super.sprite = new EnemySpriteController(this);
 
         //Movement:
         super.SetMovementsystem(new MovementSystem(120, this, 1.5));
 
         //Inputs:
-        super.inputSystem = new EnemyInputSystemInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem(), this);
-        
+        //super.inputSystem = new EnemyInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem(), this);
+
         //Health:
-        super.healthSystem = new EnemyHealthSystem(_scene,_maxHealth);
+        super.healthSystem = new EnemyHealthSystem(_scene, _maxHealth);
 
         //Attacks:
         //super.attackSystem = new AttackSystem(_scene, this, 2);
-        
+
     }
 
     update(delta) {

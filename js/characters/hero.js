@@ -1,6 +1,6 @@
 class Hero extends Character {
 
-    constructor(_scene,_x, _y,_maxHealth) {
+    constructor(_scene, _x, _y, _maxHealth) {
         super(_scene, _x, _y, 'hero', _maxHealth);
 
         //Sprite:
@@ -13,7 +13,7 @@ class Hero extends Character {
         super.inputSystem = new HeroInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem());
 
         //Health:
-        super.healthSystem = new HeroHealthSystem(_scene,_maxHealth);
+        super.healthSystem = new HeroHealthSystem(_scene, _maxHealth);
 
         //Attacks:
         //super.attackSystem = new AttackSystem(_scene, this, 2);

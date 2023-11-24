@@ -1,56 +1,56 @@
 class EnemySpriteController extends SpriteController {
 
     constructor(_owner) {
-        super(_owner)
-        _owner.body.setSize(16, 20)
+        super(_owner);
+        _owner.body.setSize(16, 20);
     }
 
     create() {
         //Idle
         this.animation.create({
             key: 'idle_up',
-            frames: this.animation.generateFrameNumbers('soldier', { start: 13, end: 14 }),
+            frames: this.animation.generateFrameNumbers('enemy', { start: 13, end: 14 }),
             frameRate: 24
         });
         this.animation.create({
             key: 'idle_down',
-            frames: this.animation.generateFrameNumbers('soldier', { start: 0, end: 1 }),
+            frames: this.animation.generateFrameNumbers('enemy', { start: 0, end: 1 }),
             frameRate: 24
         });
         this.animation.create({
             key: 'idle_left',
-            frames: this.animation.generateFrameNumbers('soldier', { start: 5, end: 6 }),
+            frames: this.animation.generateFrameNumbers('enemy', { start: 5, end: 6 }),
             frameRate: 24
         });
         this.animation.create({
             key: 'idle_right',
-            frames: this.animation.generateFrameNumbers('soldier', { start: 9, end: 10 }),
+            frames: this.animation.generateFrameNumbers('enemy', { start: 9, end: 10 }),
             frameRate: 24
         });
 
         // Walk
         this.animation.create({
             key: 'walk_up',
-            frames: this.animation.generateFrameNumbers('soldier', { start: 29, end: 32 }),
+            frames: this.animation.generateFrameNumbers('enemy', { start: 29, end: 32 }),
             frameRate: 24,
             repeat: -1
         });
         this.animation.create({
             key: 'walk_down',
-            frames: this.animation.generateFrameNumbers('soldier', { start: 17, end: 20 }),
+            frames: this.animation.generateFrameNumbers('enemy', { start: 17, end: 20 }),
             frameRate: 24,
             repeat: -1
         });
         this.animation.create({
             key: 'walk_left',
-            frames: this.animation.generateFrameNumbers('soldier', { start: 22, end: 24 }),
+            frames: this.animation.generateFrameNumbers('enemy', { start: 22, end: 24 }),
             frameRate: 24,
             repeat: -1,
             yoyo: true
         });
         this.animation.create({
             key: 'walk_right',
-            frames: this.animation.generateFrameNumbers('soldier', { start: 26, end: 28 }),
+            frames: this.animation.generateFrameNumbers('enemy', { start: 26, end: 28 }),
             frameRate: 24,
             repeat: -1,
             yoyo: true
