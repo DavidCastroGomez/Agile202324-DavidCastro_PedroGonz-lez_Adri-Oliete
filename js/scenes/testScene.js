@@ -38,6 +38,10 @@ class TestScene extends Phaser.Scene {
         this.heroTest = new Hero(this, config.width / 2, config.height / 2, 3);
         this.heroTest.sprite.create();
 
+        //-------------------------------------------------------------Enemy Test creation:
+        this.enemyTest = new Enemy(this, config.width / 4, config.height / 2, 3);
+        this.enemyTest.sprite.create();
+
         //-------------------------------------------------------------Enemy Pool JSon create:
         this.enemyPoolData = this.cache.json.get('EP_TestMap');
         this.enemyPoolData.length = 2;
@@ -84,6 +88,7 @@ class TestScene extends Phaser.Scene {
 
     update(time, delta) {
         this.heroTest.update(delta);
+        this.enemyTest.update(delta);
 
         if (this.lifeUp.isDown) {
             this.heroTest.GetHealthSystem().HealthUp(0.5);
