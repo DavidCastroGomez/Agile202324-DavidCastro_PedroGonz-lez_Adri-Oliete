@@ -13,7 +13,7 @@ class Hero extends Character {
         super.inputSystem = new HeroInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem());
 
         //Health:
-        super.healthSystem = new HeroHealthSystem(_scene, _maxHealth);
+        super.healthSystem = new HeroHealthSystem(_maxHealth, _scene, this);
 
         //Attacks:
         //super.attackSystem = new AttackSystem(_scene, this, 2);

@@ -38,13 +38,9 @@ class TestScene extends Phaser.Scene {
         this.heroTest = new Hero(this, config.width / 2, config.height / 2, 3);
         this.heroTest.sprite.create();
 
-        //-------------------------------------------------------------Enemy Test creation:
-        this.enemyTest = new Enemy(this, config.width / 4, config.height / 2, 3);
-        this.enemyTest.sprite.create();
-
         //-------------------------------------------------------------Enemy Pool JSon create:
         this.enemyPoolData = this.cache.json.get('EP_TestMap');
-        this.enemyPoolData.length = 2;
+        this.enemyPoolData.length = 4;
 
         //-------------------------------------------------------------Pool loading:
         this.loadPools();
@@ -71,33 +67,41 @@ class TestScene extends Phaser.Scene {
 
         for (var i = 0; i < this.enemyPoolData.length; i++) {
             var row = this.enemyPoolData[i];
-            var newEnemy = new Enemy(this, row.x, row.y);
-            this.enemyPoolTest.add(newEnemy);
+            this.newEnemy = new Enemy(this, row.x, row.y, 0.5);
+            this.enemyPoolTest.add(this.newEnemy);
         }
     }
 
     collisionManagement() {
         this.physics.add.overlap(
-            this.enemyPoolTest,
             this.heroTest,
-            this.heroTest.GetHealthSystem().TakeDamage(0.5),
+            this.enemyPoolTest,
+            this.heroTest.GetHealthSystem().TakeDamage,
+            null,
+            this.heroTest.GetHealthSystem()
+        );
+
+        this.physics.add.overlap(
+            this.enemyPoolTest,
+            this.heroTest.GetAttackSystem().GetHitbox(),
+            this.hitSingleEnemy,
             null,
             this
         );
     }
 
-    update(time, delta) {
-        this.heroTest.update(delta);
-        this.enemyTest.update(delta);
+    hitSingleEnemy(_swordHitBox,_enemy){
+        _enemy.GetHealthSystem().TakeDamage();
+    }
 
-        if (this.lifeUp.isDown) {
-            this.heroTest.GetHealthSystem().HealthUp(0.5);
-            console.log(this.heroTest.GetHealthSystem().GetCurrentHealth());
+    update(time, delta) {
+
+        this.heroTest.update(delta);
+
+        for (var i = 0; i < this.enemyPoolTest.children.entries.length; i++) {
+            this.enemyPoolTest.getChildren()[i].update(delta)
         }
-        if (this.takeDamage.isDown) {
-            this.heroTest.GetHealthSystem().TakeDamage(0.5);
-            console.log(this.heroTest.GetHealthSystem().GetCurrentHealth());
-        }
+
         if (this.restartScene.isDown) {
             this.scene.restart();
         }

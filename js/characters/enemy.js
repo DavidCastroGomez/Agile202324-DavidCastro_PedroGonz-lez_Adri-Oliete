@@ -13,7 +13,7 @@ class Enemy extends Character {
         super.inputSystem = new EnemyInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem(), this);
 
         //Health:
-        super.healthSystem = new EnemyHealthSystem(_scene, _maxHealth);
+        super.healthSystem = new EnemyHealthSystem(_maxHealth, _scene, this);
 
         //Attacks:
         //super.attackSystem = new AttackSystem(_scene, this, 2);
