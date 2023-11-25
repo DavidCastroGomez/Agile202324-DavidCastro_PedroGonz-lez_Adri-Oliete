@@ -22,7 +22,11 @@ class AttackSystem {
         this.permormingChargedAttack = false;
 
         this.colliderObject = new HitboxPrefab(this.scene, 0, 0);
-        this.scene.physics.add.collider(this.colliderObject, this.enemies)
+        //this.scene.physics.add.collider(this.colliderObject, this.enemies)
+    }
+
+    GetHitbox(){
+        return this.colliderObject;
     }
 
     AddEnemies(_enemies) {
@@ -30,6 +34,8 @@ class AttackSystem {
     }
 
     Attack(direction) {
+
+        console.log(this.permormingChargedAttack)
 
         if (!this.chargingAttack && !this.permormingChargedAttack && this.currentAttackCooldown >= this.maxAttackCooldown) {
 
@@ -52,6 +58,8 @@ class AttackSystem {
 
         if (this.chargingAttack && this.currentchargeAttackTime > this.chargeAttackTime) {
 
+            
+
             this.SetAttackPosition(direction, -1)
             this.colliderObject.setNewPosition(this.positionX, this.positionY)
             this.colliderObject.activeAttack(this.spinAttackTime, this.owner);
@@ -64,6 +72,7 @@ class AttackSystem {
 
             this.owner.state = 'charged_attack';
         }
+        
 
         this.chargingAttack = false;
         this.currentchargeAttackTime = 0;
@@ -74,8 +83,8 @@ class AttackSystem {
         this.positionX = this.owner.body.position.x
         this.positionY = this.owner.body.position.y
 
-        this.positionOffsetX = 40 * forward
-        this.positionOffsetY = 40 * forward
+        this.positionOffsetX = 20 * forward
+        this.positionOffsetY = 20 * forward
 
         switch (direction) {
             case 'right':

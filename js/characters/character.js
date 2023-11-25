@@ -28,13 +28,6 @@ class Character extends Phaser.GameObjects.Sprite {
         this.inputSystem.GetInputs();
         this.sprite.updateAnim(this.movementSystem.GetLastDir(), this.state);
         this.attackSystem.updateAttackSystem(delta);
-
-        /*
-        this.healthSystem.update()
-        this.attackSystem.update()
-        this.movementSystem.update()
-        this.inputSystem.update()
-        */
     }
 
     SetMovementsystem(_mov) {

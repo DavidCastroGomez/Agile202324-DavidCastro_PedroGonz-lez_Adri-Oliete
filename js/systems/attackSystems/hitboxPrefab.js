@@ -13,18 +13,16 @@ class HitboxPrefab extends Phaser.GameObjects.Sprite
         this.body.setSize(25, 25);
         this.body.setOffset(0, 0);
         this.setAlpha(0); 
-        this.setOrigin(0);
+        this.setOrigin(0, 0);
         this.scene.add.existing(this);
-
-        this.newBody = this.body
 
         this.body.checkCollision.none = false;
 
     }
 
     setNewPosition(posX, posY){
-        this.newBody.position.x = posX
-        this.newBody.position.y = posY
+        this.x = posX
+        this.y = posY
     }
 
 
@@ -34,10 +32,10 @@ class HitboxPrefab extends Phaser.GameObjects.Sprite
 
         owner.movementSystem.CanMove(false)
 
-        this.body.checkCollision.none = false;
+        //this.body.checkCollision.none = false;
       
         this.scene.time.delayedCall(this.delay, () => {
-            this.body.checkCollision.none = true;
+            //this.body.checkCollision.none = true;
             owner.movementSystem.CanMove(true)
             owner.state = 'idle'
         });

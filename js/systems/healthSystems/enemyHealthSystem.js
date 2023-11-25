@@ -5,7 +5,7 @@ class EnemyHealthSystem extends HealthSystem {
 
     DieAction(){
         //Play death animation, wait till end and jump next line
-        super.self.setActive(false);
-        super.self.x=-200;
+        super.GetSelf().setActive(false);
+        super.GetSelf().x=-200;
     }
 }

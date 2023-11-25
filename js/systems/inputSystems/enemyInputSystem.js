@@ -7,60 +7,90 @@ class EnemyInputSystem extends InputSystem {
 
         this.delay = 5000;
 
-        this.wanderRadius = 50;
+        this.wanderRadius = 1;
 
-        const Modes = {
-            WANDER, SEEK, ATTACK
+        this.Modes = {
+            WANDER: 0, SEEK: 1, ATTACK: 2
         }
     
 
-        this.state = Modes.WANDER
+        this.state = this.Modes.WANDER
 
         this.canCalculateWander = true;
+
+        this.arrivedToTargetX = false;
+        this.arrivedToTargetY = false;
     }
 
     GetInputs() {
-        GeneratePosition()
-        GoToPosition();
+        this.GeneratePosition()
+        this.CheckIfArrivedToTarget()
+
+        this.GoToPosition();
+
     }
 
     GeneratePosition(){
         switch(this.state){
-            case Modes.WANDER:
+            case this.Modes.WANDER:
                 this.WanderBehaviour();
                 break;
         }     
     }
 
-    GoToPosition(){
-        if(positionX < targetX){
-            super.PassInputs('right')
-        }else{
-            super.PassInputs('left')
+
+    CheckIfArrivedToTarget(){
+
+        if(Math.abs(this.owner.body.position.x - this.targetX) < 1 && !this.arrivedToTargetX){
+            this.arrivedToTargetX = true;
+            super.PassInputs('stop_hor')
         }
 
-        if(positionY < targetY){
-            super.PassInputs('up')
-        }else{
-            super.PassInputs('down')
+        if(Math.abs(this.owner.body.position.y - this.targetY) < 1 && !this.arrivedToTargetY){
+            this.arrivedToTargetY = true;
+            super.PassInputs('stop_ver')
+        }
+    }
+
+
+    GoToPosition(){
+        if(!this.arrivedToTargetX)
+        {
+            if(this.owner.body.position.x < this.targetX){
+                super.PassInputs('right')
+            }else{
+                super.PassInputs('left')
+            }
+        }
+
+        if(!this.arrivedToTargetX)
+        {
+            if(this.owner.body.position.y < this.targetY){
+                super.PassInputs('up')
+            }else{
+                super.PassInputs('down')
+            }
         }
     }
 
     WanderBehaviour(){
-        if(canCalculateWander){
+        if(this.canCalculateWander){
+            this.arrivedToTargetX = false;
+            this.arrivedToTargetY = false;
+
             this.canCalculateWander = false;
 
-            this.positionX = this.owner.body.position.x
-            this.positionY = this.owner.body.position.y
-
             // Calculate a random angle
-            this.angle = Math.random() * 2 * Math.PI;
+            this.angle = Phaser.Math.RadToDeg(Phaser.Math.Angle.Random());
+
+            this.cos = Math.cos(this.angle)
+            this.sin = Math.sin(this.angle)
     
             // Calculate the new destination within the wander radius
-            this.targetX = positionX + this.wanderRadius * Math.cos(angle);
-            this.targetY = positionY + this.wanderRadius * Math.sin(angle);
+            this.targetX = this.owner.body.position.x + this.wanderRadius * 10 * Math.cos(this.angle);
+            this.targetY = this.owner.body.position.y + this.wanderRadius * 0.1 * Math.sin(this.angle);
 
-            this.time.delayedCall(this.delay, ()  =>{
+            this.scene.time.delayedCall(this.delay, ()  =>{
                 this.canCalculateWander = true;
             });
         }
