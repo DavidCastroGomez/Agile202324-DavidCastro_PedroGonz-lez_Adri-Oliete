@@ -1,30 +1,30 @@
-var gamePrefs=
+var gamePrefs =
 {
-    gameWidth:512,
-    gameHeight:384
+    gameWidth: 512,
+    gameHeight: 384
 }
 
-var config = 
+var config =
 {
     type: Phaser.AUTO,
     width: gamePrefs.gameWidth,
     height: gamePrefs.gameHeight,
-    scene:[TestScene],
+    scene: [TestScene],
     render:
     {
-        pixelArt:true
+        pixelArt: true
     },
     scale:
     {
-        mode:Phaser.Scale.FIT,
-        autoCenter:Phaser.Scale.CENTER_BOTH
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
     },
     physics:
     {
-        default:'arcade',
+        default: 'arcade',
         arcade:
         {
-            gravity:{y:0},
+            gravity: { y: 0 },
             debug: true
         }
     }

@@ -17,7 +17,6 @@ class Enemy extends Character {
 
         //Attacks:
         //super.attackSystem = new AttackSystem(_scene, this, 2);
-
     }
 
     update(delta) {

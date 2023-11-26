@@ -25,7 +25,7 @@ class AttackSystem {
         //this.scene.physics.add.collider(this.colliderObject, this.enemies)
     }
 
-    GetHitbox(){
+    GetHitbox() {
         return this.colliderObject;
     }
 
@@ -58,7 +58,7 @@ class AttackSystem {
 
         if (this.chargingAttack && this.currentchargeAttackTime > this.chargeAttackTime) {
 
-            
+
 
             this.SetAttackPosition(direction, -1)
             this.colliderObject.setNewPosition(this.positionX, this.positionY)
@@ -72,7 +72,7 @@ class AttackSystem {
 
             this.owner.state = 'charged_attack';
         }
-        
+
 
         this.chargingAttack = false;
         this.currentchargeAttackTime = 0;

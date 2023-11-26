@@ -1,5 +1,5 @@
 class Character extends Phaser.GameObjects.Sprite {
-    constructor(_scene, _x, _y, _tag,_maxHealth) {
+    constructor(_scene, _x, _y, _tag, _maxHealth) {
         super(_scene, _x, _y, _tag)
 
         this.sprite = new SpriteController(this);
@@ -16,12 +16,12 @@ class Character extends Phaser.GameObjects.Sprite {
         this.setGeneralSceneColliders(_scene);
     }
 
-    setGeneralSceneColliders(_scene){
+    setGeneralSceneColliders(_scene) {
         _scene.physics.add.collider
-        (
-            this,
-            _scene.walls
-        );
+            (
+                this,
+                _scene.walls
+            );
     }
 
     update(delta) {
@@ -50,7 +50,7 @@ class Character extends Phaser.GameObjects.Sprite {
         return this.sprite
     }
 
-    GetHealthSystem(){
+    GetHealthSystem() {
         return this.healthSystem;
     }
 }

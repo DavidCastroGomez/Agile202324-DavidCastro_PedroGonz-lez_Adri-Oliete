@@ -68,6 +68,7 @@ class TestScene extends Phaser.Scene {
         for (var i = 0; i < this.enemyPoolData.length; i++) {
             var row = this.enemyPoolData[i];
             this.newEnemy = new Enemy(this, row.x, row.y, 0.5);
+            this.newEnemy.sprite.create();
             this.enemyPoolTest.add(this.newEnemy);
         }
     }
@@ -90,7 +91,7 @@ class TestScene extends Phaser.Scene {
         );
     }
 
-    hitSingleEnemy(_swordHitBox,_enemy){
+    hitSingleEnemy(_swordHitBox, _enemy) {
         _enemy.GetHealthSystem().TakeDamage();
     }
 

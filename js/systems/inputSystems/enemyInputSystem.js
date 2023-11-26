@@ -12,7 +12,7 @@ class EnemyInputSystem extends InputSystem {
         this.Modes = {
             WANDER: 0, SEEK: 1, ATTACK: 2
         }
-    
+
 
         this.state = this.Modes.WANDER
 
@@ -30,51 +30,49 @@ class EnemyInputSystem extends InputSystem {
 
     }
 
-    GeneratePosition(){
-        switch(this.state){
+    GeneratePosition() {
+        switch (this.state) {
             case this.Modes.WANDER:
                 this.WanderBehaviour();
                 break;
-        }     
+        }
     }
 
 
-    CheckIfArrivedToTarget(){
+    CheckIfArrivedToTarget() {
 
-        if(Math.abs(this.owner.body.position.x - this.targetX) < 1 && !this.arrivedToTargetX){
+        if (Math.abs(this.owner.body.position.x - this.targetX) < 1 && !this.arrivedToTargetX) {
             this.arrivedToTargetX = true;
             super.PassInputs('stop_hor')
         }
 
-        if(Math.abs(this.owner.body.position.y - this.targetY) < 1 && !this.arrivedToTargetY){
+        if (Math.abs(this.owner.body.position.y - this.targetY) < 1 && !this.arrivedToTargetY) {
             this.arrivedToTargetY = true;
             super.PassInputs('stop_ver')
         }
     }
 
 
-    GoToPosition(){
-        if(!this.arrivedToTargetX)
-        {
-            if(this.owner.body.position.x < this.targetX){
+    GoToPosition() {
+        if (!this.arrivedToTargetX) {
+            if (this.owner.body.position.x < this.targetX) {
                 super.PassInputs('right')
-            }else{
+            } else {
                 super.PassInputs('left')
             }
         }
 
-        if(!this.arrivedToTargetX)
-        {
-            if(this.owner.body.position.y < this.targetY){
+        if (!this.arrivedToTargetX) {
+            if (this.owner.body.position.y < this.targetY) {
                 super.PassInputs('up')
-            }else{
+            } else {
                 super.PassInputs('down')
             }
         }
     }
 
-    WanderBehaviour(){
-        if(this.canCalculateWander){
+    WanderBehaviour() {
+        if (this.canCalculateWander) {
             this.arrivedToTargetX = false;
             this.arrivedToTargetY = false;
 
@@ -85,16 +83,16 @@ class EnemyInputSystem extends InputSystem {
 
             this.cos = Math.cos(this.angle)
             this.sin = Math.sin(this.angle)
-    
+
             // Calculate the new destination within the wander radius
             this.targetX = this.owner.body.position.x + this.wanderRadius * 10 * Math.cos(this.angle);
             this.targetY = this.owner.body.position.y + this.wanderRadius * 0.1 * Math.sin(this.angle);
 
-            this.scene.time.delayedCall(this.delay, ()  =>{
+            this.scene.time.delayedCall(this.delay, () => {
                 this.canCalculateWander = true;
             });
         }
     }
 
-    
+
 }
