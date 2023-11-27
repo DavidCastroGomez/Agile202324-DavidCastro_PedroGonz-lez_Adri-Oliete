@@ -5,6 +5,7 @@ class Hero extends Character {
 
         //Sprite:
         super.sprite = new HeroSpriteController(this);
+        this.sprite.create();
 
         //Movement:
         super.SetMovementsystem(new MovementSystem(120, this, 1.5));
