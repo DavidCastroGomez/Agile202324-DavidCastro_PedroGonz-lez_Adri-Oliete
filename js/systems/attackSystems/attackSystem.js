@@ -14,7 +14,7 @@ class AttackSystem {
         this.positionX = 0;
         this.positionY = 0;
 
-        this.spinAttackTime = 850;
+        this.spinAttackTime = 500;
         this.currentSpinTime = 0;
 
         this.chargedPosition = new Phaser.Geom.Point([0], [0]);
@@ -22,7 +22,6 @@ class AttackSystem {
         this.permormingChargedAttack = false;
 
         this.colliderObject = new HitboxPrefab(this.scene, 0, 0);
-        //this.scene.physics.add.collider(this.colliderObject, this.enemies)
     }
 
     GetHitbox() {
@@ -34,14 +33,10 @@ class AttackSystem {
     }
 
     Attack(direction) {
-
-        console.log(this.permormingChargedAttack)
-
         if (!this.chargingAttack && !this.permormingChargedAttack && this.currentAttackCooldown >= this.maxAttackCooldown) {
 
             this.SetAttackPosition(direction, 1)
 
-            //this.colliderObject.setPosition(this.positionX, this.positionY)
             this.colliderObject.setNewPosition(this.positionX, this.positionY)
             this.colliderObject.activeAttack(this.maxAttackCooldown, this.owner);
 
@@ -53,12 +48,8 @@ class AttackSystem {
         this.chargingAttack = true
     }
 
-
     StopChargeAttack(direction) {
-
         if (this.chargingAttack && this.currentchargeAttackTime > this.chargeAttackTime) {
-
-
 
             this.SetAttackPosition(direction, -1)
             this.colliderObject.setNewPosition(this.positionX, this.positionY)
@@ -72,7 +63,6 @@ class AttackSystem {
 
             this.owner.state = 'charged_attack';
         }
-
 
         this.chargingAttack = false;
         this.currentchargeAttackTime = 0;
@@ -103,7 +93,6 @@ class AttackSystem {
 
     }
 
-
     updateAttackSystem(delta) {
 
         if (this.chargingAttack) {
@@ -112,7 +101,7 @@ class AttackSystem {
             if (this.currentchargeAttackTime <= this.maxAttackCooldown) {
                 this.owner.state = 'attack';
             }
-            else /*if (this.currentchargeAttackTime > this.maxAttackCooldown)*/ {
+            else {
                 this.owner.state = 'charging_attack';
             }
         }
@@ -122,8 +111,8 @@ class AttackSystem {
 
         if (this.permormingChargedAttack) {
 
-            if (this.currentSpinTime > 200) {
-                this.chargedPosition = Phaser.Math.RotateAround(this.chargedPosition, this.positionX, this.positionY, 0.01 * delta);
+            if (this.currentSpinTime > 250) {
+                this.chargedPosition = Phaser.Math.RotateAround(this.chargedPosition, this.positionX, this.positionY, 0.03 * delta);
                 this.colliderObject.setNewPosition(this.chargedPosition.x, this.chargedPosition.y)
             }
 

@@ -2,7 +2,10 @@ class HeroSpriteController extends SpriteController {
 
     constructor(_owner) {
         super(_owner);
-        _owner.body.setSize(16, 20);
+        _owner.body.setSize(16, 20).setOffset(11,15);
+
+        this.chargeDir = 'down';
+        this.isCharging = false;
     }
 
     create() {
@@ -60,22 +63,26 @@ class HeroSpriteController extends SpriteController {
         this.animation.create({
             key: 'attack_up',
             frames: this.animation.generateFrameNumbers('hero', { start: 93, end: 98 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'attack_down',
             frames: this.animation.generateFrameNumbers('hero', { start: 55, end: 60 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'attack_left',
             frames: this.animation.generateFrameNumbers('hero', { start: 69, end: 74 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'attack_right',
             frames: this.animation.generateFrameNumbers('hero', { start: 81, end: 86 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
 
         //Charging Attack
@@ -105,30 +112,60 @@ class HeroSpriteController extends SpriteController {
         this.animation.create({
             key: 'charged_attack_up',
             frames: this.animation.generateFrameNumbers('hero', { start: 150, end: 157 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'charged_attack_down',
             frames: this.animation.generateFrameNumbers('hero', { start: 112, end: 119 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'charged_attack_left',
             frames: this.animation.generateFrameNumbers('hero', { start: 126, end: 133 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'charged_attack_right',
             frames: this.animation.generateFrameNumbers('hero', { start: 138, end: 145 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
 
-        //Picking Up
+        //taking damage
         this.animation.create({
-            key: 'pick_up',
-            frames: this.animation.generateFrameNumbers('hero', { start: 113, end: 113 }),
+            key: 'damaged_up',
+            frames: this.animation.generateFrameNumbers('hero', { frames: [49] }),
             frameRate: 24,
-            repeat: -1
+            repeat: 0
+        });
+        this.animation.create({
+            key: 'damaged_down',
+            frames: this.animation.generateFrameNumbers('hero', { frames: [11] }),
+            frameRate: 24,
+            repeat: 0
+        });
+        this.animation.create({
+            key: 'damaged_left',
+            frames: this.animation.generateFrameNumbers('hero', { frames: [23] }),
+            frameRate: 24,
+            repeat: 0
+        });
+        this.animation.create({
+            key: 'damaged_right',
+            frames: this.animation.generateFrameNumbers('hero', { frames: [35] }),
+            frameRate: 24,
+            repeat: 0
+        });
+    
+        //death
+        this.animation.create({
+            key: 'death',
+            frames: this.animation.generateFrameNumbers('hero', { start: 93, end: 98 }),
+            frameRate: 24,
+            repeat: 0
         });
     }
 
@@ -166,8 +203,8 @@ class HeroSpriteController extends SpriteController {
                         break;
                 }
                 break;
-
             case 'attack':
+                this.isCharging = false;
                 switch (direction) {
                     case 'up':
                         this.animation.play('attack_up', true);
@@ -182,8 +219,13 @@ class HeroSpriteController extends SpriteController {
                         this.animation.play('attack_right', true);
                         break;
                 }
+                break;
             case 'charging_attack':
-                switch (direction) {
+                if (!this.isCharging) {
+                    this.chargeDir = direction;
+                    this.isCharging = true;
+                }
+                switch (this.chargeDir) {
                     case 'up':
                         this.animation.play('charging_attack_up', true);
                         break;
@@ -199,7 +241,7 @@ class HeroSpriteController extends SpriteController {
                 }
                 break;
             case 'charged_attack':
-                switch (direction) {
+                switch (this.chargeDir) {
                     case 'up':
                         this.animation.play('charged_attack_up', true);
                         break;
@@ -214,8 +256,23 @@ class HeroSpriteController extends SpriteController {
                         break;
                 }
                 break;
-            case 'pick_up':
-                this.animation.play('pick_up', true);
+            case 'damaged':
+                switch (direction) {
+                    case 'up':
+                        this.animation.play('damaged_up', true);
+                        break;
+                    case 'down':
+                        this.animation.play('damaged_down', true);
+                        break;
+                    case 'left':
+                        this.animation.play('damaged_left', true);
+                        break;
+                    case 'right':
+                        this.animation.play('damaged_right', true);
+                        break;
+                }
+                break;
+            case 'dead':
                 break;
             default:
                 break;

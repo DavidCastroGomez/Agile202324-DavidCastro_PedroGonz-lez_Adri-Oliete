@@ -11,7 +11,7 @@ class MovementSystem {
 
     Move(direction) {
         if (this.canMove) {
-            this.owner.state = 'walk'
+            this.owner.state = 'walk';
             switch (direction) {
                 case 'up':
                     this.owner.body.velocity.y = -this.speed;
@@ -32,12 +32,10 @@ class MovementSystem {
                 case 'stop_hor':
                     this.owner.state = 'idle'
                     this.owner.body.velocity.x = 0;
-                    this.anim = this.idleDirection
                     break;
                 case 'stop_ver':
                     this.owner.state = 'idle'
                     this.owner.body.velocity.y = 0;
-                    this.anim = this.idleDirection
                     break;
             }
         } else {
@@ -52,15 +50,15 @@ class MovementSystem {
 
         this.speed = this.originalSpeed * this.runningMultipler;
 
-        this.owner.body.velocity.x = dirSpeed.x * this.speed
-        this.owner.body.velocity.y = dirSpeed.y * this.speed
+        this.owner.body.velocity.x = dirSpeed.x * this.speed;
+        this.owner.body.velocity.y = dirSpeed.y * this.speed;
     }
 
     Walk() {
         var dirSpeed = this.owner.body.velocity.normalize()
         this.speed = this.originalSpeed;
-        this.owner.body.velocity.x = dirSpeed.x * this.speed
-        this.owner.body.velocity.y = dirSpeed.y * this.speed
+        this.owner.body.velocity.x = dirSpeed.x * this.speed;
+        this.owner.body.velocity.y = dirSpeed.y * this.speed;
     }
 
     CanMove(bool) {
@@ -68,6 +66,6 @@ class MovementSystem {
     }
 
     GetLastDir() {
-        return this.lastDir
+        return this.lastDir;
     }
 }

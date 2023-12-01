@@ -5,7 +5,6 @@ class Enemy extends Character {
 
         //Sprite:
         super.sprite = new EnemySpriteController(this);
-        this.sprite.create();
 
         //Movement:
         super.SetMovementsystem(new MovementSystem(120, this, 1.5));
@@ -15,9 +14,6 @@ class Enemy extends Character {
 
         //Health:
         super.healthSystem = new EnemyHealthSystem(_maxHealth, _scene, this);
-
-        //Attacks:
-        //super.attackSystem = new AttackSystem(_scene, this, 2);
     }
 
     update(delta) {
