@@ -208,6 +208,8 @@ class HeroSpriteController extends SpriteController {
                 switch (direction) {
                     case 'up':
                         this.animation.play('attack_up', true);
+                        this.animation.complete()
+                        
                         break;
                     case 'down':
                         this.animation.play('attack_down', true);

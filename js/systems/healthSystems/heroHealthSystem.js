@@ -1,6 +1,6 @@
 class HeroHealthSystem extends HealthSystem {
-    constructor(_maxHealth, _scene, _self) { 
-        super(_maxHealth, _scene, _self);
+    constructor(_maxHealth, _scene, _owner) { 
+        super(_maxHealth, _scene, _owner);
     }
 
     DieAction(){
