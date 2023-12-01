@@ -2,7 +2,7 @@ class HeroSpriteController extends SpriteController {
 
     constructor(_owner) {
         super(_owner);
-        _owner.body.setSize(16, 20);
+        _owner.body.setSize(16, 20).setOffset(11,15);
 
         this.chargeDir = 'down';
         this.isCharging = false;
@@ -134,6 +134,39 @@ class HeroSpriteController extends SpriteController {
             repeat: 0
         });
 
+        //taking damage
+        this.animation.create({
+            key: 'damaged_up',
+            frames: this.animation.generateFrameNumbers('hero', { frames: [49] }),
+            frameRate: 24,
+            repeat: 0
+        });
+        this.animation.create({
+            key: 'damaged_down',
+            frames: this.animation.generateFrameNumbers('hero', { frames: [11] }),
+            frameRate: 24,
+            repeat: 0
+        });
+        this.animation.create({
+            key: 'damaged_left',
+            frames: this.animation.generateFrameNumbers('hero', { frames: [23] }),
+            frameRate: 24,
+            repeat: 0
+        });
+        this.animation.create({
+            key: 'damaged_right',
+            frames: this.animation.generateFrameNumbers('hero', { frames: [35] }),
+            frameRate: 24,
+            repeat: 0
+        });
+    
+        //death
+        this.animation.create({
+            key: 'death',
+            frames: this.animation.generateFrameNumbers('hero', { start: 93, end: 98 }),
+            frameRate: 24,
+            repeat: 0
+        });
     }
 
     updateAnim(direction, action) {
@@ -222,6 +255,24 @@ class HeroSpriteController extends SpriteController {
                         this.animation.play('charged_attack_right', true);
                         break;
                 }
+                break;
+            case 'damaged':
+                switch (direction) {
+                    case 'up':
+                        this.animation.play('damaged_up', true);
+                        break;
+                    case 'down':
+                        this.animation.play('damaged_down', true);
+                        break;
+                    case 'left':
+                        this.animation.play('damaged_left', true);
+                        break;
+                    case 'right':
+                        this.animation.play('damaged_right', true);
+                        break;
+                }
+                break;
+            case 'dead':
                 break;
             default:
                 break;

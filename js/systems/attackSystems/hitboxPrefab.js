@@ -36,7 +36,7 @@ class HitboxPrefab extends Phaser.GameObjects.Sprite {
         this.scene.time.delayedCall(this.delay, () => {
             this.body.checkCollision.none = true;
             owner.movementSystem.CanMove(true)
-            owner.state = 'idle'
+            //owner.state = 'idle';
         });
     }
 

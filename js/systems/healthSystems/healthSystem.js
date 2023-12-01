@@ -1,9 +1,9 @@
 class HealthSystem {
-    constructor(_maxHealth, _scene, _self) { 
+    constructor(_maxHealth, _scene, _owner) { 
         this.maxHealth = _maxHealth;
         this.currentHealth = _maxHealth;
         this.scene = _scene;
-        this.self = _self;
+        this.owner = _owner;
         
         this.invincible = false;
     }
@@ -14,13 +14,15 @@ class HealthSystem {
             if(this.tempHealth > 0){
                 this.currentHealth = this.tempHealth;
                 this.InvulnerabilityTime();
-                console.log("golpeado");
+                console.log("dana");
+                this.owner.state = 'damaged';
             }
             else if(this.tempHealth <= 0){
                 this.currentHealth = 0;
                 this.DieAction();
                 this.invincible = true;
                 console.log("muelto");
+                this.owner.state = 'dead';
             }
         }
     }
@@ -61,7 +63,7 @@ class HealthSystem {
         return this.scene;
     }
 
-    GetSelf(){
-        return this.self;
+    GetOwner(){
+        return this.owner;
     }
 }
