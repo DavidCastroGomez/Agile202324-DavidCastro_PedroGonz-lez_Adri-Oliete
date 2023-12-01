@@ -70,4 +70,8 @@ class MovementSystem {
     GetLastDir() {
         return this.lastDir
     }
+
+    LockLastDir(){
+        
+    }
 }

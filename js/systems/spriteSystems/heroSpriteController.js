@@ -3,6 +3,9 @@ class HeroSpriteController extends SpriteController {
     constructor(_owner) {
         super(_owner);
         _owner.body.setSize(16, 20);
+
+        this.chargeDir = 'down';
+        this.isCharging = false;
     }
 
     create() {
@@ -123,13 +126,6 @@ class HeroSpriteController extends SpriteController {
             frameRate: 24
         });
 
-        //Picking Up
-        this.animation.create({
-            key: 'pick_up',
-            frames: this.animation.generateFrameNumbers('hero', { start: 113, end: 113 }),
-            frameRate: 24,
-            repeat: -1
-        });
     }
 
     updateAnim(direction, action) {
@@ -166,8 +162,8 @@ class HeroSpriteController extends SpriteController {
                         break;
                 }
                 break;
-
             case 'attack':
+                this.isCharging = false;
                 switch (direction) {
                     case 'up':
                         this.animation.play('attack_up', true);
@@ -182,8 +178,13 @@ class HeroSpriteController extends SpriteController {
                         this.animation.play('attack_right', true);
                         break;
                 }
+                break;
             case 'charging_attack':
-                switch (direction) {
+                if (!this.isCharging) {
+                    this.chargeDir = direction;
+                    this.isCharging = true;
+                }
+                switch (this.chargeDir) {
                     case 'up':
                         this.animation.play('charging_attack_up', true);
                         break;
@@ -199,7 +200,7 @@ class HeroSpriteController extends SpriteController {
                 }
                 break;
             case 'charged_attack':
-                switch (direction) {
+                switch (this.chargeDir) {
                     case 'up':
                         this.animation.play('charged_attack_up', true);
                         break;
@@ -213,9 +214,6 @@ class HeroSpriteController extends SpriteController {
                         this.animation.play('charged_attack_right', true);
                         break;
                 }
-                break;
-            case 'pick_up':
-                this.animation.play('pick_up', true);
                 break;
             default:
                 break;

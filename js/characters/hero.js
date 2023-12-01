@@ -22,5 +22,7 @@ class Hero extends Character {
 
     update(delta) {
         super.update(delta);
+        
+        console.log(this.state);
     }
 }
