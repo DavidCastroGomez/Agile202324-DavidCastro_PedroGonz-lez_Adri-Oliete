@@ -63,22 +63,26 @@ class HeroSpriteController extends SpriteController {
         this.animation.create({
             key: 'attack_up',
             frames: this.animation.generateFrameNumbers('hero', { start: 93, end: 98 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'attack_down',
             frames: this.animation.generateFrameNumbers('hero', { start: 55, end: 60 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'attack_left',
             frames: this.animation.generateFrameNumbers('hero', { start: 69, end: 74 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'attack_right',
             frames: this.animation.generateFrameNumbers('hero', { start: 81, end: 86 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
 
         //Charging Attack
@@ -108,22 +112,26 @@ class HeroSpriteController extends SpriteController {
         this.animation.create({
             key: 'charged_attack_up',
             frames: this.animation.generateFrameNumbers('hero', { start: 150, end: 157 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'charged_attack_down',
             frames: this.animation.generateFrameNumbers('hero', { start: 112, end: 119 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'charged_attack_left',
             frames: this.animation.generateFrameNumbers('hero', { start: 126, end: 133 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
         this.animation.create({
             key: 'charged_attack_right',
             frames: this.animation.generateFrameNumbers('hero', { start: 138, end: 145 }),
-            frameRate: 24
+            frameRate: 24,
+            repeat: 0
         });
 
     }

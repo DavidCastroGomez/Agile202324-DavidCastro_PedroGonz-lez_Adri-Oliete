@@ -36,7 +36,6 @@ class TestScene extends Phaser.Scene {
 
         //-------------------------------------------------------------Hero creation:
         this.heroTest = new Hero(this, config.width / 2, config.height / 2, 3);
-        //this.heroTest.sprite.create();
 
         //-------------------------------------------------------------Enemy Pool JSon create:
         this.enemyPoolData = this.cache.json.get('EP_TestMap');
@@ -68,7 +67,6 @@ class TestScene extends Phaser.Scene {
         for (var i = 0; i < this.enemyPoolData.length; i++) {
             var row = this.enemyPoolData[i];
             this.newEnemy = new Enemy(this, row.x, row.y, 0.5);
-            //this.newEnemy.sprite.create();
             this.enemyPoolTest.add(this.newEnemy);
         }
     }

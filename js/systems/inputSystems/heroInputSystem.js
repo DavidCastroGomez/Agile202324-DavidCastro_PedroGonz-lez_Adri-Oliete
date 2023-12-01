@@ -15,31 +15,30 @@ class HeroInputSystem extends InputSystem {
     GetInputs() {
 
         if (!this.up.isDown && !this.down.isDown)
-            super.PassInputs('stop_ver')
+            super.PassInputs('stop_ver');
         if (!this.left.isDown && !this.right.isDown)
-            super.PassInputs('stop_hor')
+            super.PassInputs('stop_hor');
 
         if (this.up.isDown)
-            super.PassInputs('up')
-        if (this.right.isDown)
-            super.PassInputs('right')
-        if (this.left.isDown)
-            super.PassInputs('left')
+            super.PassInputs('up');
         if (this.down.isDown)
-            super.PassInputs('down')
+            super.PassInputs('down');
+        if (this.left.isDown)
+            super.PassInputs('left');
+        if (this.right.isDown)
+            super.PassInputs('right');
 
         if (this.runKey.isDown)
-            super.PassInputs('run')
+            super.PassInputs('run');
         else
-            super.PassInputs('walk')
+            super.PassInputs('walk');
 
         if (this.attackKey.isDown) {
-            super.PassInputs('attack')
-            //super.PassInputs('charging_attack')
+            super.PassInputs('attack');
         }
 
         if (this.attackKey.isUp) {
-            super.PassInputs('charged_attack')
+            super.PassInputs('charged_attack');
         }
     }
 }

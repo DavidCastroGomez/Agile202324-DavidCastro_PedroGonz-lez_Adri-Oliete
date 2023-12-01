@@ -6,7 +6,7 @@ class Character extends Phaser.GameObjects.Sprite {
         this.state = 'idle';
 
         this.healthSystem = new HealthSystem(_maxHealth, _scene, this);
-        this.attackSystem = new AttackSystem(_scene, this, 300);
+        this.attackSystem = new AttackSystem(_scene, this, 280);
         this.movementSystem = new MovementSystem(1, this, 1);
         this.inputSystem = new InputSystem(_scene, this.attackSystem, this.movementSystem);
 
