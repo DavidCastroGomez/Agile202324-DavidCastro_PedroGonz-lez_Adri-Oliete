@@ -1,7 +1,10 @@
 var gamePrefs =
 {
+    mapStartIndexToCharge: 0,
     gameWidth: 512,
-    gameHeight: 384
+    gameHeight: 384,
+    scene0_Width: 224,
+    scene0_Height: 176
 }
 
 var config =
@@ -9,7 +12,7 @@ var config =
     type: Phaser.AUTO,
     width: gamePrefs.gameWidth,
     height: gamePrefs.gameHeight,
-    scene: [TestScene],
+    scene: [Scene0_LinkHouse],
     render:
     {
         pixelArt: true

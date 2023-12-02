@@ -45,9 +45,67 @@
          "width":14,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":3,
+         "name":"game_elements",
+         "objects":[
+                {
+                 "height":0,
+                 "id":1,
+                 "name":"0",
+                 "point":true,
+                 "rotation":0,
+                 "type":"MapStart",
+                 "visible":true,
+                 "width":0,
+                 "x":72.75,
+                 "y":40.25
+                }, 
+                {
+                 "height":0,
+                 "id":2,
+                 "name":"MapExit_0",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"mapStartIndex",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"sceneToCharge",
+                         "type":"string",
+                         "value":"Scene0_LinkHouse"
+                        }],
+                 "rotation":0,
+                 "type":"MapExit",
+                 "visible":true,
+                 "width":0,
+                 "x":112,
+                 "y":155
+                }, 
+                {
+                 "height":0,
+                 "id":3,
+                 "name":"1",
+                 "point":true,
+                 "rotation":0,
+                 "type":"MapStart",
+                 "visible":true,
+                 "width":0,
+                 "x":112,
+                 "y":154.5
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":3,
- "nextobjectid":1,
+ "nextlayerid":5,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
