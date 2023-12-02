@@ -1,6 +1,6 @@
-class Scene0_LinkHouse extends Phaser.Scene {
+class Scene1_Overworld extends Phaser.Scene {
     constructor() {
-        super({ key: 'Scene0_LinkHouse' });
+        super({ key: 'Scene1_Overworld' });
     }
 
     preload() {

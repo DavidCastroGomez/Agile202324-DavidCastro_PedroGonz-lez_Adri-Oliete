@@ -1,6 +1,7 @@
 var gamePrefs =
 {
     mapStartIndexToCharge: 0,
+    heroHealth: 3,
     gameWidth: 512,
     gameHeight: 384,
     scene0_Width: 224,
@@ -12,7 +13,7 @@ var config =
     type: Phaser.AUTO,
     width: gamePrefs.gameWidth,
     height: gamePrefs.gameHeight,
-    scene: [Scene0_LinkHouse],
+    scene: [Scene0_LinkHouse,Scene1_Overworld],
     render:
     {
         pixelArt: true
