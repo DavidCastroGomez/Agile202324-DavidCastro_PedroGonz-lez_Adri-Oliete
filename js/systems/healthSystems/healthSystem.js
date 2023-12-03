@@ -14,14 +14,12 @@ class HealthSystem {
             if(this.tempHealth > 0){
                 this.currentHealth = this.tempHealth;
                 this.InvulnerabilityTime();
-                console.log("dana");
                 this.owner.state = 'damaged';
             }
             else if(this.tempHealth <= 0){
                 this.currentHealth = 0;
                 this.DieAction();
                 this.invincible = true;
-                console.log("muelto");
                 this.owner.state = 'dead';
             }
         }
