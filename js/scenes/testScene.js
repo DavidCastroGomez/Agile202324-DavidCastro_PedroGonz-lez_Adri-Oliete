@@ -93,6 +93,10 @@ class TestScene extends Phaser.Scene {
         _enemy.GetHealthSystem().TakeDamage();
     }
 
+    getWalls(){
+        return this.walls;
+    }
+
     update(time, delta) {
 
         this.heroTest.update(delta);
