@@ -9,7 +9,7 @@ class Scene1_Overworld extends Phaser.Scene {
 
         //-------------------------------------------------------------Map preload:
         this.load.setPath('res/maps');
-        this.load.tilemapTiledJSON('Map0_LinkHouse', 'Map0_LinkHouse.json');
+        this.load.tilemapTiledJSON('Map1_Overworld', 'Map1_Overworld.json');
 
         //-------------------------------------------------------------Sprite Manager preload:
         this.spriteManager = new SpriteManager(this);
@@ -25,12 +25,12 @@ class Scene1_Overworld extends Phaser.Scene {
         this.cameras.main.fadeIn();
 
         //-------------------------------------------------------------Map creation:
-        this.map = this.add.tilemap('Map0_LinkHouse');
+        this.map = this.add.tilemap('Map1_Overworld');
 
-        this.map.addTilesetImage('Map0_LinkHouse');
+        this.map.addTilesetImage('Map1_Overworld');
 
-        this.map.createLayer('ground_layer', 'Map0_LinkHouse');
-        this.walls = this.map.createLayer('wall_layer', 'Map0_LinkHouse');
+        this.map.createLayer('ground_layer', 'Map1_Overworld');
+        this.walls = this.map.createLayer('wall_layer', 'Map1_Overworld');
 
         this.map.setCollisionByExclusion(-1, true, true, 'wall_layer');
 
@@ -46,21 +46,16 @@ class Scene1_Overworld extends Phaser.Scene {
         //-------------------------------------------------------------Load map exits:
         this.loadMapExits();
 
-        //-------------------------------------------------------------Enemy Pool JSon create:
-        /* TODO():
-        this.enemyPoolData = this.cache.json.get('EP_TestMap');
-        this.enemyPoolData.length = 4;
-        */
-
-        //-------------------------------------------------------------Pool loading:
-        this.loadPools();
+        //-------------------------------------------------------------Load Enemy Pool:
+        this.enemyPoolTest = this.physics.add.group();
+        this.loadEnemyPool();
 
         //-------------------------------------------------------------Collision management creation:
         this.collisionManagement();
 
         //-------------------------------------------------------------Camera following:
         this.cameras.main.startFollow(this.hero);
-        this.cameras.main.setBounds(0, 0, gamePrefs.scene0_Width, gamePrefs.scene0_Height);
+        this.cameras.main.setBounds(0, 0, gamePrefs.scene1_Width, gamePrefs.scene1_Height);
         this.cameras.main.zoom = 2;
         this.cameras.main.centerOn(0.5, 0.5);
 
@@ -70,11 +65,18 @@ class Scene1_Overworld extends Phaser.Scene {
         this.restartScene = this.input.keyboard.addKey('R');
     }
 
-    loadPools() {
-        /* TODO():
-        this.enemyPoolTest = this.physics.add.group();
-        this.loadEnemies();
-        */
+    loadEnemyPool() {
+        this.game_elements = this.map.getObjectLayer('game_elements');
+        this.game_elements.objects.forEach(function (element)
+        {
+            switch(element.type){
+                case 'EnemySpawn':{
+                    this.newEnemy = new Enemy(this, element.x, element.y, 0.5);
+                    this.enemyPoolTest.add(this.newEnemy);
+                }
+                break;
+            }
+        },this);
     }
 
     loadMapStarts(){
@@ -113,17 +115,7 @@ class Scene1_Overworld extends Phaser.Scene {
         },this);
     }
 
-    loadEnemies() {
-
-        for (var i = 0; i < this.enemyPoolData.length; i++) {
-            var row = this.enemyPoolData[i];
-            this.newEnemy = new Enemy(this, row.x, row.y, 0.5);
-            this.enemyPoolTest.add(this.newEnemy);
-        }
-    }
-
     collisionManagement() {
-        /* TODO():
         this.physics.add.overlap(
             this.hero,
             this.enemyPoolTest,
@@ -138,12 +130,7 @@ class Scene1_Overworld extends Phaser.Scene {
             this.hitSingleEnemy,
             null,
             this
-        );*/
-    }
-
-    enterMapExitTriggerZone(player, zone) {
-        console.log('Player entered the trigger zone!');
-        // Perform actions or trigger events when the player enters the zone
+        );
     }
 
     hitSingleEnemy(_swordHitBox, _enemy) {
@@ -154,13 +141,8 @@ class Scene1_Overworld extends Phaser.Scene {
 
         this.hero.update(delta);
 
-        /* TODO():
         for (var i = 0; i < this.enemyPoolTest.children.entries.length; i++) {
             this.enemyPoolTest.getChildren()[i].update(delta)
-        }*/
-
-        if (this.restartScene.isDown) {
-            this.scene.restart();
         }
     }
 }

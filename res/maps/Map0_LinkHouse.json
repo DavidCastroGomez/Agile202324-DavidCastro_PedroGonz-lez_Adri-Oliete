@@ -66,37 +66,37 @@
                 {
                  "height":0,
                  "id":2,
-                 "name":"MapExit_0",
+                 "name":"1",
                  "point":true,
                  "properties":[
                         {
                          "name":"mapStartIndex",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }, 
                         {
                          "name":"sceneToCharge",
                          "type":"string",
-                         "value":"Scene0_LinkHouse"
+                         "value":"Scene1_Overworld"
                         }],
                  "rotation":0,
                  "type":"MapExit",
                  "visible":true,
                  "width":0,
-                 "x":112,
+                 "x":112.5,
                  "y":155
                 }, 
                 {
                  "height":0,
                  "id":3,
-                 "name":"1",
+                 "name":"2",
                  "point":true,
                  "rotation":0,
                  "type":"MapStart",
                  "visible":true,
                  "width":0,
-                 "x":112,
-                 "y":154.5
+                 "x":112.25,
+                 "y":125.75
                 }],
          "opacity":1,
          "type":"objectgroup",

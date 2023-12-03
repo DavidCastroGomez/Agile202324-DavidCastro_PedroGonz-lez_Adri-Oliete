@@ -46,18 +46,6 @@ class Scene0_LinkHouse extends Phaser.Scene {
         //-------------------------------------------------------------Load map exits:
         this.loadMapExits();
 
-        //-------------------------------------------------------------Enemy Pool JSon create:
-        /* TODO():
-        this.enemyPoolData = this.cache.json.get('EP_TestMap');
-        this.enemyPoolData.length = 4;
-        */
-
-        //-------------------------------------------------------------Pool loading:
-        this.loadPools();
-
-        //-------------------------------------------------------------Collision management creation:
-        this.collisionManagement();
-
         //-------------------------------------------------------------Camera following:
         this.cameras.main.startFollow(this.hero);
         this.cameras.main.setBounds(0, 0, gamePrefs.scene0_Width, gamePrefs.scene0_Height);
@@ -68,13 +56,6 @@ class Scene0_LinkHouse extends Phaser.Scene {
         this.lifeUp = this.input.keyboard.addKey('Y');
         this.takeDamage = this.input.keyboard.addKey('T');
         this.restartScene = this.input.keyboard.addKey('R');
-    }
-
-    loadPools() {
-        /* TODO():
-        this.enemyPoolTest = this.physics.add.group();
-        this.loadEnemies();
-        */
     }
 
     loadMapStarts(){
@@ -113,54 +94,7 @@ class Scene0_LinkHouse extends Phaser.Scene {
         },this);
     }
 
-    loadEnemies() {
-
-        for (var i = 0; i < this.enemyPoolData.length; i++) {
-            var row = this.enemyPoolData[i];
-            this.newEnemy = new Enemy(this, row.x, row.y, 0.5);
-            this.enemyPoolTest.add(this.newEnemy);
-        }
-    }
-
-    collisionManagement() {
-        /* TODO():
-        this.physics.add.overlap(
-            this.hero,
-            this.enemyPoolTest,
-            this.hero.GetHealthSystem().TakeDamage,
-            null,
-            this.hero.GetHealthSystem()
-        );
-
-        this.physics.add.overlap(
-            this.enemyPoolTest,
-            this.hero.GetAttackSystem().GetHitbox(),
-            this.hitSingleEnemy,
-            null,
-            this
-        );*/
-    }
-
-    enterMapExitTriggerZone(player, zone) {
-        console.log('Player entered the trigger zone!');
-        // Perform actions or trigger events when the player enters the zone
-    }
-
-    hitSingleEnemy(_swordHitBox, _enemy) {
-        _enemy.GetHealthSystem().TakeDamage();
-    }
-
     update(time, delta) {
-
         this.hero.update(delta);
-
-        /* TODO():
-        for (var i = 0; i < this.enemyPoolTest.children.entries.length; i++) {
-            this.enemyPoolTest.getChildren()[i].update(delta)
-        }*/
-
-        if (this.restartScene.isDown) {
-            this.scene.restart();
-        }
     }
 }

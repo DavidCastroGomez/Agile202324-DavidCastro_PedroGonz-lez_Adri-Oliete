@@ -8,6 +8,7 @@ class SpriteManager {
         this.scene.load.setPath('res/img/tilesets');
         this.scene.load.image('Alttp_Tileset', 'Alttp_Tileset.png');
         this.scene.load.image('Map0_LinkHouse', 'Map0_LinkHouse.png');
+        this.scene.load.image('Map1_Overworld', 'Map1_Overworld.png');
 
 
         this.scene.load.setPath('res/img/sprites');
