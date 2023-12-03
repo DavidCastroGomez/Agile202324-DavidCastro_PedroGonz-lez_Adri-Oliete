@@ -35,7 +35,7 @@ class EnemyInputSystem extends InputSystem {
         this.CheckIfArrivedToTarget()
 
         this.GoToPosition();
-
+        
     }
 
     GeneratePosition() {
@@ -49,14 +49,13 @@ class EnemyInputSystem extends InputSystem {
 
     CheckIfArrivedToTarget() {
 
-        if (Math.abs(this.owner.body.position.x - this.walls.tileToWorldX(this.currentPathTarget.x)) < 50 && !this.arrivedToTargetX) {
+        
+        if (this.walls.worldToTileX(this.owner.body.position.x) == this.currentPathTarget.x && !this.arrivedToTargetX) {
             this.arrivedToTargetX = true;
             super.PassInputs('stop_hor')
         }
 
-        console.log(this.walls.tileToWorldY(this.currentPathTarget.y))
-
-        if (Math.abs(this.owner.body.position.y - this.walls.tileToWorldY(this.currentPathTarget.y)) < 100 && !this.arrivedToTargetY) {
+        if (this.walls.worldToTileY(this.owner.body.position.y) == this.currentPathTarget.y && !this.arrivedToTargetY) {
             this.arrivedToTargetY = true;
             super.PassInputs('stop_ver')
         }
@@ -69,15 +68,15 @@ class EnemyInputSystem extends InputSystem {
                 this.arrivedToTargetX = false
                 this.arrivedToTargetY = false
 
-                console.log(this.currentPathTarget)
             }
         }
+        
     }
 
 
     GoToPosition() {
         if (!this.arrivedToTargetX) {
-            if (this.owner.body.position.x < this.currentPathTarget.x) {
+            if (this.owner.body.position.x < this.walls.tileToWorldX(this.currentPathTarget.x)) {
                 super.PassInputs('right')
             } else {
                 super.PassInputs('left')
@@ -85,7 +84,7 @@ class EnemyInputSystem extends InputSystem {
         }
 
         if (!this.arrivedToTargetY) {
-            if (this.owner.body.position.y < this.currentPathTarget.y) {
+            if (this.owner.body.position.y > this.walls.tileToWorldY(this.currentPathTarget.y)) {
                 super.PassInputs('up')
             } else {
                 super.PassInputs('down')
@@ -110,18 +109,18 @@ class EnemyInputSystem extends InputSystem {
             this.sin = Math.sin(this.angle)
 
             // Calculate the new destination within the wander radius
-            this.targetX = this.owner.body.position.x + this.wanderRadius * 100 * Math.cos(this.angle);
-            this.targetY = this.owner.body.position.y + this.wanderRadius * 50 * Math.sin(this.angle);
+            this.targetX = this.owner.body.position.x + this.wanderRadius * 200 * Math.cos(this.angle);
+            this.targetY = this.owner.body.position.y + this.wanderRadius * 200 * Math.sin(this.angle);
 
             this.targetWorldTileX = this.walls.worldToTileX(this.targetX);
             this.targetWorldTileY = this.walls.worldToTileY(this.targetY);
 
             var index;
 
-            if(this.targetX > 0 &&
-                this.targetY > 0 &&
-                this.targetX < this.walls.width - 1 &&
-                this.targetY < this.walls.height - 1){
+            if(this.targetWorldTileX > 4 &&
+                this.targetWorldTileY > 4 &&
+                this.targetWorldTileX < this.walls.worldToTileX(this.walls.width) - 4 &&
+                this.targetWorldTileY < this.walls.worldToTileY(this.walls.height) - 4){
 
                     index = this.walls.getTileAt(this.targetWorldTileX, this.targetWorldTileY, true, 1).index
             }
@@ -143,8 +142,6 @@ class EnemyInputSystem extends InputSystem {
 
             this.currentPathTarget = this.path[0];
 
-            console.log(this.currentPathTarge);
-
             this.scene.time.delayedCall(this.delay, () => {
                 this.canCalculateWander = true;
             });
@@ -159,8 +156,13 @@ class EnemyInputSystem extends InputSystem {
         var closedSet = [];
 
         openSet.push(start);
+
+        start.g = 0;
+
+        var maxIterations = 1000
     
-        while (openSet.length > 0) {
+        while (openSet.length > 0 && maxIterations > 0) {
+            maxIterations--;
             var current = this.findLowestFScore(openSet);
     
             if (current.x === this.targetPoint.x && current.y === this.targetPoint.y) {
@@ -194,6 +196,11 @@ class EnemyInputSystem extends InputSystem {
                     }
                 }
             }
+        }
+
+        if(maxIterations == 0){
+            //Not completed Path
+            return this.reconstructPath(current);
         }
     
         // No path found
@@ -252,6 +259,8 @@ class EnemyInputSystem extends InputSystem {
             current = current.cameFrom;
             totalPath.unshift(current);
         }
+
+        console.log(totalPath);
     
         return totalPath;
     }
