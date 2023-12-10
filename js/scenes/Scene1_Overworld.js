@@ -137,6 +137,10 @@ class Scene1_Overworld extends Phaser.Scene {
         _enemy.GetHealthSystem().TakeDamage();
     }
 
+    getWalls(){
+        return this.walls;
+    }
+
     update(time, delta) {
 
         this.hero.update(delta);

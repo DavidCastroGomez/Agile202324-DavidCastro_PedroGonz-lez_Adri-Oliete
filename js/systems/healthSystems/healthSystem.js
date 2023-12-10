@@ -14,13 +14,13 @@ class HealthSystem {
             if(this.tempHealth > 0){
                 this.currentHealth = this.tempHealth;
                 this.InvulnerabilityTime();
-                this.owner.state = 'damaged';
+                //this.owner.state = 'damaged';
             }
             else if(this.tempHealth <= 0){
                 this.currentHealth = 0;
                 this.DieAction();
                 this.invincible = true;
-                this.owner.state = 'dead';
+                //this.owner.state = 'dead';
             }
         }
     }
@@ -51,6 +51,10 @@ class HealthSystem {
 
     GetCurrentHealth(){
         return this.currentHealth;
+    }
+
+    IsDead(){
+        return this.currentHealth == 0;
     }
 
     GetMaxHealth(){

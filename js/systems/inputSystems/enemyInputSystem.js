@@ -127,7 +127,9 @@ class EnemyInputSystem extends InputSystem {
             else{
                 index = 7
             }
-
+            if(this.owner.GetHealthSystem().IsDead()){
+                return;
+            }
             } while (index != -1);
 
             //Translate to map coor

@@ -74,6 +74,10 @@ class Scene0_LinkHouse extends Phaser.Scene {
         },this);
     }
 
+    getWalls(){
+        return this.walls;
+    }
+
     loadMapExits(){
         this.game_elements = this.map.getObjectLayer('game_elements');
         this.game_elements.objects.forEach(function (element)
