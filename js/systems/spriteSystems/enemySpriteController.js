@@ -9,25 +9,25 @@ class EnemySpriteController extends SpriteController {
         //Idle
         this.animation.create({
             key: 'idle_up',
-            frames: this.animation.generateFrameNumbers('enemy', { start: 13, end: 14 }),
+            frames: this.animation.generateFrameNumbers('enemy', { frames: [13] }),
             frameRate: 12,
             repeat: -1
         });
         this.animation.create({
             key: 'idle_down',
-            frames: this.animation.generateFrameNumbers('enemy', { start: 0, end: 1 }),
+            frames: this.animation.generateFrameNumbers('enemy', {frames: [0]}),
             frameRate: 12,
             repeat: -1
         });
         this.animation.create({
             key: 'idle_left',
-            frames: this.animation.generateFrameNumbers('enemy', { start: 5, end: 6 }),
+            frames: this.animation.generateFrameNumbers('enemy', { frames: [5] }),
             frameRate: 12,
             repeat: -1
         });
         this.animation.create({
             key: 'idle_right',
-            frames: this.animation.generateFrameNumbers('enemy', { start: 9, end: 10 }),
+            frames: this.animation.generateFrameNumbers('enemy', { frames: [9] }),
             frameRate: 12,
             repeat: -1
         });
@@ -85,16 +85,16 @@ class EnemySpriteController extends SpriteController {
             case 'idle':
                 switch (direction) {
                     case 'up':
-                        //this.animation.play('idle_up', true);
+                        this.animation.play('idle_up', true);
                         break;
                     case 'down':
-                        //this.animation.play('idle_down', true);
+                        this.animation.play('idle_down', true);
                         break;
                     case 'left':
-                        //this.animation.play('idle_left', true);
+                        this.animation.play('idle_left', true);
                         break;
                     case 'right':
-                        //this.animation.play('idle_right', true);
+                        this.animation.play('idle_right', true);
                         break;
                 }
                 break;
