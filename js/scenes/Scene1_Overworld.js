@@ -141,6 +141,10 @@ class Scene1_Overworld extends Phaser.Scene {
         return this.walls;
     }
 
+    getHero(){
+        return this.hero;
+    }
+
     update(time, delta) {
 
         this.hero.update(delta);

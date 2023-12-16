@@ -5,18 +5,11 @@ class EnemyInputSystem extends InputSystem {
 
         this.owner = _owner
 
-        this.delay = 5000;
-
         this.wanderRadius = 1;
 
-        this.Modes = {
-            WANDER: 0, SEEK: 1, ATTACK: 2
-        }
+        this.hero = _scene.getHero();
 
-
-        this.state = this.Modes.WANDER
-
-        this.canCalculateWander = true;
+        this.canCalculatePath = true;
 
         this.arrivedToTargetX = false;
         this.arrivedToTargetY = false;
@@ -27,21 +20,64 @@ class EnemyInputSystem extends InputSystem {
         this.targetPoint;
 
         this.currentPathTarget;
+
+        //states   
+        this.Modes = {
+            WANDER: 0, SEEK: 1
+        }
+      
+        this.delayWander = 5000;
+        this.delaySeek = 500;
+
+        this.state = this.Modes.SEEK
+
+        this.distanceToSeek = 80;
+
     }
 
     GetInputs() {
-        
-        this.GeneratePosition()
+        if(this.owner.GetHealthSystem().IsDead()){
+            return;
+        }
+
+        this.ChangeState();
+
+        if(this.canCalculatePath){
+            this.GeneratePosition()
+        }
         this.CheckIfArrivedToTarget()
 
         this.GoToPosition();
         
     }
 
+    ChangeState(){
+
+        var distance = Phaser.Math.Distance.BetweenPoints(this.hero.body.position, this.owner.body.position)
+
+        if(distance < this.distanceToSeek){
+            if(this.state != this.Modes.SEEK){
+                this.canCalculatePath = true;
+            }
+
+            this.state = this.Modes.SEEK
+            
+        }else{
+
+            if(this.state == this.Modes.SEEK && this.path.length == 0){
+                this.state = this.Modes.WANDER
+            }          
+        }
+
+    }
+
     GeneratePosition() {
         switch (this.state) {
             case this.Modes.WANDER:
                 this.WanderBehaviour();
+                break;
+            case this.Modes.SEEK:
+                this.SeekBehaviour();
                 break;
         }
     }
@@ -94,14 +130,12 @@ class EnemyInputSystem extends InputSystem {
     }
 
     WanderBehaviour() {
-        if (this.canCalculateWander) {
-            this.arrivedToTargetX = false;
-            this.arrivedToTargetY = false;
+        this.arrivedToTargetX = false;
+        this.arrivedToTargetY = false;
 
-            this.canCalculateWander = false;
+        this.canCalculatePath = false;
 
-            do {                
-            
+        do {                         
             // Calculate a random angle
             this.angle = Phaser.Math.RadToDeg(Phaser.Math.Angle.Random());
 
@@ -127,30 +161,57 @@ class EnemyInputSystem extends InputSystem {
             else{
                 index = 7
             }
-            if(this.owner.GetHealthSystem().IsDead()){
-                return;
-            }
-            } while (index != -1);
+        } while (index != -1);
 
-            //Translate to map coor
+        //Translate to map coor
 
-            this.startTileX = this.walls.worldToTileX(this.owner.body.position.x);
-            this.startTileY = this.walls.worldToTileY(this.owner.body.position.y);
+        this.startTileX = this.walls.worldToTileX(this.owner.body.position.x);
+        this.startTileY = this.walls.worldToTileY(this.owner.body.position.y);
 
-            this.startPoint = new Phaser.Geom.Point(this.startTileX, this.startTileY);
-            this.targetPoint = new Phaser.Geom.Point(this.targetWorldTileX, this.targetWorldTileY);
+        this.startPoint = new Phaser.Geom.Point(this.startTileX, this.startTileY);
+        this.targetPoint = new Phaser.Geom.Point(this.targetWorldTileX, this.targetWorldTileY);
 
-            this.path = this.findPath(this.walls, this.startPoint, this.targetPoint);
+        this.path = this.findPath(this.walls, this.startPoint, this.targetPoint);
 
-            this.currentPathTarget = this.path[0];
+        this.currentPathTarget = this.path[0];
 
-            this.scene.time.delayedCall(this.delay, () => {
-                this.canCalculateWander = true;
-            });
-        }
+        this.SetCalculatePathDelay(this.delayWander)
     }
 
+    SeekBehaviour(){
+        this.arrivedToTargetX = false;
+        this.arrivedToTargetY = false;
+
+        this.canCalculatePath = false;
+
+        this.startTileX = this.walls.worldToTileX(this.owner.body.position.x);
+        this.startTileY = this.walls.worldToTileY(this.owner.body.position.y);
+
+        this.targetWorldTileX = this.walls.worldToTileX(this.hero.body.position.x)
+        this.targetWorldTileY = this.walls.worldToTileX(this.hero.body.position.y)
+
+        this.startPoint = new Phaser.Geom.Point(this.startTileX, this.startTileY);
+        this.targetPoint = new Phaser.Geom.Point(this.targetWorldTileX, this.targetWorldTileY);
+
+        this.path = this.findPath(this.walls, this.startPoint, this.targetPoint);
+
+        this.currentPathTarget = this.path[0];
+
+        this.SetCalculatePathDelay(this.delaySeek)
+    }
+
+    SetCalculatePathDelay(_delay){
+        if(this.delayedEvent != null){
+            this.delayedEvent.remove(false);
+        }
+   
+        this.delayedEvent = this.scene.time.delayedCall(_delay, () => {
+            this.canCalculatePath = true;
+        });
+    }
+    //--------------------------------
     //---------------A*---------------
+    //--------------------------------
 
     findPath(tilemap, start, end) {
 
