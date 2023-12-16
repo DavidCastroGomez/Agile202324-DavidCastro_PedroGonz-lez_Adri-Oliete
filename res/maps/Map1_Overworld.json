@@ -385,6 +385,29 @@
                  "width":0,
                  "x":674,
                  "y":362
+                }, 
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"3",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"mapStartIndex",
+                         "type":"int",
+                         "value":3
+                        }, 
+                        {
+                         "name":"sceneToCharge",
+                         "type":"string",
+                         "value":"Scene2_TheWell"
+                        }],
+                 "rotation":0,
+                 "type":"MapExit",
+                 "visible":true,
+                 "width":0,
+                 "x":690,
+                 "y":152.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -393,7 +416,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":13,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
