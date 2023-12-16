@@ -52,7 +52,7 @@ class Scene2_TheWell extends Phaser.Scene {
         this.loadKeyPool();
 
         //-------------------------------------------------------------Load map exits:
-        this.loadDoorLocks();
+        this.loadDoorLocks();            
 
         //-------------------------------------------------------------Collision management creation:
         this.collisionManagement();
@@ -77,20 +77,6 @@ class Scene2_TheWell extends Phaser.Scene {
                 case 'EnemySpawn':{
                     this.newEnemy = new Enemy(this, element.x, element.y, 0.5);
                     this.enemyPoolTest.add(this.newEnemy);
-                }
-                break;
-            }
-        },this);
-    }
-
-    loadKeyPool() {
-        this.game_elements = this.map.getObjectLayer('game_elements');
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){
-                case 'ItemKey':{
-                    this.newKey = new ItemKey(this.hero, this, element.x, element.y);
-                    this.keyPoolTest.add(this.newKey);
                 }
                 break;
             }
@@ -133,19 +119,43 @@ class Scene2_TheWell extends Phaser.Scene {
         },this);
     }
 
+    loadKeyPool() {
+        this.game_elements = this.map.getObjectLayer('game_elements');
+        var iter = 0;
+        this.game_elements.objects.forEach(function (element)
+        {
+            switch(element.type){
+                case 'ItemKey':{
+                    if(gamePrefs.scene2_LocksOpen.length == 0 || gamePrefs.scene2_LocksOpen[iter] == false){
+                        this.newKey = new ItemKey(this.hero, this, element.x, element.y);
+                        this.keyPoolTest.add(this.newKey);
+                    }
+                    iter++;
+                }
+                break;
+            }
+        },this);
+    }
+
     loadDoorLocks(){
         this.game_elements = this.map.getObjectLayer('game_elements');
+        var iter = 0;
         this.game_elements.objects.forEach(function (element)
         {
             switch(element.type){  
             case 'DoorLock':{
-                this.newMapExitTrigger = new MapDoorLock(
-                    element.properties[0].value,
-                    this.hero, 
-                    this,
-                    element.x, 
-                    element.y
-                );
+                if(gamePrefs.scene2_LocksOpen.length == 0 || gamePrefs.scene2_LocksOpen[iter] == false){
+                    this.newMapExitTrigger = new MapDoorLock(
+                        iter,
+                        element.properties[0].value,
+                        this.hero, 
+                        this,
+                        element.x, 
+                        element.y
+                    );
+                    gamePrefs.scene2_LocksOpen.push(false);
+                    iter++;
+                }
             }
             break;
             }

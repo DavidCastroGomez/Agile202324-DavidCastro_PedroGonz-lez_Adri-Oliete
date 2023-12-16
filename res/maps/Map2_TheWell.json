@@ -199,8 +199,43 @@
                  "type":"DoorLock",
                  "visible":true,
                  "width":0,
-                 "x":136.787878787879,
-                 "y":478.242424242424
+                 "x":135.69696969697,
+                 "y":444.60606060606
+                }, 
+                {
+                 "height":0,
+                 "id":6,
+                 "name":"5",
+                 "point":true,
+                 "rotation":0,
+                 "type":"MapStart",
+                 "visible":true,
+                 "width":0,
+                 "x":135.363636363637,
+                 "y":450
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"4",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"mapStartIndex",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
+                         "name":"sceneToCharge",
+                         "type":"string",
+                         "value":"Scene1_Overworld"
+                        }],
+                 "rotation":0,
+                 "type":"MapExit",
+                 "visible":true,
+                 "width":0,
+                 "x":136,
+                 "y":484
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -209,7 +244,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":6,
+ "nextobjectid":9,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
