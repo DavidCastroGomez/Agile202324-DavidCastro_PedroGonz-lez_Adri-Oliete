@@ -38,11 +38,7 @@ class MovementSystem {
                     this.owner.body.velocity.y = 0;
                     break;
             }
-        } else {
-            this.owner.body.velocity.x = 0;
-            this.owner.body.velocity.y = 0;
         }
-
     }
 
     Run() {
@@ -63,6 +59,11 @@ class MovementSystem {
 
     CanMove(bool) {
         this.canMove = bool;
+
+        if(!this.canMove){
+            this.owner.body.velocity.x = 0;
+            this.owner.body.velocity.y = 0;
+        }
     }
 
     GetLastDir() {
