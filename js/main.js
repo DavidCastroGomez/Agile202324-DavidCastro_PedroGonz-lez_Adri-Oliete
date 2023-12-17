@@ -4,6 +4,8 @@ var gamePrefs =
     heroMaxHealth: 3,
     heroHealth: 3,
     heroKeys: 0,
+
+    enemyHealth: 1,
     
     gameWidth: 512,
     gameHeight: 384,

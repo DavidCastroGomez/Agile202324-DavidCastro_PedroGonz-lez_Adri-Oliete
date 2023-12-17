@@ -67,7 +67,7 @@ class Scene1_Overworld extends Phaser.Scene {
         {
             switch(element.type){
                 case 'EnemySpawn':{
-                    this.newEnemy = new Enemy(this, element.x, element.y, 1);
+                    this.newEnemy = new Enemy(this, element.x, element.y, gamePrefs.enemyHealth);
                     this.enemyPoolTest.add(this.newEnemy);
                 }
                 break;
