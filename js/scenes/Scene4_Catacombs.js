@@ -1,6 +1,6 @@
-class Scene1_Overworld extends Phaser.Scene {
+class Scene4_Catacombs extends Phaser.Scene {
     constructor() {
-        super({ key: 'Scene1_Overworld' });
+        super({ key: 'Scene4_Catacombs' });
     }
 
     preload() {
@@ -9,7 +9,7 @@ class Scene1_Overworld extends Phaser.Scene {
 
         //-------------------------------------------------------------Map preload:
         this.load.setPath('res/maps');
-        this.load.tilemapTiledJSON('Map1_Overworld', 'Map1_Overworld.json');
+        this.load.tilemapTiledJSON('Map4_Catacombs', 'Map4_Catacombs.json');
 
         //-------------------------------------------------------------Sprite Manager preload:
         this.spriteManager = new SpriteManager(this);
@@ -21,12 +21,14 @@ class Scene1_Overworld extends Phaser.Scene {
         this.cameras.main.fadeIn();
 
         //-------------------------------------------------------------Map creation:
-        this.map = this.add.tilemap('Map1_Overworld');
+        this.map = this.add.tilemap('Map4_Catacombs');
 
-        this.map.addTilesetImage('Map1_Overworld');
+        this.map.addTilesetImage('Map4_Catacombs');
 
-        this.map.createLayer('ground_layer', 'Map1_Overworld');
-        this.walls = this.map.createLayer('wall_layer', 'Map1_Overworld');
+        this.map.createLayer('ground_layer', 'Map4_Catacombs');
+        this.walls = this.map.createLayer('wall_layer', 'Map4_Catacombs');
+        this.map.createLayer('ceiling_layer', 'Map4_Catacombs').setDepth(2);
+        this.map.createLayer('maximum_layer', 'Map4_Catacombs').setDepth(3);
 
         this.map.setCollisionByExclusion(-1, true, true, 'wall_layer');
 
@@ -46,12 +48,16 @@ class Scene1_Overworld extends Phaser.Scene {
         this.enemyPoolTest = this.physics.add.group();
         this.loadEnemyPool();
 
+        //-------------------------------------------------------------Load Key Pool:
+        this.keyPoolTest = this.physics.add.group();
+        this.loadKeyPool();           
+
         //-------------------------------------------------------------Collision management creation:
         this.collisionManagement();
 
         //-------------------------------------------------------------Camera following:
         this.cameras.main.startFollow(this.hero);
-        this.cameras.main.setBounds(0, 0, gamePrefs.scene1_Width, gamePrefs.scene1_Height);
+        this.cameras.main.setBounds(0, 0, gamePrefs.scene4_Width, gamePrefs.scene4_Height);
         this.cameras.main.zoom = 2;
         this.cameras.main.centerOn(0.5, 0.5);
 
@@ -107,6 +113,24 @@ class Scene1_Overworld extends Phaser.Scene {
                 );
             }
             break;
+            }
+        },this);
+    }
+
+    loadKeyPool() {
+        this.game_elements = this.map.getObjectLayer('game_elements');
+        var iter = 0;
+        this.game_elements.objects.forEach(function (element)
+        {
+            switch(element.type){
+                case 'ItemKey':{
+                    if(gamePrefs.scene3_LocksOpen.length == 0 || gamePrefs.scene3_LocksOpen[iter] == false){
+                        this.newKey = new ItemKey(this.hero, this, element.x, element.y);
+                        this.keyPoolTest.add(this.newKey);
+                    }
+                    iter++;
+                }
+                break;
             }
         },this);
     }

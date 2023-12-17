@@ -9,6 +9,7 @@ class HeroHealthSystem extends HealthSystem {
         super.GetScene().cameras.main.fadeOut(1000,0,0,0,(camera, progress)=>{
             if(progress===1){
                 super.GetScene().scene.restart();
+                gamePrefs.heroHealth = gamePrefs.heroMaxHealth;
             }
         });
     }
