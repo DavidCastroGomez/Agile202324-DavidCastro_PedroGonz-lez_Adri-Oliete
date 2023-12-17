@@ -67,7 +67,7 @@ class Scene1_Overworld extends Phaser.Scene {
         {
             switch(element.type){
                 case 'EnemySpawn':{
-                    this.newEnemy = new Enemy(this, element.x, element.y, 0.5);
+                    this.newEnemy = new Enemy(this, element.x, element.y, 1);
                     this.enemyPoolTest.add(this.newEnemy);
                 }
                 break;
@@ -115,7 +115,7 @@ class Scene1_Overworld extends Phaser.Scene {
         this.physics.add.overlap(
             this.hero,
             this.enemyPoolTest,
-            this.hero.GetHealthSystem().TakeDamage,
+            this.hitHero,
             null,
             this.hero.GetHealthSystem()
         );
@@ -130,7 +130,11 @@ class Scene1_Overworld extends Phaser.Scene {
     }
 
     hitSingleEnemy(_swordHitBox, _enemy) {
-        _enemy.GetHealthSystem().TakeDamage();
+        _enemy.GetHealthSystem().TakeDamage(_swordHitBox);
+    }
+
+    hitHero(_hero, _enemy){
+        _hero.GetHealthSystem().TakeDamage(_enemy);
     }
 
     getWalls(){
