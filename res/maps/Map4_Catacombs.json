@@ -317,18 +317,6 @@
                 {
                  "ellipse":true,
                  "height":0,
-                 "id":3,
-                 "name":"EnemySpawn_0",
-                 "rotation":0,
-                 "type":"EnemySpawn",
-                 "visible":true,
-                 "width":0,
-                 "x":728.666666666667,
-                 "y":146
-                }, 
-                {
-                 "ellipse":true,
-                 "height":0,
                  "id":4,
                  "name":"EnemySpawn_1",
                  "rotation":0,
