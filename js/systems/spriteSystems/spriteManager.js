@@ -12,6 +12,8 @@ class SpriteManager {
         this.scene.load.image('Map0_LinkHouse', 'Map0_LinkHouse.png');
         this.scene.load.image('Map1_Overworld', 'Map1_Overworld.png');
         this.scene.load.image('Map2_TheWell', 'Map2_TheWell.png');
+        this.scene.load.image('Map3_HyruleCastle', 'Map3_HyruleCastle.png');
+        this.scene.load.image('Map4_Catacombs', 'Map4_Catacombs.png');
 
         //-------------------------------------------------------------Characters:
         this.scene.load.setPath('res/img/sprites');

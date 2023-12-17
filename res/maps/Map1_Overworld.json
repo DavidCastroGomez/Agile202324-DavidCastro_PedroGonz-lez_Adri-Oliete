@@ -424,14 +424,14 @@
                 {
                  "height":0,
                  "id":15,
-                 "name":"6",
+                 "name":"7",
                  "point":true,
                  "rotation":0,
                  "type":"MapStart",
                  "visible":true,
                  "width":0,
-                 "x":247.5,
-                 "y":288.5
+                 "x":247.75,
+                 "y":291.5
                 }, 
                 {
                  "height":0,
@@ -455,6 +455,65 @@
                  "width":0,
                  "x":488.5,
                  "y":210.5
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":17,
+                 "name":"EnemySpawn_10",
+                 "rotation":0,
+                 "type":"EnemySpawn",
+                 "visible":true,
+                 "width":0,
+                 "x":432,
+                 "y":487.5
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":18,
+                 "name":"EnemySpawn_11",
+                 "rotation":0,
+                 "type":"EnemySpawn",
+                 "visible":true,
+                 "width":0,
+                 "x":251,
+                 "y":586
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":19,
+                 "name":"EnemySpawn_12",
+                 "rotation":0,
+                 "type":"EnemySpawn",
+                 "visible":true,
+                 "width":0,
+                 "x":246.590909090909,
+                 "y":346.636363636364
+                }, 
+                {
+                 "height":0,
+                 "id":20,
+                 "name":"6",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"mapStartIndex",
+                         "type":"int",
+                         "value":6
+                        }, 
+                        {
+                         "name":"sceneToCharge",
+                         "type":"string",
+                         "value":"Scene3_HyruleCastle"
+                        }],
+                 "rotation":0,
+                 "type":"MapExit",
+                 "visible":true,
+                 "width":0,
+                 "x":248.125,
+                 "y":265.25
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -463,7 +522,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":17,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

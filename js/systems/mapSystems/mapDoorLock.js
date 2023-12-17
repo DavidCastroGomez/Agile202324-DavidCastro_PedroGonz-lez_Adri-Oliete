@@ -1,6 +1,6 @@
 class MapDoorLock extends Phaser.GameObjects.Sprite {
 
-    constructor(_index, _angle, _entityToCollideWith, _actualScene, _posX, _posY) {
+    constructor(_index, _angle, _entityToCollideWith, _actualScene, _posX, _posY, _sceneLocksOpen) {
 
         super(_actualScene, _posX, _posY, 'lock')
         _actualScene.add.existing(this);
@@ -20,6 +20,8 @@ class MapDoorLock extends Phaser.GameObjects.Sprite {
         this.index = _index;
 
         this.self = this;
+
+        this.sceneLocksOpen = _sceneLocksOpen;
 
         this.collisionManagement();
     }
@@ -46,7 +48,7 @@ class MapDoorLock extends Phaser.GameObjects.Sprite {
 
         if(gamePrefs.heroKeys > 0){
             gamePrefs.heroKeys-=1;
-            gamePrefs.scene2_LocksOpen[this.index] = true;
+            this.sceneLocksOpen[this.index] = true;
             console.log("Used key! I have " + gamePrefs.heroKeys + " keys now.");
             this.destroy();
         }

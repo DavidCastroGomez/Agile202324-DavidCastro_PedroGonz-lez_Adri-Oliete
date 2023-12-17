@@ -2,7 +2,7 @@ class HeroSpriteController extends SpriteController {
 
     constructor(_owner) {
         super(_owner);
-        _owner.body.setSize(16, 20).setOffset(11,15);
+        _owner.body.setSize(14, 14).setOffset(11,19);
 
         this.chargeDir = 'down';
         this.isCharging = false;
