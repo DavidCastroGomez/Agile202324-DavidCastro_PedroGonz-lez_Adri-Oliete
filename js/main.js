@@ -1,6 +1,6 @@
 var gamePrefs =
 {
-    mapStartIndexToCharge: 10,
+    mapStartIndexToCharge: 0,
     heroMaxHealth: 3,
     heroHealth: 3,
     heroKeys: 0,
@@ -35,7 +35,7 @@ var config =
     type: Phaser.AUTO,
     width: gamePrefs.gameWidth,
     height: gamePrefs.gameHeight,
-    scene: [Scene5_SewersToTheSanctuary],//Scene0_LinkHouse, Scene1_Overworld, Scene2_TheWell, Scene3_HyruleCastle, Scene4_Catacombs, 
+    scene: [Scene0_LinkHouse, Scene1_Overworld, Scene2_TheWell, Scene3_HyruleCastle, Scene4_Catacombs,Scene5_SewersToTheSanctuary],
     render:
     {
         pixelArt: true

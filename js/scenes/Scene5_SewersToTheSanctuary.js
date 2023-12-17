@@ -31,7 +31,6 @@ class Scene5_SewersToTheSanctuary extends Phaser.Scene {
         this.map.createLayer('maximum_layer', 'Map5_SewersToTheSanctuary').setDepth(3);
 
         this.map.setCollisionByExclusion(-1, true, true, 'wall_layer');
-        this.map.setCollisionByExclusion(-1, true, false, 'maximum_layer');
 
         this.starttingPosX = 0;
         this.starttingPosY = 0;

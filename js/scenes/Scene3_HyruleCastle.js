@@ -31,7 +31,6 @@ class Scene3_HyruleCastle extends Phaser.Scene {
         this.map.createLayer('maximum_layer', 'Map3_HyruleCastle').setDepth(3);
 
         this.map.setCollisionByExclusion(-1, true, true, 'wall_layer');
-        this.map.setCollisionByExclusion(-1, true, true, 'maximum_layer');
 
         this.starttingPosX = 0;
         this.starttingPosY = 0;
