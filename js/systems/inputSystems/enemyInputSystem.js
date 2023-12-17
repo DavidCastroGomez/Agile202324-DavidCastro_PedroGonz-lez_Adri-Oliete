@@ -222,7 +222,7 @@ class EnemyInputSystem extends InputSystem {
 
         start.g = 0;
 
-        var maxIterations = 1000
+        var maxIterations = 2000
     
         while (openSet.length > 0 && maxIterations > 0) {
             maxIterations--;
@@ -323,7 +323,7 @@ class EnemyInputSystem extends InputSystem {
             totalPath.unshift(current);
         }
 
-        console.log(totalPath);
+        //console.log(totalPath);
     
         return totalPath;
     }

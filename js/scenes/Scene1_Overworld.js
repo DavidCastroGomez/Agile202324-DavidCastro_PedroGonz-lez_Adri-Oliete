@@ -119,7 +119,7 @@ class Scene1_Overworld extends Phaser.Scene {
         this.physics.add.overlap(
             this.hero,
             this.enemyPoolTest,
-            this.hero.GetHealthSystem().TakeDamage,
+            this.hitHero,
             null,
             this.hero.GetHealthSystem()
         );
@@ -134,7 +134,11 @@ class Scene1_Overworld extends Phaser.Scene {
     }
 
     hitSingleEnemy(_swordHitBox, _enemy) {
-        _enemy.GetHealthSystem().TakeDamage(this.hero);
+        _enemy.GetHealthSystem().TakeDamage(_swordHitBox);
+    }
+
+    hitHero(_hero, _enemy){
+        _hero.GetHealthSystem().TakeDamage(_enemy);
     }
 
     getWalls(){

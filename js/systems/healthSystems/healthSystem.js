@@ -6,19 +6,24 @@ class HealthSystem {
         this.owner = _owner;
         
         this.invincible = false;
+        this.invincibleTime = 500;
 
-        this.knockbackForce = 5;
+        this.knockbackForce = 400;
+        this.knockbackTime = 200;
     }
 
     TakeDamage(_hitter){
         if(!this.invincible){
+
+            console.log("HIT")
+
             this.tempHealth = this.currentHealth - 0.5;
-
-            this.Knockback(_hitter);
-
+            
             if(this.tempHealth > 0){
+                this.InvulnerabilityTime()
+                this.Knockback(_hitter);
+                this.RestoreMovementAfterKnockbackTime();
                 this.currentHealth = this.tempHealth;
-                this.InvulnerabilityTime();
                 //this.owner.state = 'damaged';
             }
             else if(this.tempHealth <= 0){
@@ -33,7 +38,7 @@ class HealthSystem {
     Knockback(_hitter){
         var enemyPosition = _hitter.body.position;
 
-        var direction = _hitter.body.position
+        var direction = {x: 0, y: 0};
 
         direction.x = this.owner.body.position.x - enemyPosition.x
         direction.y = this.owner.body.position.y - enemyPosition.y
@@ -64,11 +69,16 @@ class HealthSystem {
     InvulnerabilityTime(){
         
         this.invincible = true;
-        this.scene.time.delayedCall(1000, () => {
+        this.scene.time.delayedCall(this.invincibleTime, () => {
                 if(this.invincible){
                     this.invincible = false;
-                    this.owner.GetMovementSystem().CanMove(true);
                 }
+        });
+    }
+
+    RestoreMovementAfterKnockbackTime(){
+        this.scene.time.delayedCall(this.knockbackTime, () => {
+                this.owner.GetMovementSystem().CanMove(true);    
         });
     }
 

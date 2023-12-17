@@ -42,28 +42,30 @@ class MovementSystem {
     }
 
     Run() {
-        var dirSpeed = this.owner.body.velocity.normalize()
+        if(this.canMove){
+            var dirSpeed = this.owner.body.velocity.normalize()
 
-        this.speed = this.originalSpeed * this.runningMultipler;
+            this.speed = this.originalSpeed * this.runningMultipler;
 
-        this.owner.body.velocity.x = dirSpeed.x * this.speed;
-        this.owner.body.velocity.y = dirSpeed.y * this.speed;
+            this.owner.body.velocity.x = dirSpeed.x * this.speed;
+            this.owner.body.velocity.y = dirSpeed.y * this.speed;
+        }
     }
 
     Walk() {
-        var dirSpeed = this.owner.body.velocity.normalize()
-        this.speed = this.originalSpeed;
-        this.owner.body.velocity.x = dirSpeed.x * this.speed;
-        this.owner.body.velocity.y = dirSpeed.y * this.speed;
+        if(this.canMove){
+            var dirSpeed = this.owner.body.velocity.normalize()
+            this.speed = this.originalSpeed;
+            this.owner.body.velocity.x = dirSpeed.x * this.speed;
+            this.owner.body.velocity.y = dirSpeed.y * this.speed;
+        }
     }
 
     CanMove(bool) {
-        this.canMove = bool;
-
-        if(!this.canMove){
-            this.owner.body.velocity.x = 0;
-            this.owner.body.velocity.y = 0;
-        }
+        this.canMove = bool;        
+        this.owner.body.velocity.x = 0;
+        this.owner.body.velocity.y = 0;
+        
     }
 
     GetLastDir() {
