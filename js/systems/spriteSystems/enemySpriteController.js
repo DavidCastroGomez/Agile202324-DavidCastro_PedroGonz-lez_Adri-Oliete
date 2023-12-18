@@ -15,7 +15,7 @@ class EnemySpriteController extends SpriteController {
         });
         this.animation.create({
             key: 'idle_down',
-            frames: this.animation.generateFrameNumbers('enemy', {frames: [0]}),
+            frames: this.animation.generateFrameNumbers('enemy', { frames: [0] }),
             frameRate: 12,
             repeat: -1
         });
@@ -60,7 +60,33 @@ class EnemySpriteController extends SpriteController {
             yoyo: true
         });
 
-        //Combat
+        //Combat        
+        this.animation.create({
+            key: 'take_damage_up',
+            frames: this.animation.generateFrameNumbers('enemy', { start: 14, end: 15 }),
+            frameRate: 12,
+            repeat: -1
+        });
+        this.animation.create({
+            key: 'take_damage_down',
+            frames: this.animation.generateFrameNumbers('enemy', { start: 1, end: 2 }),
+            frameRate: 12,
+            repeat: -1
+        });
+        this.animation.create({
+            key: 'take_damage_left',
+            frames: this.animation.generateFrameNumbers('enemy', { start: 6, end: 7}),
+            frameRate: 12,
+            repeat: -1,
+            yoyo: true
+        });
+        this.animation.create({
+            key: 'take_damage_right',
+            frames: this.animation.generateFrameNumbers('enemy', { start: 10, end: 11 }),
+            frameRate: 12,
+            repeat: -1,
+            yoyo: true
+        });
     }
 
 
@@ -95,6 +121,22 @@ class EnemySpriteController extends SpriteController {
                         break;
                     case 'right':
                         this.animation.play('idle_right', true);
+                        break;
+                }
+                break;
+            case 'take_damage':
+                switch (direction) {
+                    case 'up':
+                        this.animation.play('take_damage_up', true);
+                        break;
+                    case 'down':
+                        this.animation.play('take_damage_down', true);
+                        break;
+                    case 'left':
+                        this.animation.play('take_damage_left', true);
+                        break;
+                    case 'right':
+                        this.animation.play('take_damage_right', true);
                         break;
                 }
                 break;
