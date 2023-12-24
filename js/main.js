@@ -10,6 +10,12 @@ var gamePrefs =
     gameWidth: 512,
     gameHeight: 384,
 
+    mainScreen_Width: 879,
+    mainScreen_Height: 659,
+    
+    tutoScreen_Width: 1890,
+    tutoScreen_Height: 1417,
+
     scene0_Width: 224,
     scene0_Height: 176,
 
@@ -37,7 +43,8 @@ var config =
     type: Phaser.AUTO,
     width: gamePrefs.gameWidth,
     height: gamePrefs.gameHeight,
-    scene: [Scene0_LinkHouse, Scene1_Overworld, Scene2_TheWell, Scene3_HyruleCastle, Scene4_Catacombs,Scene5_SewersToTheSanctuary],
+    transparent: true,
+    scene: [SceneUI_StartScreen, SceneUI_TutorialScreen, Scene0_LinkHouse, Scene1_Overworld, Scene2_TheWell, Scene3_HyruleCastle, Scene4_Catacombs,Scene5_SewersToTheSanctuary],
     render:
     {
         pixelArt: true
