@@ -6,6 +6,12 @@ class SpriteManager {
 
     preloadSprites() {
 
+        //-------------------------------------------------------------UI:
+        this.scene.load.setPath('res/img/ui');
+        this.scene.load.video('MainScreen', 'MainScreenShort.mp4');
+        this.scene.load.image('InputTutorial', 'InputTutorial.png');
+        this.scene.load.image('FinalScreen', 'FinalScreen.png');
+
         //-------------------------------------------------------------Maps:
         this.scene.load.setPath('res/img/tilesets');
         this.scene.load.image('Alttp_Tileset', 'Alttp_Tileset.png');

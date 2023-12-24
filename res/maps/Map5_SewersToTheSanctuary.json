@@ -669,6 +669,29 @@
                  "width":0,
                  "x":296,
                  "y":98.5
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"12",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"mapStartIndex",
+                         "type":"int",
+                         "value":12
+                        }, 
+                        {
+                         "name":"sceneToCharge",
+                         "type":"string",
+                         "value":"SceneUI_FinalScreen"
+                        }],
+                 "rotation":0,
+                 "type":"MapExit",
+                 "visible":true,
+                 "width":0,
+                 "x":168,
+                 "y":311
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -677,7 +700,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":17,
+ "nextobjectid":18,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
