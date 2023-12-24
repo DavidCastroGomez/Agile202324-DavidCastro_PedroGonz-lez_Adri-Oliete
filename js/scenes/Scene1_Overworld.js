@@ -47,7 +47,8 @@ class Scene1_Overworld extends Phaser.Scene {
         this.loadEnemyPool();
 
         //-------------------------------------------------------------Load PickUps Pool:
-        this.pickupPool = this.physics.add.group();
+        this.heartPickupPool = this.physics.add.group();
+        this.rupeePickupPool = this.physics.add.group();
 
         //-------------------------------------------------------------Collision management creation:
         this.collisionManagement();
@@ -132,7 +133,15 @@ class Scene1_Overworld extends Phaser.Scene {
         );
 
         this.physics.add.overlap(
-            this.pickupPool,
+            this.heartPickupPool,
+            this.hero,
+            this.getPickUp,
+            null,
+            this
+        );
+
+        this.physics.add.overlap(
+            this.rupeePickupPool,
             this.hero,
             this.getPickUp,
             null,
@@ -153,12 +162,26 @@ class Scene1_Overworld extends Phaser.Scene {
     }
 
     SpawnPickups(enemyPosition){
-        var _pickup = this.pickupPool.getFirst(false);
+        //hearts
+        var _pickup = this.heartPickupPool.getFirst(false);
 
         if(!_pickup)
         {
             _pickup = new HeartPickup(this, enemyPosition.x, enemyPosition.y);
-            this.pickupPool.add(_pickup);
+            this.heartPickupPool.add(_pickup);
+        }else
+        {
+            _pickup.SpawnFromEnemy(enemyPosition);
+        }
+
+        //rupee
+
+        var _pickup = this.rupeePickupPool.getFirst(false);
+
+        if(!_pickup)
+        {
+            _pickup = new RupeePickup(this, enemyPosition.x + 10, enemyPosition.y + 10);
+            this.rupeePickupPool.add(_pickup);
         }else
         {
             _pickup.SpawnFromEnemy(enemyPosition);

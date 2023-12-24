@@ -64,6 +64,8 @@ class HealthSystem {
         else if(tempHealth > this.maxHealth){
             this.currentHealth = this.maxHealth;
         }
+
+        console.log(this.currentHealth);
     }
 
     InvulnerabilityTime(){

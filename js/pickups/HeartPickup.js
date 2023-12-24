@@ -2,8 +2,6 @@ class HeartPickup extends PickupClass {
 
     constructor(_scene, _x, _y){
         super(_scene, _x, _y, 'heart');
-        
-        this.type = this.PickupType.HEART;
     }
 
     PickedUp(_hero){
