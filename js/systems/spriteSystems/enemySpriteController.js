@@ -2,7 +2,8 @@ class EnemySpriteController extends SpriteController {
 
     constructor(_owner) {
         super(_owner);
-        _owner.body.setSize(10, 10);
+        _owner.body.setSize(4, 4);
+        _owner.setOrigin(0.5, 0.5);
     }
 
     create() {
