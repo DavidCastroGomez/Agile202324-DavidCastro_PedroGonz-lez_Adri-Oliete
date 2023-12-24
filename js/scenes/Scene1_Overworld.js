@@ -46,6 +46,9 @@ class Scene1_Overworld extends Phaser.Scene {
         this.enemyPoolTest = this.physics.add.group();
         this.loadEnemyPool();
 
+        //-------------------------------------------------------------Load PickUps Pool:
+        this.pickupPool = this.physics.add.group();
+
         //-------------------------------------------------------------Collision management creation:
         this.collisionManagement();
 
@@ -127,6 +130,14 @@ class Scene1_Overworld extends Phaser.Scene {
             null,
             this
         );
+
+        this.physics.add.overlap(
+            this.pickupPool,
+            this.hero,
+            this.getPickUp,
+            null,
+            this
+        );
     }
 
     hitSingleEnemy(_swordHitBox, _enemy) {
@@ -135,6 +146,23 @@ class Scene1_Overworld extends Phaser.Scene {
 
     hitHero(_hero, _enemy){
         _hero.GetHealthSystem().TakeDamage(_enemy);
+    }
+
+    getPickUp(_hero, _pickup){
+        _pickup.PickedUp(_hero);
+    }
+
+    SpawnPickups(enemyPosition){
+        var _pickup = this.pickupPool.getFirst(false);
+
+        if(!_pickup)
+        {
+            _pickup = new HeartPickup(this, enemyPosition.x, enemyPosition.y);
+            this.pickupPool.add(_pickup);
+        }else
+        {
+            _pickup.SpawnFromEnemy(enemyPosition);
+        }
     }
 
     getWalls(){

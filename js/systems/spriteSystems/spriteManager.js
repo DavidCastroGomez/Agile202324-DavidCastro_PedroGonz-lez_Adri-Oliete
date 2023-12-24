@@ -24,5 +24,6 @@ class SpriteManager {
         //-------------------------------------------------------------Items:
         this.scene.load.image('key', 'Key.png');
         this.scene.load.image('lock', 'Lock.png');
+        this.scene.load.image('heart', 'Heart.png');
     }
 }
