@@ -7,7 +7,7 @@ class Enemy extends Character {
         super.sprite = new EnemySpriteController(this);
 
         //Movement:
-        super.SetMovementsystem(new MovementSystem(120, this, 1.5));
+        super.SetMovementsystem(new MovementSystem(100, this, 1.5));
 
         //Inputs:
         super.inputSystem = new EnemyInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem(), this);

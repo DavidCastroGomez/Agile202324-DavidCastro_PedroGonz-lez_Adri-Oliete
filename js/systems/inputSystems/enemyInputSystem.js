@@ -31,7 +31,7 @@ class EnemyInputSystem extends InputSystem {
 
         this.state = this.Modes.SEEK
 
-        this.distanceToSeek = 80;
+        this.distanceToSeek = 120;
 
     }
 

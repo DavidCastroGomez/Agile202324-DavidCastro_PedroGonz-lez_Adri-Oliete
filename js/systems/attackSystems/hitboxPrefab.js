@@ -9,8 +9,8 @@ class HitboxPrefab extends Phaser.GameObjects.Sprite {
 
         //this.body.setCollideWorldBounds(true);
         //this.body.onWorldBounds = true;
-        this.body.setSize(25, 25);
-        this.body.setOffset(0, 0);
+        this.body.setSize(32, 32);
+        this.body.setOffset(-9, -9);
         this.setAlpha(0);
         this.setOrigin(0, 0);
         this.scene.add.existing(this);

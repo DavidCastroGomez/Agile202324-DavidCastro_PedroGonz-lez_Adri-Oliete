@@ -22,6 +22,8 @@ class PickupClass extends Phaser.GameObjects.Sprite {
         this.SpawnAnimation();     
         
         this.body.checkCollision.none = false;
+
+        this.despawnAnimationEvent;
     }
 
     setGeneralSceneColliders(_scene) {
@@ -50,7 +52,7 @@ class PickupClass extends Phaser.GameObjects.Sprite {
     }
 
     DespawnAfterTime(){
-        this.scene.time.delayedCall(this.despawnTime, () => {
+        this.despawnAnimationEvent = this.scene.time.delayedCall(this.despawnTime, () => {
             if(this.active)
                 this.toggleBlink();
         });        
@@ -113,6 +115,10 @@ class PickupClass extends Phaser.GameObjects.Sprite {
         this.setActive(false);
         this.setVisible(false);
         this.body.checkCollision.none = true;
+
+        if(this.despawnAnimationEvent != null){
+            this.despawnAnimationEvent.remove(false);
+        }
     }
 
     toggleBlink() {

@@ -7,7 +7,7 @@ class Hero extends Character {
         super.sprite = new HeroSpriteController(this);
 
         //Movement:
-        super.SetMovementsystem(new MovementSystem(120, this, 1.5));
+        super.SetMovementsystem(new MovementSystem(100, this, 1.4));
 
         //Inputs:
         super.inputSystem = new HeroInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem());
