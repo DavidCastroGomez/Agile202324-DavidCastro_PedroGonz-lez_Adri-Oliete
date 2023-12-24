@@ -5,6 +5,8 @@ class EnemyHealthSystem extends HealthSystem {
 
     DieAction(){
         //Play death animation, wait till end and jump next line
+        super.GetScene().SpawnPickups(this.GetOwner().body.position);
+
         super.GetOwner().setActive(false);
         super.GetOwner().x=-8000;
     }

@@ -14,10 +14,16 @@ class Hero extends Character {
 
         //Health:
         super.healthSystem = new HeroHealthSystem(_maxHealth, _scene, this);
+
+        this.moneySystem = new MoneySystem();
+    }
+
+    GetMoneySystem(){
+        return this.moneySystem;
     }
 
     update(delta) {
-        console.log(this.state);
+        //console.log(this.state);
         super.update(delta);
     }
 }
