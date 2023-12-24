@@ -1,8 +1,8 @@
 var gamePrefs =
 {
     mapStartIndexToCharge: 0,
-    heroMaxHealth: 3,
-    heroHealth: 3,
+    heroMaxHealth: 16,
+    heroHealth: 16,
     heroKeys: 0,
 
     enemyHealth: 1,
@@ -35,7 +35,10 @@ var gamePrefs =
 
     scene5_Width: 1264,
     scene5_Height: 1664,
-    scene5_LocksOpen: []
+    scene5_LocksOpen: [],
+    
+    finalScreen_Width: 256,
+    finalScreen_Height: 192
 }
 
 var config =
@@ -44,7 +47,17 @@ var config =
     width: gamePrefs.gameWidth,
     height: gamePrefs.gameHeight,
     transparent: true,
-    scene: [SceneUI_StartScreen, SceneUI_TutorialScreen, Scene0_LinkHouse, Scene1_Overworld, Scene2_TheWell, Scene3_HyruleCastle, Scene4_Catacombs,Scene5_SewersToTheSanctuary],
+    scene: [
+        SceneUI_StartScreen, 
+        SceneUI_TutorialScreen, 
+        Scene0_LinkHouse, 
+        Scene1_Overworld, 
+        Scene2_TheWell, 
+        Scene3_HyruleCastle, 
+        Scene4_Catacombs,
+        Scene5_SewersToTheSanctuary,
+        SceneUI_FinalScreen
+    ],
     render:
     {
         pixelArt: true
