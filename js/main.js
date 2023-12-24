@@ -1,8 +1,8 @@
 var gamePrefs =
 {
     mapStartIndexToCharge: 0,
-    heroMaxHealth: 16,
-    heroHealth: 16,
+    heroMaxHealth: 3,
+    heroHealth: 3,
     heroKeys: 0,
 
     enemyHealth: 1,
