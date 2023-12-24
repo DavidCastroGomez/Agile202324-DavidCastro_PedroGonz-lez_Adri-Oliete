@@ -7,7 +7,7 @@ class RupeePickup extends PickupClass {
 
     PickedUp(_hero){
         console.log("rupee picked up")
-        //add rupee to hero
+        _hero.GetMoneySystem().AddMoney(1)
         super.PickedUp();
     }
 }

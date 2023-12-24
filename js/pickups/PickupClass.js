@@ -5,7 +5,7 @@ class PickupClass extends Phaser.GameObjects.Sprite {
 
         this.scene = _scene;
 
-        this.despawnTime = 2000;
+        this.despawnTime = 5000;
 
         this.scene.add.existing(this);
         
@@ -16,8 +16,20 @@ class PickupClass extends Phaser.GameObjects.Sprite {
         this.setAlpha(2);
         this.setOrigin(0.25, 0.25);
 
-        this.DespawnAfterTime();
+        this.setGeneralSceneColliders(this.scene);
 
+        this.DespawnAfterTime();
+        this.SpawnAnimation();     
+        
+        this.body.checkCollision.none = false;
+    }
+
+    setGeneralSceneColliders(_scene) {
+        _scene.physics.add.collider
+            (
+                this,
+                _scene.walls
+            );
     }
 
     PickedUp(){
@@ -28,11 +40,13 @@ class PickupClass extends Phaser.GameObjects.Sprite {
         this.x = _enemyPosition.x;
         this.y = _enemyPosition.y;
 
+        this.body.checkCollision.none = false;
+
         this.setActive(true);
         this.setVisible(true);
 
-        this.body.checkCollision.none = false;
         this.DespawnAfterTime();
+        this.SpawnAnimation();
     }
 
     DespawnAfterTime(){
@@ -40,6 +54,59 @@ class PickupClass extends Phaser.GameObjects.Sprite {
             if(this.active)
                 this.toggleBlink();
         });        
+    }
+
+    SpawnAnimation(){
+
+        var originalY = this.y;
+        var originalX = this.x;
+
+        var randomX = Phaser.Math.Between(-50, 50);
+        var xMovementDuration = randomX * 10;
+
+        if(randomX < 0){
+            xMovementDuration *= -1;
+        }
+
+        var randomY = Phaser.Math.Between(-25, 25);
+        var yMovementDuration = randomY * 10;
+
+        if(randomY < 0){
+            yMovementDuration *= -1;
+        }
+
+        const timeline = this.scene.add.timeline([
+            {
+                at: 0,
+                tween: {
+                    targets:this,
+                    x: originalX + randomX,
+                    ease: 'Power2',
+                    duration: xMovementDuration
+                }
+            },
+            {
+                at: 0,
+                tween: {
+                    targets:this,
+                    y: originalY + randomY,
+                    ease: 'Power2',
+                    duration: yMovementDuration
+                }
+            },
+            {
+                at: yMovementDuration,
+                tween: {
+                    targets:this,
+                    y: originalY + randomY + 20,
+                    ease: 'bounce.out',
+                    duration: 800
+                }               
+            }    
+        ]);
+
+        timeline.play();
+
     }
 
     Despawn(){

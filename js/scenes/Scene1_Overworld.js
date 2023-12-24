@@ -163,28 +163,38 @@ class Scene1_Overworld extends Phaser.Scene {
 
     SpawnPickups(enemyPosition){
         //hearts
-        var _pickup = this.heartPickupPool.getFirst(false);
 
-        if(!_pickup)
-        {
-            _pickup = new HeartPickup(this, enemyPosition.x, enemyPosition.y);
-            this.heartPickupPool.add(_pickup);
-        }else
-        {
-            _pickup.SpawnFromEnemy(enemyPosition);
+        enemyPosition.y -= 20;
+
+        var spawnHeart = Phaser.Math.Between(0, 1);
+        if(spawnHeart == 1){
+            var _pickup = this.heartPickupPool.getFirst(false);
+
+            if(!_pickup)
+            {
+                _pickup = new HeartPickup(this, enemyPosition.x, enemyPosition.y);
+                this.heartPickupPool.add(_pickup);
+            }else
+            {
+                _pickup.SpawnFromEnemy(enemyPosition);
+            }
         }
 
         //rupee
 
-        var _pickup = this.rupeePickupPool.getFirst(false);
+        var spawnRupee = Phaser.Math.Between(0, 6);
 
-        if(!_pickup)
-        {
-            _pickup = new RupeePickup(this, enemyPosition.x + 10, enemyPosition.y + 10);
-            this.rupeePickupPool.add(_pickup);
-        }else
-        {
-            _pickup.SpawnFromEnemy(enemyPosition);
+        for(let i = 0; i < spawnRupee/2; i++){
+            var _pickup = this.rupeePickupPool.getFirst(false);
+
+            if(!_pickup)
+            {
+                _pickup = new RupeePickup(this, enemyPosition.x, enemyPosition.y);
+                this.rupeePickupPool.add(_pickup);
+            }else
+            {
+                _pickup.SpawnFromEnemy(enemyPosition);
+            }
         }
     }
 

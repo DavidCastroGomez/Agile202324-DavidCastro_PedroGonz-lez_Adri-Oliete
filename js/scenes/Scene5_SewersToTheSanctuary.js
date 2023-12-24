@@ -48,6 +48,10 @@ class Scene5_SewersToTheSanctuary extends Phaser.Scene {
         this.enemyPoolTest = this.physics.add.group();
         this.loadEnemyPool();
 
+        //-------------------------------------------------------------Load PickUps Pool:
+        this.heartPickupPool = this.physics.add.group();
+        this.rupeePickupPool = this.physics.add.group();
+
         //-------------------------------------------------------------Load Key Pool:
         this.keyPoolTest = this.physics.add.group();
         this.loadKeyPool();
@@ -180,6 +184,22 @@ class Scene5_SewersToTheSanctuary extends Phaser.Scene {
             null,
             this
         );
+
+        this.physics.add.overlap(
+            this.heartPickupPool,
+            this.hero,
+            this.getPickUp,
+            null,
+            this
+        );
+
+        this.physics.add.overlap(
+            this.rupeePickupPool,
+            this.hero,
+            this.getPickUp,
+            null,
+            this
+        );
     }
 
     hitSingleEnemy(_swordHitBox, _enemy) {
@@ -190,6 +210,46 @@ class Scene5_SewersToTheSanctuary extends Phaser.Scene {
         _hero.GetHealthSystem().TakeDamage(_enemy);
     }
 
+    getPickUp(_hero, _pickup){
+        _pickup.PickedUp(_hero);
+    }
+
+    SpawnPickups(enemyPosition){
+        //hearts
+
+        enemyPosition.y -= 20;
+
+        var spawnHeart = Phaser.Math.Between(0, 1);
+        if(spawnHeart == 1){
+            var _pickup = this.heartPickupPool.getFirst(false);
+
+            if(!_pickup)
+            {
+                _pickup = new HeartPickup(this, enemyPosition.x, enemyPosition.y);
+                this.heartPickupPool.add(_pickup);
+            }else
+            {
+                _pickup.SpawnFromEnemy(enemyPosition);
+            }
+        }
+
+        //rupee
+
+        var spawnRupee = Phaser.Math.Between(0, 6);
+
+        for(let i = 0; i < spawnRupee/2; i++){
+            var _pickup = this.rupeePickupPool.getFirst(false);
+
+            if(!_pickup)
+            {
+                _pickup = new RupeePickup(this, enemyPosition.x, enemyPosition.y);
+                this.rupeePickupPool.add(_pickup);
+            }else
+            {
+                _pickup.SpawnFromEnemy(enemyPosition);
+            }
+        }
+    }
     getWalls(){
         return this.walls;
     }

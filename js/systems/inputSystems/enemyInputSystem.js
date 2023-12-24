@@ -222,7 +222,7 @@ class EnemyInputSystem extends InputSystem {
 
         start.g = 0;
 
-        var maxIterations = 2000
+        var maxIterations = 1000
     
         while (openSet.length > 0 && maxIterations > 0) {
             maxIterations--;
