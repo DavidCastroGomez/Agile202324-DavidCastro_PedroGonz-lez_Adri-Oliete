@@ -6,6 +6,9 @@ class HeartPickup extends PickupClass {
 
     PickedUp(_hero){
         console.log("heart picked up")
+        if(super.getScene().audioManager){
+            super.getScene().audioManager.playSFX('LTTP_Heart');
+        }
         _hero.GetHealthSystem().HealthUp();
         super.PickedUp();
     }

@@ -11,6 +11,10 @@ class SceneUI_StartScreen extends Phaser.Scene {
         this.spriteManager = new SpriteManager(this);
         this.spriteManager.preloadSprites();
 
+        //-------------------------------------------------------------Audio Manager preload:
+        this.audioManager = new AudioManager(this);
+        this.audioManager.preloadAudio();
+
         //-------------------------------------------------------------Camera options:
         this.cameras.main.setBounds(0, 0, gamePrefs.mainScreen_Width, gamePrefs.mainScreen_Height);
         this.cameras.main.zoom = .5;
@@ -25,10 +29,14 @@ class SceneUI_StartScreen extends Phaser.Scene {
         //-------------------------------------------------------------Camera fade in:
         this.cameras.main.fadeIn();
 
+        //-------------------------------------------------------------Music play:
+        this.audioManager.playMusic('SceneUI_StartScreen_MainTheme');
+
         //-------------------------------------------------------------Main Screen Image:
         this.mainScreenImage = this.add.video(gamePrefs.mainScreen_Width/2, gamePrefs.mainScreen_Height/2, 'MainScreen');
         this.mainScreenImage.play();
         this.mainScreenImage.on('complete', function () {
+            this.audioManager.fadeOut();
             this.scene.restart();
         }, this);
 
@@ -42,6 +50,8 @@ class SceneUI_StartScreen extends Phaser.Scene {
     update(time, delta) {
 
         if(this.start.isDown){
+            this.audioManager.playSFX('LTTP_Menu_Select');
+            this.audioManager.fadeOut();
             this.scene.start('SceneUI_TutorialScreen');
         }
     }

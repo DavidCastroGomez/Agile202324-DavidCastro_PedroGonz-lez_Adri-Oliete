@@ -47,6 +47,9 @@ class MapDoorLock extends Phaser.GameObjects.Sprite {
         console.log("Interaction with lock...");
 
         if(gamePrefs.heroKeys > 0){
+            if(this.actualScene.audioManager){
+                this.actualScene.audioManager.playSFX('LTTP_Unlock');
+            }
             gamePrefs.heroKeys-=1;
             this.sceneLocksOpen[this.index] = true;
             console.log("Used key! I have " + gamePrefs.heroKeys + " keys now.");

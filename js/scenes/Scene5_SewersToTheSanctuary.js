@@ -14,11 +14,18 @@ class Scene5_SewersToTheSanctuary extends Phaser.Scene {
         //-------------------------------------------------------------Sprite Manager preload:
         this.spriteManager = new SpriteManager(this);
         this.spriteManager.preloadSprites();
+        
+        //-------------------------------------------------------------Audio Manager preload:
+        this.audioManager = new AudioManager(this);
+        this.audioManager.preloadAudio();
     }
 
     create() {
         //-------------------------------------------------------------Camera fade in:
         this.cameras.main.fadeIn();
+        
+        //-------------------------------------------------------------Music play:
+        this.audioManager.playMusic('Scene5_SewersToTheSanctuary_DungeonOfShadows');
 
         //-------------------------------------------------------------Map creation:
         this.map = this.add.tilemap('Map5_SewersToTheSanctuary');

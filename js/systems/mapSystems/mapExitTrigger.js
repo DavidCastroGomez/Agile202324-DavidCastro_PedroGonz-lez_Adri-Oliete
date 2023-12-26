@@ -37,6 +37,10 @@ class MapExitTrigger extends Phaser.GameObjects.Sprite {
     exitToNextScene(){
         gamePrefs.mapStartIndexToCharge = this.mapStartIndex;
         gamePrefs.heroHealth = this.entityToCollideWith.GetHealthSystem().currentHealth;
+        if(this.actualScene.audioManager){
+            this.actualScene.audioManager.playSFX('LTTP_TravessingExit');
+            this.actualScene.audioManager.fadeOut();
+        }
         this.actualScene.scene.start(this.sceneToCharge);
     }
 }
