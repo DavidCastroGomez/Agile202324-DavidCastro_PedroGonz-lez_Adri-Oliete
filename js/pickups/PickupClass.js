@@ -26,6 +26,10 @@ class PickupClass extends Phaser.GameObjects.Sprite {
         this.despawnAnimationEvent;
     }
 
+    getScene(){
+        return this.scene;
+    }
+
     setGeneralSceneColliders(_scene) {
         _scene.physics.add.collider
             (

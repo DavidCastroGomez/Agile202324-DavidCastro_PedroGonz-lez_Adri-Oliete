@@ -45,6 +45,7 @@ class SceneUI_FinalScreen extends Phaser.Scene {
     update(time, delta) {
 
         if(this.start.isDown){
+            this.audioManager.playSFX('LTTP_Menu_Select');
             this.audioManager.fadeOut();
             gamePrefs.mapStartIndexToCharge = 0;
             this.scene.start('SceneUI_StartScreen');

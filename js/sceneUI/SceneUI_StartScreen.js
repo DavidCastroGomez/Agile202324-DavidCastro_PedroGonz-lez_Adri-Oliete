@@ -50,6 +50,7 @@ class SceneUI_StartScreen extends Phaser.Scene {
     update(time, delta) {
 
         if(this.start.isDown){
+            this.audioManager.playSFX('LTTP_Menu_Select');
             this.audioManager.fadeOut();
             this.scene.start('SceneUI_TutorialScreen');
         }

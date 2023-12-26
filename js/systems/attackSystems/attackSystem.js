@@ -35,6 +35,10 @@ class AttackSystem {
     Attack(direction) {
         if (!this.chargingAttack && !this.permormingChargedAttack && this.currentAttackCooldown >= this.maxAttackCooldown) {
 
+            if(this.scene.audioManager){
+                this.scene.audioManager.playSFX('LTTP_Sword');
+            }
+
             this.SetAttackPosition(direction, 1)
 
             this.colliderObject.setNewPosition(this.positionX, this.positionY)
@@ -49,6 +53,7 @@ class AttackSystem {
     }
 
     StopChargeAttack(direction) {
+
         if (this.chargingAttack && this.currentchargeAttackTime > this.chargeAttackTime) {
 
             this.SetAttackPosition(direction, -1)
@@ -62,6 +67,10 @@ class AttackSystem {
             this.permormingChargedAttack = true;
 
             this.owner.state = 'charged_attack';
+            
+            if(this.scene.audioManager){
+                this.scene.audioManager.playSFX('LTTP_Sword_Spin');
+            }
         }
 
         this.chargingAttack = false;

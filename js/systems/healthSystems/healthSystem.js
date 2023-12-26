@@ -107,4 +107,8 @@ class HealthSystem {
     GetOwner(){
         return this.owner;
     }
+
+    IsInvincible(){
+        return this.invincible;
+    }
 }

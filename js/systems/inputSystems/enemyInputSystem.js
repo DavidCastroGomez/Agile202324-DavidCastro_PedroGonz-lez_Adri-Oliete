@@ -32,7 +32,6 @@ class EnemyInputSystem extends InputSystem {
         this.state = this.Modes.SEEK
 
         this.distanceToSeek = 120;
-
     }
 
     GetInputs() {
@@ -58,6 +57,9 @@ class EnemyInputSystem extends InputSystem {
         if(distance < this.distanceToSeek){
             if(this.state != this.Modes.SEEK){
                 this.canCalculatePath = true;
+                if(this.scene.audioManager){
+                    this.scene.audioManager.playSFX('LTTP_Enemy_Chase');
+                }
             }
 
             this.state = this.Modes.SEEK
