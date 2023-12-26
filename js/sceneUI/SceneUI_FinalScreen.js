@@ -10,6 +10,10 @@ class SceneUI_FinalScreen extends Phaser.Scene {
         //-------------------------------------------------------------Sprite Manager preload:
         this.spriteManager = new SpriteManager(this);
         this.spriteManager.preloadSprites();
+        
+        //-------------------------------------------------------------Audio Manager preload:
+        this.audioManager = new AudioManager(this);
+        this.audioManager.preloadAudio();
 
         //-------------------------------------------------------------Camera options:
         this.cameras.main.setBounds(0, 0, gamePrefs.finalScreen_Width, gamePrefs.finalScreen_Height);
@@ -24,6 +28,9 @@ class SceneUI_FinalScreen extends Phaser.Scene {
     create() {
         //-------------------------------------------------------------Camera fade in:
         this.cameras.main.fadeIn();
+        
+        //-------------------------------------------------------------Music play:
+        this.audioManager.playMusic('SceneUI_FinalScreen_ZeldasTheme');
 
         //-------------------------------------------------------------Tutorial Screen Image:
         this.tutorialImage = this.add.image(gamePrefs.finalScreen_Width/2, gamePrefs.finalScreen_Height/2, 'FinalScreen');
@@ -38,6 +45,7 @@ class SceneUI_FinalScreen extends Phaser.Scene {
     update(time, delta) {
 
         if(this.start.isDown){
+            this.audioManager.fadeOut();
             gamePrefs.mapStartIndexToCharge = 0;
             this.scene.start('SceneUI_StartScreen');
         }

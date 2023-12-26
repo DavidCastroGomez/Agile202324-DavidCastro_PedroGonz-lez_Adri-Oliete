@@ -8,6 +8,9 @@ class HeroHealthSystem extends HealthSystem {
         this.owner.GetMovementSystem().CanMove(false);
         super.GetScene().cameras.main.fadeOut(1000,0,0,0,(camera, progress)=>{
             if(progress===1){
+                if(super.GetScene().audioManager){
+                    super.GetScene().audioManager.fadeOut();
+                }
                 super.GetScene().scene.restart();
                 gamePrefs.heroHealth = gamePrefs.heroMaxHealth;
             }

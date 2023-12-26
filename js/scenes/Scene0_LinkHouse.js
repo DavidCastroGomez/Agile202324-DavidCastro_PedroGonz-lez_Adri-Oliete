@@ -15,9 +15,9 @@ class Scene0_LinkHouse extends Phaser.Scene {
         this.spriteManager = new SpriteManager(this);
         this.spriteManager.preloadSprites();
 
-        //-------------------------------------------------------------Enemy Pool JSon preload:
-        this.load.setPath('res/enemyPools');
-        this.load.json('EP_TestMap', 'EP_TestMap.json');
+        //-------------------------------------------------------------Audio Manager preload:
+        this.audioManager = new AudioManager(this);
+        this.audioManager.preloadAudio();
     }
 
     create() {
@@ -36,6 +36,9 @@ class Scene0_LinkHouse extends Phaser.Scene {
 
         this.starttingPosX = 0;
         this.starttingPosY = 0;
+        
+        //-------------------------------------------------------------Music play:
+        this.audioManager.playMusic('Scene0_LinkHouse_KakarikoVillage');
 
         //-------------------------------------------------------------Load map starts:
         this.loadMapStarts();

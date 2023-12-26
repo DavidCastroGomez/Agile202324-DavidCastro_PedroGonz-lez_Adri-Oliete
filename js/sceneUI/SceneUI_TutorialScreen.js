@@ -11,6 +11,10 @@ class SceneUI_TutorialScreen extends Phaser.Scene {
         this.spriteManager = new SpriteManager(this);
         this.spriteManager.preloadSprites();
 
+        //-------------------------------------------------------------Audio Manager preload:
+        this.audioManager = new AudioManager(this);
+        this.audioManager.preloadAudio();
+
         //-------------------------------------------------------------Camera options:
         this.cameras.main.setBounds(0, 0, gamePrefs.tutoScreen_Width, gamePrefs.tutoScreen_Height);
         this.cameras.main.zoom = .25;
@@ -25,6 +29,9 @@ class SceneUI_TutorialScreen extends Phaser.Scene {
         //-------------------------------------------------------------Camera fade in:
         this.cameras.main.fadeIn();
 
+        //-------------------------------------------------------------Music play:
+        this.audioManager.playMusic('SceneUI_TutorialScreen_FairyFountain');
+
         //-------------------------------------------------------------Tutorial Screen Image:
         this.tutorialImage = this.add.image(gamePrefs.tutoScreen_Width/2, gamePrefs.tutoScreen_Height/2, 'InputTutorial');
 
@@ -38,6 +45,7 @@ class SceneUI_TutorialScreen extends Phaser.Scene {
     update(time, delta) {
 
         if(this.start.isDown){
+            this.audioManager.fadeOut();
             this.scene.start('Scene0_LinkHouse');
         }
     }
