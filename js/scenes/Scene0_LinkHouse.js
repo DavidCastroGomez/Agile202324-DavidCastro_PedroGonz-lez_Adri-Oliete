@@ -18,6 +18,9 @@ class Scene0_LinkHouse extends Phaser.Scene {
         //-------------------------------------------------------------Audio Manager preload:
         this.audioManager = new AudioManager(this);
         this.audioManager.preloadAudio();
+        
+        //-------------------------------------------------------------UI:
+        this.heartUI = [];
     }
 
     create() {
@@ -36,7 +39,7 @@ class Scene0_LinkHouse extends Phaser.Scene {
 
         this.starttingPosX = 0;
         this.starttingPosY = 0;
-        
+
         //-------------------------------------------------------------Music play:
         this.audioManager.playMusic('Scene0_LinkHouse_KakarikoVillage');
 
@@ -45,6 +48,13 @@ class Scene0_LinkHouse extends Phaser.Scene {
 
         //-------------------------------------------------------------Hero initialization:
         this.hero = new Hero(this, this.starttingPosX, this.starttingPosY, gamePrefs.heroHealth);
+
+        //-------------------------------------------------------------UI:
+        this.lifeUI = this.add.image(gamePrefs.scene0_Width / 1.25, gamePrefs.scene0_Height / 20, 'Life');
+
+        for (let i = 0; i < gamePrefs.heroHealth; i++) {
+            this.heartUI[i] = this.add.image((gamePrefs.scene0_Width / 1.35) + (i * gamePrefs.scene0_Width / 20), gamePrefs.scene0_Height / 20 + 10, 'FullHeart');
+        }
 
         //-------------------------------------------------------------Load map exits:
         this.loadMapExits();
@@ -61,48 +71,46 @@ class Scene0_LinkHouse extends Phaser.Scene {
         this.restartScene = this.input.keyboard.addKey('R');
     }
 
-    loadMapStarts(){
+    loadMapStarts() {
         this.game_elements = this.map.getObjectLayer('game_elements');
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){
-                case 'MapStart':{
-                    if(gamePrefs.mapStartIndexToCharge == element.name){
+        this.game_elements.objects.forEach(function (element) {
+            switch (element.type) {
+                case 'MapStart': {
+                    if (gamePrefs.mapStartIndexToCharge == element.name) {
                         this.starttingPosX = element.x;
                         this.starttingPosY = element.y;
                     }
                 }
-                break;
+                    break;
             }
-        },this);
+        }, this);
     }
 
-    getWalls(){
+    getWalls() {
         return this.walls;
     }
 
-    getHero(){
+    getHero() {
         return this.hero;
     }
 
-    loadMapExits(){
+    loadMapExits() {
         this.game_elements = this.map.getObjectLayer('game_elements');
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){  
-            case 'MapExit':{
-                this.newMapExitTrigger = new MapExitTrigger(
-                    element.properties[0].value,
-                    element.properties[1].value,
-                    this.hero, 
-                    this,
-                    element.x, 
-                    element.y
-                );
+        this.game_elements.objects.forEach(function (element) {
+            switch (element.type) {
+                case 'MapExit': {
+                    this.newMapExitTrigger = new MapExitTrigger(
+                        element.properties[0].value,
+                        element.properties[1].value,
+                        this.hero,
+                        this,
+                        element.x,
+                        element.y
+                    );
+                }
+                    break;
             }
-            break;
-            }
-        },this);
+        }, this);
     }
 
     update(time, delta) {

@@ -11,6 +11,9 @@ class SpriteManager {
         this.scene.load.video('MainScreen', 'MainScreenShort.mp4');
         this.scene.load.image('InputTutorial', 'InputTutorial.png');
         this.scene.load.image('FinalScreen', 'FinalScreen.png');
+        this.scene.load.image('FullHeart', 'FullHeartUI.png');
+        this.scene.load.image('NoHeart', 'NoHeartUI.png');
+        this.scene.load.image('Life', 'LifeUI.png');
 
         //-------------------------------------------------------------Maps:
         this.scene.load.setPath('res/img/tilesets');

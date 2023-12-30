@@ -14,7 +14,7 @@ class Scene1_Overworld extends Phaser.Scene {
         //-------------------------------------------------------------Sprite Manager preload:
         this.spriteManager = new SpriteManager(this);
         this.spriteManager.preloadSprites();
-        
+
         //-------------------------------------------------------------Audio Manager preload:
         this.audioManager = new AudioManager(this);
         this.audioManager.preloadAudio();
@@ -23,7 +23,7 @@ class Scene1_Overworld extends Phaser.Scene {
     create() {
         //-------------------------------------------------------------Camera fade in:
         this.cameras.main.fadeIn();
-        
+
         //-------------------------------------------------------------Music play:
         this.audioManager.playMusic('Scene1_Overworld_SealOfTheSevenMaidens');
 
@@ -45,6 +45,18 @@ class Scene1_Overworld extends Phaser.Scene {
 
         //-------------------------------------------------------------Hero initialization:
         this.hero = new Hero(this, this.starttingPosX, this.starttingPosY, gamePrefs.heroHealth);
+
+        //-------------------------------------------------------------UI:
+        this.lifeUI = this.add.image(gamePrefs.scene1_Width / 1.25, gamePrefs.scene1_Height / 20, 'Life');
+
+        for (let i = 0; i < gamePrefs.heroHealth; i++) {
+            this.add.image((gamePrefs.scene1_Width / 1.35) + (i * gamePrefs.scene1_Width / 20), gamePrefs.scene1_Height / 20 + 10, 'FullHeart');
+        }
+        /*const heartUI = [];
+
+        for (let i = 0; i < gamePrefs.heroHealth; i++) {
+            heartUI[i] = this.add.image(160 + (i * 10), 20, 'FullHeart');
+        }*/
 
         //-------------------------------------------------------------Load map exits:
         this.loadMapExits();
@@ -74,52 +86,49 @@ class Scene1_Overworld extends Phaser.Scene {
 
     loadEnemyPool() {
         this.game_elements = this.map.getObjectLayer('game_elements');
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){
-                case 'EnemySpawn':{
+        this.game_elements.objects.forEach(function (element) {
+            switch (element.type) {
+                case 'EnemySpawn': {
                     this.newEnemy = new Enemy(this, element.x, element.y, gamePrefs.enemyHealth);
                     this.enemyPoolTest.add(this.newEnemy);
                 }
-                break;
+                    break;
             }
-        },this);
+        }, this);
     }
 
-    loadMapStarts(){
+    loadMapStarts() {
         this.game_elements = this.map.getObjectLayer('game_elements');
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){
-                case 'MapStart':{
-                    if(gamePrefs.mapStartIndexToCharge == element.name){
+        this.game_elements.objects.forEach(function (element) {
+            switch (element.type) {
+                case 'MapStart': {
+                    if (gamePrefs.mapStartIndexToCharge == element.name) {
                         this.starttingPosX = element.x;
                         this.starttingPosY = element.y;
                     }
                 }
-                break;
+                    break;
             }
-        },this);
+        }, this);
     }
 
-    loadMapExits(){
+    loadMapExits() {
         this.game_elements = this.map.getObjectLayer('game_elements');
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){  
-            case 'MapExit':{
-                this.newMapExitTrigger = new MapExitTrigger(
-                    element.properties[0].value,
-                    element.properties[1].value,
-                    this.hero, 
-                    this,
-                    element.x, 
-                    element.y
-                );
+        this.game_elements.objects.forEach(function (element) {
+            switch (element.type) {
+                case 'MapExit': {
+                    this.newMapExitTrigger = new MapExitTrigger(
+                        element.properties[0].value,
+                        element.properties[1].value,
+                        this.hero,
+                        this,
+                        element.x,
+                        element.y
+                    );
+                }
+                    break;
             }
-            break;
-            }
-        },this);
+        }, this);
     }
 
     collisionManagement() {
@@ -160,29 +169,27 @@ class Scene1_Overworld extends Phaser.Scene {
         _enemy.GetHealthSystem().TakeDamage(_swordHitBox);
     }
 
-    hitHero(_hero, _enemy){
+    hitHero(_hero, _enemy) {
         _hero.GetHealthSystem().TakeDamage(_enemy);
     }
 
-    getPickUp(_hero, _pickup){
+    getPickUp(_hero, _pickup) {
         _pickup.PickedUp(_hero);
     }
 
-    SpawnPickups(enemyPosition){
+    SpawnPickups(enemyPosition) {
         //hearts
 
         enemyPosition.y -= 20;
 
         var spawnHeart = Phaser.Math.Between(0, 1);
-        if(spawnHeart == 1){
+        if (spawnHeart == 1) {
             var _pickup = this.heartPickupPool.getFirst(false);
 
-            if(!_pickup)
-            {
+            if (!_pickup) {
                 _pickup = new HeartPickup(this, enemyPosition.x, enemyPosition.y);
                 this.heartPickupPool.add(_pickup);
-            }else
-            {
+            } else {
                 _pickup.SpawnFromEnemy(enemyPosition);
             }
         }
@@ -191,25 +198,23 @@ class Scene1_Overworld extends Phaser.Scene {
 
         var spawnRupee = Phaser.Math.Between(0, 6);
 
-        for(let i = 0; i < spawnRupee/2; i++){
+        for (let i = 0; i < spawnRupee / 2; i++) {
             var _pickup = this.rupeePickupPool.getFirst(false);
 
-            if(!_pickup)
-            {
+            if (!_pickup) {
                 _pickup = new RupeePickup(this, enemyPosition.x, enemyPosition.y);
                 this.rupeePickupPool.add(_pickup);
-            }else
-            {
+            } else {
                 _pickup.SpawnFromEnemy(enemyPosition);
             }
         }
     }
 
-    getWalls(){
+    getWalls() {
         return this.walls;
     }
 
-    getHero(){
+    getHero() {
         return this.hero;
     }
 

@@ -63,26 +63,26 @@ class EnemySpriteController extends SpriteController {
 
         //Combat        
         this.animation.create({
-            key: 'take_damage_up',
+            key: 'damaged_up',
             frames: this.animation.generateFrameNumbers('enemy', { start: 14, end: 15 }),
             frameRate: 12,
             repeat: -1
         });
         this.animation.create({
-            key: 'take_damage_down',
+            key: 'damaged_down',
             frames: this.animation.generateFrameNumbers('enemy', { start: 1, end: 2 }),
             frameRate: 12,
             repeat: -1
         });
         this.animation.create({
-            key: 'take_damage_left',
+            key: 'damaged_left',
             frames: this.animation.generateFrameNumbers('enemy', { start: 6, end: 7}),
             frameRate: 12,
             repeat: -1,
             yoyo: true
         });
         this.animation.create({
-            key: 'take_damage_right',
+            key: 'damaged_right',
             frames: this.animation.generateFrameNumbers('enemy', { start: 10, end: 11 }),
             frameRate: 12,
             repeat: -1,
@@ -125,19 +125,19 @@ class EnemySpriteController extends SpriteController {
                         break;
                 }
                 break;
-            case 'take_damage':
+            case 'damaged':
                 switch (direction) {
                     case 'up':
-                        this.animation.play('take_damage_up', true);
+                        this.animation.play('damaged_up', true);
                         break;
                     case 'down':
-                        this.animation.play('take_damage_down', true);
+                        this.animation.play('damaged_down', true);
                         break;
                     case 'left':
-                        this.animation.play('take_damage_left', true);
+                        this.animation.play('damaged_left', true);
                         break;
                     case 'right':
-                        this.animation.play('take_damage_right', true);
+                        this.animation.play('damaged_right', true);
                         break;
                 }
                 break;

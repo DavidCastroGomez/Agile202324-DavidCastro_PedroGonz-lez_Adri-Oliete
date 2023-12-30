@@ -24,7 +24,7 @@ class HealthSystem {
                 this.Knockback(_hitter);
                 this.RestoreMovementAfterKnockbackTime();
                 this.currentHealth = this.tempHealth;
-                //this.owner.state = 'damaged';
+                this.owner.state = 'damaged';
             }
             else if(this.tempHealth <= 0){
                 this.currentHealth = 0;
