@@ -22,6 +22,11 @@ class Hero extends Character {
         return this.moneySystem;
     }
 
+    GetHealth(){
+        return this.healthSystem;
+    }
+
+
     update(delta) {
         //console.log(this.state);
         super.update(delta);

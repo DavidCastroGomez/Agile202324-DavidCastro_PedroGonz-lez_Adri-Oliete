@@ -14,7 +14,7 @@ class Scene2_TheWell extends Phaser.Scene {
         //-------------------------------------------------------------Sprite Manager preload:
         this.spriteManager = new SpriteManager(this);
         this.spriteManager.preloadSprites();
-        
+
         //-------------------------------------------------------------Audio Manager preload:
         this.audioManager = new AudioManager(this);
         this.audioManager.preloadAudio();
@@ -23,7 +23,7 @@ class Scene2_TheWell extends Phaser.Scene {
     create() {
         //-------------------------------------------------------------Camera fade in:
         this.cameras.main.fadeIn();
-        
+
         //-------------------------------------------------------------Music play:
         this.audioManager.playMusic('Scene2_TheWell_DarkDungeons');
 
@@ -48,6 +48,23 @@ class Scene2_TheWell extends Phaser.Scene {
         //-------------------------------------------------------------Hero initialization:
         this.hero = new Hero(this, this.starttingPosX, this.starttingPosY, gamePrefs.heroHealth);
 
+        //-------------------------------------------------------------UI:
+        this.lifeUI = this.add.image(150, 100, 'Life')
+            .setOrigin(0)
+            .setScrollFactor(0);
+        this.heartUI = this.add.sprite(150, 110, 'Heart', (this.hero.GetHealth().GetCurrentHealth() * 2) - 1)
+            .setOrigin(0)
+            .setScrollFactor(0);
+
+        this.moneyUI = this.add.image(220, 100, 'rupee')
+            .setOrigin(0)
+            .setScrollFactor(0);
+
+        this.rupeeUIText = this.add.bitmapText(
+            230, 115, 'UIFont', 'x00', 5)
+            .setOrigin(1, 0)
+            .setScrollFactor(0);
+
         //-------------------------------------------------------------Load map exits:
         this.loadMapExits();
 
@@ -64,7 +81,7 @@ class Scene2_TheWell extends Phaser.Scene {
         this.loadKeyPool();
 
         //-------------------------------------------------------------Load map exits:
-        this.loadDoorLocks();            
+        this.loadDoorLocks();
 
         //-------------------------------------------------------------Collision management creation:
         this.collisionManagement();
@@ -83,96 +100,91 @@ class Scene2_TheWell extends Phaser.Scene {
 
     loadEnemyPool() {
         this.game_elements = this.map.getObjectLayer('game_elements');
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){
-                case 'EnemySpawn':{
+        this.game_elements.objects.forEach(function (element) {
+            switch (element.type) {
+                case 'EnemySpawn': {
                     this.newEnemy = new Enemy(this, element.x, element.y, gamePrefs.enemyHealth);
                     this.enemyPoolTest.add(this.newEnemy);
                 }
-                break;
+                    break;
             }
-        },this);
+        }, this);
     }
 
-    loadMapStarts(){
+    loadMapStarts() {
         this.game_elements = this.map.getObjectLayer('game_elements');
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){
-                case 'MapStart':{
-                    if(gamePrefs.mapStartIndexToCharge == element.name){
+        this.game_elements.objects.forEach(function (element) {
+            switch (element.type) {
+                case 'MapStart': {
+                    if (gamePrefs.mapStartIndexToCharge == element.name) {
                         this.starttingPosX = element.x;
                         this.starttingPosY = element.y;
                     }
                 }
-                break;
+                    break;
             }
-        },this);
+        }, this);
     }
 
-    loadMapExits(){
+    loadMapExits() {
         this.game_elements = this.map.getObjectLayer('game_elements');
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){  
-            case 'MapExit':{
-                this.newMapExitTrigger = new MapExitTrigger(
-                    element.properties[0].value,
-                    element.properties[1].value,
-                    this.hero, 
-                    this,
-                    element.x, 
-                    element.y
-                );
+        this.game_elements.objects.forEach(function (element) {
+            switch (element.type) {
+                case 'MapExit': {
+                    this.newMapExitTrigger = new MapExitTrigger(
+                        element.properties[0].value,
+                        element.properties[1].value,
+                        this.hero,
+                        this,
+                        element.x,
+                        element.y
+                    );
+                }
+                    break;
             }
-            break;
-            }
-        },this);
+        }, this);
     }
 
     loadKeyPool() {
         this.game_elements = this.map.getObjectLayer('game_elements');
         var iter = 0;
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){
-                case 'ItemKey':{
-                    if(gamePrefs.scene2_LocksOpen.length == 0 || gamePrefs.scene2_LocksOpen[iter] == false){
+        this.game_elements.objects.forEach(function (element) {
+            switch (element.type) {
+                case 'ItemKey': {
+                    if (gamePrefs.scene2_LocksOpen.length == 0 || gamePrefs.scene2_LocksOpen[iter] == false) {
                         this.newKey = new ItemKey(this.hero, this, element.x, element.y);
                         this.keyPoolTest.add(this.newKey);
                     }
                     iter++;
                 }
-                break;
+                    break;
             }
-        },this);
+        }, this);
     }
 
-    loadDoorLocks(){
+    loadDoorLocks() {
         this.game_elements = this.map.getObjectLayer('game_elements');
         var iter = 0;
-        this.game_elements.objects.forEach(function (element)
-        {
-            switch(element.type){  
-            case 'DoorLock':{
-                if(gamePrefs.scene2_LocksOpen.length == 0 || gamePrefs.scene2_LocksOpen[iter] == false){
-                    this.newMapExitTrigger = new MapDoorLock(
-                        iter,
-                        element.properties[0].value,
-                        this.hero, 
-                        this,
-                        element.x, 
-                        element.y,
-                        gamePrefs.scene2_LocksOpen
-                    );
-                    gamePrefs.scene2_LocksOpen.push(false);
-                    iter++;
+        this.game_elements.objects.forEach(function (element) {
+            switch (element.type) {
+                case 'DoorLock': {
+                    if (gamePrefs.scene2_LocksOpen.length == 0 || gamePrefs.scene2_LocksOpen[iter] == false) {
+                        this.newMapExitTrigger = new MapDoorLock(
+                            iter,
+                            element.properties[0].value,
+                            this.hero,
+                            this,
+                            element.x,
+                            element.y,
+                            gamePrefs.scene2_LocksOpen
+                        );
+                        gamePrefs.scene2_LocksOpen.push(false);
+                        iter++;
+                    }
                 }
+                    break;
             }
-            break;
-            }
-        },this);
+        }, this);
     }
 
     collisionManagement() {
@@ -213,29 +225,27 @@ class Scene2_TheWell extends Phaser.Scene {
         _enemy.GetHealthSystem().TakeDamage(_swordHitBox);
     }
 
-    hitHero(_hero, _enemy){
+    hitHero(_hero, _enemy) {
         _hero.GetHealthSystem().TakeDamage(_enemy);
     }
 
-    getPickUp(_hero, _pickup){
+    getPickUp(_hero, _pickup) {
         _pickup.PickedUp(_hero);
     }
 
-    SpawnPickups(enemyPosition){
+    SpawnPickups(enemyPosition) {
         //hearts
 
         enemyPosition.y -= 20;
 
         var spawnHeart = Phaser.Math.Between(0, 1);
-        if(spawnHeart == 1){
+        if (spawnHeart == 1) {
             var _pickup = this.heartPickupPool.getFirst(false);
 
-            if(!_pickup)
-            {
+            if (!_pickup) {
                 _pickup = new HeartPickup(this, enemyPosition.x, enemyPosition.y);
                 this.heartPickupPool.add(_pickup);
-            }else
-            {
+            } else {
                 _pickup.SpawnFromEnemy(enemyPosition);
             }
         }
@@ -244,31 +254,31 @@ class Scene2_TheWell extends Phaser.Scene {
 
         var spawnRupee = Phaser.Math.Between(0, 6);
 
-        for(let i = 0; i < spawnRupee/2; i++){
+        for (let i = 0; i < spawnRupee / 2; i++) {
             var _pickup = this.rupeePickupPool.getFirst(false);
 
-            if(!_pickup)
-            {
+            if (!_pickup) {
                 _pickup = new RupeePickup(this, enemyPosition.x, enemyPosition.y);
                 this.rupeePickupPool.add(_pickup);
-            }else
-            {
+            } else {
                 _pickup.SpawnFromEnemy(enemyPosition);
             }
         }
     }
 
-    getWalls(){
+    getWalls() {
         return this.walls;
     }
 
-    getHero(){
+    getHero() {
         return this.hero;
     }
 
     update(time, delta) {
 
         this.hero.update(delta);
+        this.heartUI.setFrame((this.hero.GetHealth().GetCurrentHealth() * 2) - 1);
+        this.rupeeUIText.text = 'x' + ('0' + this.hero.GetMoneySystem().GetMoney()).slice(-2);
 
         for (var i = 0; i < this.enemyPoolTest.children.entries.length; i++) {
             this.enemyPoolTest.getChildren()[i].update(delta)

@@ -47,16 +47,21 @@ class Scene1_Overworld extends Phaser.Scene {
         this.hero = new Hero(this, this.starttingPosX, this.starttingPosY, gamePrefs.heroHealth);
 
         //-------------------------------------------------------------UI:
-        this.lifeUI = this.add.image(gamePrefs.scene1_Width / 1.25, gamePrefs.scene1_Height / 20, 'Life');
+        this.lifeUI = this.add.image(150, 100, 'Life')
+            .setOrigin(0)
+            .setScrollFactor(0);
+        this.heartUI = this.add.sprite(150, 110, 'Heart', (this.hero.GetHealth().GetCurrentHealth() * 2) - 1)
+            .setOrigin(0)
+            .setScrollFactor(0);
 
-        for (let i = 0; i < gamePrefs.heroHealth; i++) {
-            this.add.image((gamePrefs.scene1_Width / 1.35) + (i * gamePrefs.scene1_Width / 20), gamePrefs.scene1_Height / 20 + 10, 'FullHeart');
-        }
-        /*const heartUI = [];
+        this.moneyUI = this.add.image(220, 100, 'rupee')
+            .setOrigin(0)
+            .setScrollFactor(0);
 
-        for (let i = 0; i < gamePrefs.heroHealth; i++) {
-            heartUI[i] = this.add.image(160 + (i * 10), 20, 'FullHeart');
-        }*/
+        this.rupeeUIText = this.add.bitmapText(
+            230, 115, 'UIFont', 'x00', 5)
+            .setOrigin(1, 0)
+            .setScrollFactor(0);
 
         //-------------------------------------------------------------Load map exits:
         this.loadMapExits();
@@ -221,9 +226,12 @@ class Scene1_Overworld extends Phaser.Scene {
     update(time, delta) {
 
         this.hero.update(delta);
+        this.heartUI.setFrame((this.hero.GetHealth().GetCurrentHealth() * 2) - 1);
+        this.rupeeUIText.text = 'x' + ('0' + this.hero.GetMoneySystem().GetMoney()).slice(-2);
 
         for (var i = 0; i < this.enemyPoolTest.children.entries.length; i++) {
             this.enemyPoolTest.getChildren()[i].update(delta)
         }
+
     }
 }

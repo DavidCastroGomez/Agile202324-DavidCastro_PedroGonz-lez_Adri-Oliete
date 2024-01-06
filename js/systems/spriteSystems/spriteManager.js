@@ -14,6 +14,10 @@ class SpriteManager {
         this.scene.load.image('FullHeart', 'FullHeartUI.png');
         this.scene.load.image('NoHeart', 'NoHeartUI.png');
         this.scene.load.image('Life', 'LifeUI.png');
+        this.scene.load.spritesheet('Heart', 'HeartUI.png', { frameWidth: 41, frameHeight: 8 });
+
+        this.scene.load.setPath('res/img/fonts');
+        this.scene.load.bitmapFont('UIFont','gameFont.png','gameFont.xml');
 
         //-------------------------------------------------------------Maps:
         this.scene.load.setPath('res/img/tilesets');

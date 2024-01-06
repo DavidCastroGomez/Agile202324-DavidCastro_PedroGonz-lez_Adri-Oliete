@@ -1,13 +1,16 @@
 class MoneySystem {
 
-    constructor(){
+    constructor() {
         this.money = 0;
     }
 
-    AddMoney(_money){
+    AddMoney(_money) {
         this.money += _money;
 
         console.log(this.money)
     }
 
+    GetMoney() {
+        return this.money;
+    }
 }
