@@ -1,7 +1,7 @@
 class HealthSystem {
-    constructor(_maxHealth, _scene, _owner) { 
+    constructor(_maxHealth, _currentHealth, _scene, _owner) { 
         this.maxHealth = _maxHealth;
-        this.currentHealth = _maxHealth;
+        this.currentHealth = _currentHealth;
         this.scene = _scene;
         this.owner = _owner;
         
@@ -14,8 +14,6 @@ class HealthSystem {
 
     TakeDamage(_hitter){
         if(!this.invincible){
-
-            console.log("HIT")
 
             this.tempHealth = this.currentHealth - 0.5;
             
@@ -64,8 +62,6 @@ class HealthSystem {
         else if(tempHealth > this.maxHealth){
             this.currentHealth = this.maxHealth;
         }
-
-        console.log(this.currentHealth);
     }
 
     InvulnerabilityTime(){

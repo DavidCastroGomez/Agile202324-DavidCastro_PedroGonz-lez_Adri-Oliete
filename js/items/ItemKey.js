@@ -37,7 +37,6 @@ class ItemKey extends Phaser.GameObjects.Sprite {
             this.actualScene.audioManager.playSFX('LTTP_Key');
         }
         gamePrefs.heroKeys += 1;
-        console.log("Got key! I have " + gamePrefs.heroKeys + " keys now.");
         this.destroy();
     }
 }

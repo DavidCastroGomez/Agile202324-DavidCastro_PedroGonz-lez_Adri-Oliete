@@ -6,7 +6,6 @@ class RupeePickup extends PickupClass {
     }
 
     PickedUp(_hero){
-        console.log("rupee picked up")
         if(super.getScene().audioManager){
             super.getScene().audioManager.playSFX('LTTP_Rupee');
         }

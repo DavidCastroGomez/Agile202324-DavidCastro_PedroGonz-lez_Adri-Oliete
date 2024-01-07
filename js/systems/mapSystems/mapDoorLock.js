@@ -44,7 +44,6 @@ class MapDoorLock extends Phaser.GameObjects.Sprite {
     }
 
     lockInteraction(){
-        console.log("Interaction with lock...");
 
         if(gamePrefs.heroKeys > 0){
             if(this.actualScene.audioManager){
@@ -52,7 +51,6 @@ class MapDoorLock extends Phaser.GameObjects.Sprite {
             }
             gamePrefs.heroKeys-=1;
             this.sceneLocksOpen[this.index] = true;
-            console.log("Used key! I have " + gamePrefs.heroKeys + " keys now.");
             this.destroy();
         }
     }

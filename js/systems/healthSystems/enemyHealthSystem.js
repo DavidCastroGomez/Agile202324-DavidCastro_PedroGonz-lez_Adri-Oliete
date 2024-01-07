@@ -1,6 +1,6 @@
 class EnemyHealthSystem extends HealthSystem {
-    constructor(_maxHealth, _scene, _owner) { 
-        super(_maxHealth, _scene, _owner);
+    constructor(_maxHealth, _currentHealth,  _scene, _owner) { 
+        super(_maxHealth, _currentHealth,  _scene, _owner);
     }
 
     TakeDamage(_hitter){
