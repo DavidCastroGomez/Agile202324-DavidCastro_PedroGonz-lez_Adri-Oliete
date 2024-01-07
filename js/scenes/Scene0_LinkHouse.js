@@ -52,20 +52,22 @@ class Scene0_LinkHouse extends Phaser.Scene {
         //-------------------------------------------------------------UI:
         this.lifeUI = this.add.image(150, 100, 'Life')
             .setOrigin(0)
-            .setScrollFactor(0);
-        this.heartUI = this.add.sprite(150, 110, 'Heart', (this.hero.GetHealth().GetCurrentHealth() * 2) - 1)
+            .setScrollFactor(0)
+            .setDepth(10);
+        this.heartUI = this.add.sprite(150, 110, 'Heart', (this.hero.GetHealth().GetCurrentHealth() * 2))
             .setOrigin(0)
-            .setScrollFactor(0);
-
+            .setScrollFactor(0)
+            .setDepth(10);
         this.moneyUI = this.add.image(220, 100, 'rupee')
             .setOrigin(0)
-            .setScrollFactor(0);
-
+            .setScrollFactor(0)
+            .setDepth(10);
         this.rupeeUIText = this.add.bitmapText(
             230, 115, 'UIFont', 'x00', 5)
             .setOrigin(1, 0)
-            .setScrollFactor(0);
-
+            .setScrollFactor(0)
+            .setDepth(10);
+            
         //-------------------------------------------------------------Load map exits:
         this.loadMapExits();
 
@@ -125,7 +127,7 @@ class Scene0_LinkHouse extends Phaser.Scene {
 
     update(time, delta) {
         this.hero.update(delta);
-        this.heartUI.setFrame((this.hero.GetHealth().GetCurrentHealth() * 2) - 1);
+        this.heartUI.setFrame((this.hero.GetHealth().GetCurrentHealth() * 2));
         this.rupeeUIText.text = 'x' + ('0' + this.hero.GetMoneySystem().GetMoney()).slice(-2);
     }
 }

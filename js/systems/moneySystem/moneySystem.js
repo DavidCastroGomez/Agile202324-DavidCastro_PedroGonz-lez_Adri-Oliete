@@ -1,13 +1,12 @@
 class MoneySystem {
 
     constructor() {
-        this.money = 0;
+        this.money = gamePrefs.heroMoney;
     }
 
     AddMoney(_money) {
         this.money += _money;
-
-        console.log(this.money)
+        gamePrefs.heroMoney = this.money;
     }
 
     GetMoney() {

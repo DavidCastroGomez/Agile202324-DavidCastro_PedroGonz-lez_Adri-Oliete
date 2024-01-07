@@ -23,6 +23,9 @@ class SceneUI_TutorialScreen extends Phaser.Scene {
         this.scale.pageAlignHorizontally = true;
         this.scale.pageAlignVertically = true;
         this.scale.refresh();
+
+        //-------------------------------------------------------------Rupies punctuation reset:
+        gamePrefs.heroMoney = 0;
     }
 
     create() {

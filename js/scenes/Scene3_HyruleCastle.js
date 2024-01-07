@@ -51,20 +51,22 @@ class Scene3_HyruleCastle extends Phaser.Scene {
         //-------------------------------------------------------------UI:
         this.lifeUI = this.add.image(150, 100, 'Life')
             .setOrigin(0)
-            .setScrollFactor(0);
+            .setScrollFactor(0)
+            .setDepth(10);
         this.heartUI = this.add.sprite(150, 110, 'Heart', (this.hero.GetHealth().GetCurrentHealth() * 2) - 1)
             .setOrigin(0)
-            .setScrollFactor(0);
-
+            .setScrollFactor(0)
+            .setDepth(10);
         this.moneyUI = this.add.image(220, 100, 'rupee')
             .setOrigin(0)
-            .setScrollFactor(0);
-
+            .setScrollFactor(0)
+            .setDepth(10);
         this.rupeeUIText = this.add.bitmapText(
             230, 115, 'UIFont', 'x00', 5)
             .setOrigin(1, 0)
-            .setScrollFactor(0);
-
+            .setScrollFactor(0)
+            .setDepth(10);
+            
         //-------------------------------------------------------------Load map exits:
         this.loadMapExits();
 
