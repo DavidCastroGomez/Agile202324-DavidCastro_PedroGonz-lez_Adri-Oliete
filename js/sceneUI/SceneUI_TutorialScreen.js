@@ -25,7 +25,7 @@ class SceneUI_TutorialScreen extends Phaser.Scene {
         this.scale.refresh();
 
         //-------------------------------------------------------------Rupies punctuation reset:
-        //gamePrefs.heroMoney = 0;
+        gamePrefs.heroMoney = 0;
     }
 
     create() {
