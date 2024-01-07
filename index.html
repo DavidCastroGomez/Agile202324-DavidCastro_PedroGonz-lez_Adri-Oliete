@@ -1,12 +1,87 @@
 <!DOCTYPE html>
-<html>
-    <head>
-         <meta charset="utf-8" />
-        <title>A LINK TO THE PAST</title>
-        <script src="lib/phaser.min.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/gameState.js"></script>
-    </head>
-    <body>
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>A LINK TO THE PAST</title>
+    <link rel="shortcut icon" href="#">
+
+    <!-- Phaser -->
+    <script src="lib/phaser.min.js"></script>
+
+    <!-- Scenes -->
+    <script src="js/scenes/testScene.js"></script>
+    <script src="js/scenes/Scene0_LinkHouse.js"></script>
+    <script src="js/scenes/Scene1_Overworld.js"></script>
+    <script src="js/scenes/Scene2_TheWell.js"></script>
+    <script src="js/scenes/Scene3_HyruleCastle.js"></script>
+    <script src="js/scenes/Scene4_Catacombs.js"></script>
+    <script src="js/scenes/Scene5_SewersToTheSanctuary.js"></script>
+
+    <!-- UI Scenes -->
+    <script src="js/sceneUI/SceneUI_StartScreen.js"></script>
+    <script src="js/sceneUI/SceneUI_TutorialScreen.js"></script>
+    <script src="js/sceneUI/SceneUI_FinalScreen.js"></script>
+
+    <!-- Characters -->
+    <script src="js/characters/character.js"></script>
+    <script src="js/characters/hero.js"></script>
+    <script src="js/characters/enemy.js"></script>
+
+    <!-- Items -->
+    <script src="js/items/ItemKey.js"></script>
+    <script src="js/pickups/PickupClass.js"></script>
+    <script src="js/pickups/HeartPickup.js"></script>
+    <script src="js/pickups/RupeePickup.js"></script>
+
+    <!-- Sprite managers -->
+    <script src="js/systems/spriteSystems/spriteManager.js"></script>
+    <script src="js/systems/spriteSystems/spriteController.js"></script>
+    <script src="js/systems/spriteSystems/heroSpriteController.js"></script>
+    <script src="js/systems/spriteSystems/enemySpriteController.js"></script>
+
+    <!-- Audio managers -->
+    <script src="js/systems/audioSystems/audioManager.js"></script>
+
+    <!-- Attack systems -->
+    <script src="js/systems/attackSystems/attackSystem.js"></script>
+    <script src="js/systems/attackSystems/hitboxPrefab.js"></script>
+
+    <!-- Movement systems -->
+    <script src="js/systems/movementSystems/movementSystem.js"></script>
+    <script src="js/systems/movementSystems/heroMovementSystem.js"></script>
+
+    <!-- Health systems -->
+    <script src="js/systems/healthSystems/healthSystem.js"></script>
+    <script src="js/systems/healthSystems/heroHealthSystem.js"></script>
+    <script src="js/systems/healthSystems/enemyHealthSystem.js"></script>
+
+    <!-- Input systems -->
+    <script src="js/systems/inputSystems/inputSystem.js"></script>
+    <script src="js/systems/inputSystems/heroInputSystem.js"></script>
+    <script src="js/systems/inputSystems/enemyInputSystem.js"></script>
+
+    <!-- Money systems -->
+    <script src="js/systems/moneySystem/moneySystem.js"></script>
+    
+    <!-- Map systems -->
+    <script src="js/systems/mapSystems/mapExitTrigger.js"></script>
+    <script src="js/systems/mapSystems/mapDoorLock.js"></script>
+
+    <!-- Main -->
+    <script src="js/main.js"></script>
+
+    <!-- Screen style -->
+    <style>
+        body {
+            background-color: black;
+            padding: 0px;
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+</body>
+
 </html>
