@@ -1,7 +1,7 @@
 class Enemy extends Character {
 
-    constructor(_scene, _x, _y, _maxHealth) {
-        super(_scene, _x, _y, 'enemy', _maxHealth);
+    constructor(_scene, _x, _y, _maxHealth, _currentHealth) {
+        super(_scene, _x, _y, 'enemy', _maxHealth, _currentHealth);
 
         //Sprite:
         super.sprite = new EnemySpriteController(this);
@@ -13,7 +13,7 @@ class Enemy extends Character {
         super.inputSystem = new EnemyInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem(), this);
 
         //Health:
-        super.healthSystem = new EnemyHealthSystem(_maxHealth, _scene, this);
+        super.healthSystem = new EnemyHealthSystem(_maxHealth, _currentHealth, _scene, this);
     }
 
     update(delta) {

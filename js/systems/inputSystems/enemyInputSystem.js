@@ -324,8 +324,6 @@ class EnemyInputSystem extends InputSystem {
             current = current.cameFrom;
             totalPath.unshift(current);
         }
-
-        //console.log(totalPath);
     
         return totalPath;
     }

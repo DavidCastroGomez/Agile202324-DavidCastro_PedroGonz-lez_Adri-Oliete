@@ -1,7 +1,7 @@
 class Hero extends Character {
 
-    constructor(_scene, _x, _y, _maxHealth) {
-        super(_scene, _x, _y, 'hero', _maxHealth);
+    constructor(_scene, _x, _y, _maxHealth, _currentHealth) {
+        super(_scene, _x, _y, 'hero', _maxHealth, _currentHealth);
 
         //Sprite:
         super.sprite = new HeroSpriteController(this);
@@ -13,7 +13,7 @@ class Hero extends Character {
         super.inputSystem = new HeroInputSystem(_scene, super.GetAttackSystem(), super.GetMovementSystem());
 
         //Health:
-        super.healthSystem = new HeroHealthSystem(_maxHealth, _scene, this);
+        super.healthSystem = new HeroHealthSystem(_maxHealth, _currentHealth, _scene, this);
 
         this.moneySystem = new MoneySystem();
     }
@@ -28,7 +28,6 @@ class Hero extends Character {
 
 
     update(delta) {
-        //console.log(this.state);
         super.update(delta);
     }
 }

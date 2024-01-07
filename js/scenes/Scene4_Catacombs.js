@@ -46,7 +46,7 @@ class Scene4_Catacombs extends Phaser.Scene {
         this.loadMapStarts();
 
         //-------------------------------------------------------------Hero initialization:
-        this.hero = new Hero(this, this.starttingPosX, this.starttingPosY, gamePrefs.heroHealth);
+        this.hero = new Hero(this, this.starttingPosX, this.starttingPosY, gamePrefs.heroMaxHealth, gamePrefs.heroHealth);
 
         //-------------------------------------------------------------UI:
         this.lifeUI = this.add.image(150, 100, 'Life')
@@ -90,11 +90,6 @@ class Scene4_Catacombs extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, gamePrefs.scene4_Width, gamePrefs.scene4_Height);
         this.cameras.main.zoom = 2;
         this.cameras.main.centerOn(0.5, 0.5);
-
-        //-------------------------------------------------------------Debug keys:
-        this.lifeUp = this.input.keyboard.addKey('Y');
-        this.takeDamage = this.input.keyboard.addKey('T');
-        this.restartScene = this.input.keyboard.addKey('R');
     }
 
     loadEnemyPool() {
@@ -102,7 +97,7 @@ class Scene4_Catacombs extends Phaser.Scene {
         this.game_elements.objects.forEach(function (element) {
             switch (element.type) {
                 case 'EnemySpawn': {
-                    this.newEnemy = new Enemy(this, element.x, element.y, gamePrefs.enemyHealth);
+                    this.newEnemy = new Enemy(this, element.x, element.y, gamePrefs.enemyHealth, gamePrefs.enemyHealth);
                     this.enemyPoolTest.add(this.newEnemy);
                 }
                     break;
@@ -252,7 +247,7 @@ class Scene4_Catacombs extends Phaser.Scene {
 
         this.hero.update(delta);
         this.heartUI.setFrame((this.hero.GetHealth().GetCurrentHealth() * 2) - 1);
-        this.rupeeUIText.text = 'x' + ('0' + this.hero.GetMoneySystem().GetMoney()).slice(-2);
+        this.rupeeUIText.text = this.hero.GetMoneySystem().GetMoney();
 
         for (var i = 0; i < this.enemyPoolTest.children.entries.length; i++) {
             this.enemyPoolTest.getChildren()[i].update(delta)
